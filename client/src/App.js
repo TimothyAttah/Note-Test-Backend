@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Router, Route, Switch } from 'react-router-dom';
 import {colors} from './components/elements'
+import history from './history';
+import Header from './components/header/Header';
 
 const MainContainer = styled.main`
   *{
@@ -21,7 +24,12 @@ const MainContainer = styled.main`
 const App = () => {
   return (
     <MainContainer>
-      <h1>Hello world</h1>
+      <Router history={ history }>
+        <Header />
+        <Switch>
+          <Route path='/' exact component={Home} />
+        </Switch>
+      </Router>
     </MainContainer>
   );
 };
