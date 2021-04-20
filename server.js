@@ -8,7 +8,7 @@ app.use( express() );
 app.use( cors() );
 
 app.get( '/', ( req, res ) => {
-  res.send( 'Hello mighty world' )
+  res.send( 'Hello mighty worlds' )
 } );
 
 
