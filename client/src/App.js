@@ -16,7 +16,7 @@ const MainContainer = styled.main`
     }
   }
   width: 100%;
-  max-width: 1300px;
+  max-width: 1200px;
   border: 2px solid red;
   font-family: 'Roboto', sans-serif;
   margin: 0 auto;

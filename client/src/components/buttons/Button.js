@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -12,5 +13,12 @@ const Buttons = ( { first, second, firstLink, secondLink } ) => {
     </>
   );
 };
+
+Buttons.propTypes = {
+  first: PropTypes.string.isRequired,
+  second: PropTypes.string.isRequired,
+  firstLink: PropTypes.string.isRequired,
+  secondLink: PropTypes.string.isRequired,
+}
 
 export default Buttons;
