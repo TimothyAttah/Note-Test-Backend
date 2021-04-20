@@ -1,3 +1,4 @@
+require('dotenv').config({path: './config/key'})
 const express = require( 'express' );
 const cors = require( 'cors' );
 
