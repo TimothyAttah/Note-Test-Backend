@@ -5,6 +5,7 @@ import {colors} from './components/elements'
 import history from './history';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
+import Notes from './pages/notes/Notes';
 
 const MainContainer = styled.main`
   *{
@@ -14,9 +15,12 @@ const MainContainer = styled.main`
       text-decoration: none;
       color: ${colors.white};
     }
+    ul {
+      list-style-type: none;
+    }
   }
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px;
   border: 2px solid red;
   font-family: 'Roboto', sans-serif;
   margin: 0 auto;
@@ -29,6 +33,7 @@ const App = () => {
         <Header />
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/api/users/notes' exact component={Notes} />
         </Switch>
       </Router>
     </MainContainer>

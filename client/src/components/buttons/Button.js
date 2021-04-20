@@ -15,7 +15,7 @@ const Buttons = ( { first, second, firstLink, secondLink } ) => {
 };
 
 Buttons.propTypes = {
-  first: PropTypes.string.isRequired,
+  first: PropTypes.any.isRequired,
   second: PropTypes.string.isRequired,
   firstLink: PropTypes.string.isRequired,
   secondLink: PropTypes.string.isRequired,
