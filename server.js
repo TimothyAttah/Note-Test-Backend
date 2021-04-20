@@ -1,20 +1,23 @@
-require('dotenv').config({path: './config/key'})
 const express = require( 'express' );
 const cors = require( 'cors' );
+const dotenv = require( 'dotenv' )
+dotenv.config({path: './config/key'})
 
-require( './models/User' );
+require( './models/UserModel' );
 
 const app = express();
 
 const connectDB = require( './config/db' );
 connectDB();
 
-app.use( express() );
+app.use( express.json() );
 app.use( cors() );
 
 app.get( '/', ( req, res ) => {
   res.send( 'Hello mighty worlds' )
 } );
+
+app.use( '/api/user', require( './routes/authRoutes' ) );
 
 
 const PORT = process.env.PORT || 8080;
