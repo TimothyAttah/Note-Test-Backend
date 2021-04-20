@@ -4,6 +4,7 @@ import {Router, Route, Switch } from 'react-router-dom';
 import {colors} from './components/elements'
 import history from './history';
 import Header from './components/header/Header';
+import Home from './pages/home/Home';
 
 const MainContainer = styled.main`
   *{
@@ -11,7 +12,7 @@ const MainContainer = styled.main`
     box-sizing: border-box;
     a {
       text-decoration: none;
-      color: ${colors.black};
+      color: ${colors.white};
     }
   }
   width: 100%;
