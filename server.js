@@ -6,6 +6,9 @@ require( './models/User' );
 
 const app = express();
 
+const connectDB = require( './config/db' );
+connectDB();
+
 app.use( express() );
 app.use( cors() );
 
