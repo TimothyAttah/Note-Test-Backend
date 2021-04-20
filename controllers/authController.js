@@ -23,6 +23,7 @@ module.exports.signupUser = async ( req, res ) => {
       password: hashedPassword
     })
     await users.save()
+    users.password = undefined;
     res.status(200).json({message: 'User successfully signed up.', users})
   } catch (error) {
     res.status(500).json({error: error.message})
@@ -41,10 +42,19 @@ module.exports.signinUser = async ( req, res ) => {
     const confirmPassword = await bcrypt.compare( password, users.password )
     if ( !confirmPassword )
       return res.status( 404 ).json( { error: 'Incorrect password' } );
-    const token = jwt.sign({_id: users._id}, key.jwtSecret)
-    res.status(200).json({message: 'User successfully signed in', token, users})
-    
+    const token = jwt.sign( { _id: users._id }, key.jwtSecret );
+    users.password = undefined;
+    res.status( 200 ).json( { message: 'User successfully signed in', token, users } );
   } catch (error) {
-     res.status(500).json({error: error.message})
+    res.status( 500 ).json( { error: error.message } );
+  }
+}
+
+module.exports.getUsers = async ( req, res ) => {
+  try {
+    const savedUsers = await User.find()
+    res.status( 200 ).json( { message: 'All users', savedUsers } );
+  } catch (error) {
+    res.status( 500 ).json( { error: error.message } );
   }
 }
