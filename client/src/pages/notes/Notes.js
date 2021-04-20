@@ -1,13 +1,13 @@
 import React from 'react'
 import Nav from '../../components/navs/Nav'
 
-const Home = () => {
+const Notes = () => {
   return (
     <div>
       <Nav />
-      <h1>Home Page</h1>
+      <h2>Notes page</h2>
     </div>
   )
 }
 
-export default Home
+export default Notes

@@ -13,6 +13,8 @@ export const Headers = styled.header`
   h1 > a {
     color: ${colors.teal};
     font-family: 'Cursive', serif;
+    text-shadow:  -3px -3px 3px #fff7,
+               3px 3px 3px #0003;
   }
     h2 {
       display: none;
