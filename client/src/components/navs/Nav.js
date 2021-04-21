@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import { Drawer, IconButton } from '@material-ui/core';
-import { AddAlertOutlined, AddCircle, AddOutlined, Menu } from '@material-ui/icons';
+import {  AddCircle, AddOutlined, Menu } from '@material-ui/icons';
 
 import { navMenu } from '../helper/Helper';
 import { NavLink } from 'react-router-dom';
 import Buttons from '../buttons/Button';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Navs = styled.nav`
   background-color: #3f51b5;

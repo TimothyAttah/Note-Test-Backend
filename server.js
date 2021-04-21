@@ -17,7 +17,7 @@ app.get( '/', ( req, res ) => {
   res.send( 'Hello mighty worlds' )
 } );
 
-app.use( '/api/user', require( './routes/authRoutes' ) );
+app.use( '/api/users', require( './routes/authRoutes' ) );
 
 
 const PORT = process.env.PORT || 8080;

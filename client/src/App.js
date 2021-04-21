@@ -6,6 +6,8 @@ import history from './history';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
 import Notes from './pages/notes/Notes';
+import Signup from './pages/user/Signup';
+import Signin from './pages/user/Signin';
 
 const MainContainer = styled.main`
   *{
@@ -33,6 +35,8 @@ const App = () => {
         <Header />
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/api/users/signup' exact component={Signup} />
+          <Route path='/api/users/signin' exact component={Signin} />
           <Route path='/api/users/notes' exact component={Notes} />
         </Switch>
       </Router>
