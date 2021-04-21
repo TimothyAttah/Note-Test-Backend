@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { Button } from '@material-ui/core';
 import styled from 'styled-components';
-// import { useDispatch } from 'react-redux';
-// import { userSignin } from '../../redux/actions/authActions';
+import { useDispatch } from 'react-redux';
+import { signinUser } from '../../redux/actions/authActions';
 
 const FormContainer = styled.form`
   margin: 20px 0;
@@ -38,7 +38,7 @@ const FormContainer = styled.form`
 `;
 
 const Signin = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -49,7 +49,7 @@ const Signin = () => {
       email,
       password
     }
-    // dispatch( userSignin( savedUser ) );
+    dispatch( signinUser( savedUser ) );
     console.log(savedUser);
   }
   return (

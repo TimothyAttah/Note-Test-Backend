@@ -22,3 +22,19 @@ export const signupUser = ( userData ) => async dispatch => {
     }
   }
 }
+
+export const signinUser = ( userData ) => async dispatch => {
+  try {
+    const { data } = await api.signinUser( userData )
+    toast.success( data.message );
+    dispatch( {
+      type: SIGNIN_USER,
+      payload: data.users
+    } )
+    history.push('/api/users/notes')
+  } catch (err) {
+     if ( err.response && err.response.data ) { 
+      toast.error( err.response.data.error);
+    }
+  }
+}
