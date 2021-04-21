@@ -31,9 +31,26 @@ export const signinUser = ( userData ) => async dispatch => {
       type: SIGNIN_USER,
       payload: data.users
     } )
+    localStorage.setItem( 'jwt', data.token );
+    localStorage.setItem( 'user', JSON.stringify( data.users ) );
     history.push('/api/users/notes')
   } catch (err) {
      if ( err.response && err.response.data ) { 
+      toast.error( err.response.data.error);
+    }
+  }
+}
+
+export const getUsers = () => async dispatch => {
+  try {
+    const { data } = await api.getUsers();
+    console.log(data);
+    dispatch( {
+      type: GET_USERS,
+      payload: data.savedUsers
+    })
+  } catch (err) {
+      if ( err.response && err.response.data ) { 
       toast.error( err.response.data.error);
     }
   }

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { Router, Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import {colors} from './components/elements'
+import { colors } from './components/elements'
+import { getUsers } from './redux/actions/authActions';
 import history from './history';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
@@ -31,6 +33,10 @@ const MainContainer = styled.main`
 
 const App = () => {
   toast.configure()
+  const dispatch = useDispatch();
+  useEffect( () => {
+    dispatch( getUsers() );
+  },[dispatch])
   return (
     <MainContainer>
       <Router history={ history }>
