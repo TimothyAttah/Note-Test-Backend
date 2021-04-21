@@ -41,7 +41,10 @@ const initialState = {
 const notesReducer = ( state = initialState, action ) => {
   switch ( action.type ) {
     case NOTES_LISTS:
-      return state.notes;
+      return {
+        ...state,
+        notes: state.notes
+      };
     case NOTES_CREATE:
       return [ action.payload, ...state.notes ];
     case NOTES_DELETE:
