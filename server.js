@@ -13,9 +13,9 @@ connectDB();
 app.use( express.json() );
 app.use( cors() );
 
-app.get( '/', ( req, res ) => {
-  res.send( 'Hello mighty worlds' )
-} );
+// app.get( '/', ( req, res ) => {
+//   res.send( 'Hello mighty worlds' )
+// } );
 
 app.use( '/users', require( './routes/authRoutes' ) );
 
