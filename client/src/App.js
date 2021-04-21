@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {colors} from './components/elements'
 import history from './history';
 import Header from './components/header/Header';
@@ -29,14 +30,15 @@ const MainContainer = styled.main`
 `;
 
 const App = () => {
+  toast.configure()
   return (
     <MainContainer>
       <Router history={ history }>
         <Header />
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/api/users/signup' exact component={Signup} />
-          <Route path='/api/users/signin' exact component={Signin} />
+          <Route path='/api/users/signup' component={Signup} />
+          <Route path='/api/users/signin' component={Signin} />
           <Route path='/api/users/notes' exact component={Notes} />
         </Switch>
       </Router>

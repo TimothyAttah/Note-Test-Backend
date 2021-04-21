@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const authUrl = '/api/users';
+const authUrl = 'http://localhost:8080/api/users';
 
 export const signupUser = ( userData ) => axios.post( `${ authUrl }/signup`, userData );
 
