@@ -15,8 +15,8 @@ const Header = () => {
         <Buttons
           first='Signup'
           second='Signin'
-          firstLink='/api/user/signup'
-          secondLink='/api/user/signin'
+          firstLink='/api/users/signup'
+          secondLink='/api/users/signin'
         />
       </div>
     </Headers>

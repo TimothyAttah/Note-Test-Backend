@@ -40,7 +40,7 @@ const Signup = () => {
           <img src={ images.lineIcon } alt='' />
         </Divider>
         <SignupForm />
-        <Description primary>Already have an account? <Link to='/api/user/signin'>Signin here</Link></Description>
+        <Description primary>Already have an account? <Link to='/api/users/signin'>Signin here</Link></Description>
       </Modal>
     </>
   );
