@@ -53,7 +53,7 @@ const App = () => {
           <Route path='/api/users/signup' component={Signup} />
           <Route path='/api/users/signin' component={Signin} />
           <Route path='/api/users/notes' exact component={Notes} />
-          <Route path='/api/users/notes/:id/delete' component={NotesDelete} />
+          <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
         </Switch>
       </Router>
     </MainContainer>

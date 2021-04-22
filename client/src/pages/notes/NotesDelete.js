@@ -4,8 +4,8 @@ import styled, {css} from 'styled-components';
 import {Delete, Close, Check} from '@material-ui/icons'
 import { useSelector, useDispatch } from 'react-redux';
 import {useParams} from 'react-router-dom'
-import Modal from '../../Components/modal/Modal';
-import Backdrop from '../../Components/Backdrop';
+import Modal from '../../components/modal/Modal';
+import Backdrop from '../../components/Backdrop';
 import { notesDelete } from '../../redux/actions/notesActions';
 import { green} from '@material-ui/core/colors';
 import history from '../../history';

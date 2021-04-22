@@ -32,16 +32,19 @@ export const popupNav = [
   {
     name: 'Edit',
     icon: <Edit />,
-    url: '/api/users/notes'
+    url: '/api/users/notes',
+    path: 'edit'
   },
   {
     name: 'Delete',
     icon: <Delete />,
-    url: '/api/users/notes'
+    url: '/api/users/notes',
+    path: 'delete'
   },
   {
     name: 'Print',
     icon: <Print />,
-    url: '/api/users/notes'
+    url: '/api/users/notes',
+    path: 'print'
   },
 ]

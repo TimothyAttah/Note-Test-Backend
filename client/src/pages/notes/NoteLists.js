@@ -44,7 +44,7 @@ const NoteLists = () => {
                   <p>{ note.content }</p>
                 </NoteCenter>
                 <div>
-                  <PopupNav />
+                  <PopupNav note={note} />
                 </div>
               </Notes>
               <Divider />

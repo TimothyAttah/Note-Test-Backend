@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { PopupContainer } from './PopupNavStyles';
 
 
-const PopupNav = () => {
+const PopupNav = ({note}) => {
    const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -32,7 +32,7 @@ const PopupNav = () => {
           { popupNav.map( (item, index) => {
             return (
               <PopupContainer primary key={index}>
-                <Link to={item.url}>
+                <Link to={`${item.url}/${note.id}/${item.path}`}>
                   {item.icon }
                   <span>{item.name}</span>
                 </Link>
