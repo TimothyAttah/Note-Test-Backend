@@ -14,9 +14,13 @@ const Navs = styled.nav`
   justify-content: space-between;
    padding: 9px 20px 2px 10px;
    position: sticky;
-   top: 0;
+  top: 67px;
+   z-index: 100;
    .MuiIconButton-root {
      color: white;
+   }
+   @media (max-width: 445px){
+     top: 60px;
    }
 `;
 
