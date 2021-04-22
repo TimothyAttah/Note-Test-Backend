@@ -12,6 +12,7 @@ import Notes from './pages/notes/Notes';
 import Signup from './pages/user/Signup';
 import Signin from './pages/user/Signin';
 import NotesDelete from './pages/notes/NotesDelete';
+import NotesCreate from './pages/notes/NotesCreate';
 
 const MainContainer = styled.main`
   *{
@@ -54,6 +55,7 @@ const App = () => {
           <Route path='/api/users/signin' component={Signin} />
           <Route path='/api/users/notes' exact component={Notes} />
           <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
+          <Route path='/api/users/notes/create/note' component={NotesCreate} />
         </Switch>
       </Router>
     </MainContainer>
