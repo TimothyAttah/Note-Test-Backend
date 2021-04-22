@@ -1,4 +1,4 @@
-import { AttachMoneyOutlined, Event, ListAlt, MenuBookOutlined, Settings } from "@material-ui/icons";
+import { AttachMoneyOutlined, Delete, Edit, Event, ListAlt, MenuBookOutlined, Print, Settings } from "@material-ui/icons";
 
 export const navMenu = [
   {
@@ -25,5 +25,26 @@ export const navMenu = [
     name: 'Settings',
     icon: <Settings />,
     url: '/api/users/settings'
+  },
+]
+
+export const popupNav = [
+  {
+    name: 'Edit',
+    icon: <Edit />,
+    url: '/api/users/notes',
+    path: 'edit'
+  },
+  {
+    name: 'Delete',
+    icon: <Delete />,
+    url: '/api/users/notes',
+    path: 'delete'
+  },
+  {
+    name: 'Print',
+    icon: <Print />,
+    url: '/api/users/notes',
+    path: 'print'
   },
 ]

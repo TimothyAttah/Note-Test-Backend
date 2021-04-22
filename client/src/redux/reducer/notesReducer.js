@@ -46,9 +46,15 @@ const notesReducer = ( state = initialState, action ) => {
         notes: state.notes
       };
     case NOTES_CREATE:
-      return [ action.payload, ...state.notes ];
+      return {
+        ...state,
+        notes: [ action.payload, ...state.notes ]
+      }
     case NOTES_DELETE:
-      return state.notes.filter( note => note.id !== action.payload );
+      return {
+        ...state,
+        notes: state.notes.filter( note => note.id !== action.payload )
+      }
     case NOTES_EDIT:
       return state.notes.map(note => note.id ? action.payload.id : note)
     default:
