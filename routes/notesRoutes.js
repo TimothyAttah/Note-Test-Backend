@@ -8,7 +8,9 @@ router.post( '/create', auth, notesCreate );
 
 router.get( '/', auth, allNotes );
 
-router.get( '/:id/note', auth, myNotes );
+router.get( '/user/note', auth, myNotes );
+
+router.delete( '/:noteId/delete' );
 
 
 module.exports = router;
