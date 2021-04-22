@@ -8,6 +8,7 @@ export const Headers = styled.header`
   padding: 15px 20px;
   position: sticky;
   top: 0;
+  z-index: 200;
   background-color: white;
   box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
   h1 > a {
