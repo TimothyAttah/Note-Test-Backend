@@ -11,6 +11,7 @@ import Home from './pages/home/Home';
 import Notes from './pages/notes/Notes';
 import Signup from './pages/user/Signup';
 import Signin from './pages/user/Signin';
+import NotesDelete from './pages/notes/NotesDelete';
 
 const MainContainer = styled.main`
   *{
@@ -52,6 +53,7 @@ const App = () => {
           <Route path='/api/users/signup' component={Signup} />
           <Route path='/api/users/signin' component={Signin} />
           <Route path='/api/users/notes' exact component={Notes} />
+          <Route path='/api/users/notes/:id/delete' component={NotesDelete} />
         </Switch>
       </Router>
     </MainContainer>
