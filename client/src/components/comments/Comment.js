@@ -3,11 +3,13 @@ import React from 'react';
 import styled from 'styled-components';
 import CommentRow from './CommentRow';
 import {images} from '../Images'
+import CommentsForm from '../forms/CommentsForm';
 
 const Comments = styled.div`
-
-border: 2px solid green;
 padding-top: 50px;
+.view {
+  padding: 20px 0;
+}
 `;
 
 const Comment = () => {
@@ -27,7 +29,8 @@ const Comment = () => {
         date='5 hours ago'
         comments='Hello, how are you doing.'
       />
-       <h4>View more comments...</h4>
+      <h4 className='view'>View more comments...</h4>
+      <CommentsForm src={ images.Benita } />
     </Comments>
   )
 }

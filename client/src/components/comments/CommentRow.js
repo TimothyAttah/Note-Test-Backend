@@ -20,6 +20,11 @@ const CommentsTop = styled.div`
    justify-content: space-between;
    align-items: center;
    cursor: pointer;
+   border-radius: 5px;
+   padding: 0 10px;
+   h4 {
+     padding-bottom: 3px;
+   }
    :hover {
      .delete-icon {
        display: block;
