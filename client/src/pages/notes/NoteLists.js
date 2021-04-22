@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
-import {  Favorite, MoreHoriz, Person, ThumbUp, } from '@material-ui/icons';
+import {  Favorite, Person, ThumbUp, } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';

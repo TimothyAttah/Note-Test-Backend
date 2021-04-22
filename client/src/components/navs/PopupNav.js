@@ -3,6 +3,8 @@ import { IconButton, Menu } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
 import { popupNav } from '../helper/Helper';
 import { Link } from 'react-router-dom';
+import { PopupContainer } from './PopupNavStyles';
+
 
 const PopupNav = () => {
    const [anchorEl, setAnchorEl] = useState(null);
@@ -26,18 +28,18 @@ const PopupNav = () => {
         open={ Boolean( anchorEl ) }
         onClose={ handleClose }
       >
-        <div>
+        <PopupContainer>
           { popupNav.map( (item, index) => {
             return (
-              <div key={index}>
+              <PopupContainer primary key={index}>
                 <Link to={item.url}>
                   {item.icon }
-                  {item.name}
+                  <span>{item.name}</span>
                 </Link>
-              </div>
+              </PopupContainer>
             )
           })}
-        </div>
+        </PopupContainer>
       </Menu>
     </div>
   )
