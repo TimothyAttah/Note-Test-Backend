@@ -37,8 +37,8 @@ const Nav = () => {
         <Buttons
           first={ <AddOutlined /> }
           second='Create Note'
-          firstLink='/api/users/notes/create'
-          secondLink='/api/users/notes/create'
+          firstLink='/api/users/notes/create/note'
+          secondLink='/api/users/notes/create/note'
         />
       </NavsLeft>
       <NavsRight >
