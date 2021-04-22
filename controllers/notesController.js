@@ -57,3 +57,16 @@ module.exports.noteDelete = async ( req, res ) => {
     res.status( 500 ).json( { error: error.message } );
   }
 }
+
+module.exports.notesEdit = async ( req, res ) => {
+  const { id: _id } = req.params;
+  const notesData = req.body;
+  try {
+    if ( !mongoose.Types.ObjectId.isValid )
+      return res.status( 404 ).json( { error: 'No note found with that id' } );
+    const updatedNote = await Notes.findByIdAndUpdate( _id, notesData, { new: true } );
+    res.status( 200 ).json( { message: 'Note Updated Successfully', updatedNote } );
+  } catch (error) {
+    res.status( 500 ).json( { error: error.message } );
+  }
+}
