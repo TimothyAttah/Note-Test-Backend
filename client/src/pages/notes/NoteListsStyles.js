@@ -122,6 +122,7 @@ export const NoteComments = styled.div`
    margin: 0;
    position: absolute;
    right: 0;
+   top: 8px;
  }
  @media (max-width: 445px){
  .MuiButton-contained, .MuiButtonBase-root {
