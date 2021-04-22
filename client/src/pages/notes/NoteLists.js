@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
+import PopupNav from '../../components/navs/PopupNav';
 
 import { listNotes } from '../../redux/actions/notesActions';
 import {
@@ -43,9 +44,7 @@ const NoteLists = () => {
                   <p>{ note.content }</p>
                 </NoteCenter>
                 <div>
-                  <IconButton>
-                    <MoreHoriz />
-                  </IconButton>
+                  <PopupNav />
                 </div>
               </Notes>
               <Divider />
