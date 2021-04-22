@@ -1,8 +1,10 @@
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
-import {  Favorite, InsertComment, MoreHoriz, Person, ThumbUp, } from '@material-ui/icons';
+import {  Favorite, MoreHoriz, Person, ThumbUp, } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Comment from '../../components/comments/Comment';
+import OpenComment from '../../components/comments/OpenComment';
 
 import { listNotes } from '../../redux/actions/notesActions';
 import {
@@ -17,6 +19,8 @@ const NoteLists = () => {
   }, [ dispatch ] )
   const notes = useSelector( state => state.notesReducer.notes )
   console.log( notes );
+
+  
   return (
     <>
       {notes.length ? (
@@ -57,8 +61,10 @@ const NoteLists = () => {
               </NoteComments>
               <Divider />
               <NoteComments primary>
-                <IconButton><ThumbUp /><span>Like</span></IconButton>
-                <IconButton><InsertComment /><span>Comment</span></IconButton>
+                <IconButton style={{position: 'absolute', left: '0'}}><ThumbUp /><span>Like</span></IconButton>
+                <div>
+                  <OpenComment myComment={ <Comment /> } />
+                </div>
                 <Button variant='contained' size='small'><Link to='#'>Read More</Link></Button>
               </NoteComments>
             </Notes>

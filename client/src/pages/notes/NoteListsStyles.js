@@ -6,6 +6,7 @@ export const Notes = styled.div`
   box-shadow: 5px 6px 8px -9px rgba(0, 0, 0, 0.5);
   padding: 20px 10px;
   box-sizing: content-box;
+  position: relative;
   ${props => props.primary && css`
   display: flex;
   justify-content: space-between;
@@ -21,7 +22,7 @@ export const Notes = styled.div`
     width: 250px;
   }
   @media (max-width: 290px){
-    width: 210px;
+    width: 230px;
   }
 `;
 
@@ -103,9 +104,11 @@ export const NoteComments = styled.div`
  justify-content: space-around;
  padding: 15px 0;
  ${props => props.primary && css`
+ position: relative;
  .MuiButton-root {
    font-size: 10px;
    text-transform: capitalize;
+
  }
  .MuiSvgIcon-root{
    font-size: 15px;
@@ -117,6 +120,8 @@ export const NoteComments = styled.div`
  .MuiButton-contained, .MuiButtonBase-root {
    padding: 5px;
    margin: 0;
+   position: absolute;
+   right: 0;
  }
  @media (max-width: 445px){
  .MuiButton-contained, .MuiButtonBase-root {
