@@ -2,16 +2,18 @@ import styled, { css } from 'styled-components';
 
 export const HeaderDropDown = styled.div`
   padding: 0;
- 
-    background-color: #bdbdbd;
   ${props => props.primary && css`
-  width: 120px;
+  width: 150px;
   height: auto;
-  box-shadow: 5px 6px 8px -9px rgba(0, 0, 0, 0.5);
-   background-color: #bdbdbd;
    padding: 10px;
    margin-bottom: 5px;
    border-radius: 5px;
+   p {
+     font-weight: 400;
+     font-size: 14px;
+     margin: -10px 0;
+     padding: 0;
+   }
     :hover {
      background-color: #3f51b5;
      a {
@@ -20,10 +22,13 @@ export const HeaderDropDown = styled.div`
    }
      a {
       text-decoration: none;
-      width: 120px;
+      width: 150px;
       display: flex;
       align-items: center;
-      color: #000;
+      color: #3f51b5;
+      h4 {
+        padding-right: 7px;
+      }
     }
       @media (max-width: 445px){
       width: 80px;
