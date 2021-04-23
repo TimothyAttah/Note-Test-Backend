@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
+
 import PopupNav from '../../components/navs/PopupNav';
 
 import { listNotes } from '../../redux/actions/notesActions';
@@ -21,20 +22,28 @@ const NoteLists = () => {
   const notes = useSelector( state => state.notesReducer.notes )
   console.log( notes );
 
+
+      const nameToInitials =(fullName) => {
+  const namesArray = fullName.trim().split(' ');
+  if (namesArray.length === 1) return `${namesArray[0].charAt(0)}`;
+            else return `${ namesArray[ 0 ].charAt( 0 ) }${ namesArray[ namesArray.length - 1 ].charAt( 0 ) }`;
+  }
+ 
   
   return (
     <>
       {notes.length ? (
         notes.map( note => {
+          const fullName = `${note.postedBy.firstName} ${note.postedBy.lastName}`
           return (
             <Notes key={ note._id }>
               <Notes primary>
                 <NoteLeft>
                   <Avatar>
-                    <Person />
+                    {nameToInitials(fullName)}
                   </Avatar>
                   <NoteLeft primary>
-                    <h4>Jane Doe</h4>
+                    <h4>{ fullName }</h4>
                     <h5>24 followers</h5>
                   </NoteLeft>
                 </NoteLeft>
