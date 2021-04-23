@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { Button, IconButton, Menu } from '@material-ui/core';
+import { Avatar, Button, Divider, IconButton, Menu } from '@material-ui/core';
 
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ArrowDropDown } from '@material-ui/icons';
 import history from '../../history';
 import { logout } from '../../redux/actions/authActions';
-import {HeaderDropDown} from './HeaderNavsStyles'
+import { HeaderDropDown } from './HeaderNavsStyles'
+import nameToInitials, {fullName} from '../NameInitials'
 
 
 const HeaderNavs = ({note}) => {
@@ -42,7 +43,15 @@ const HeaderNavs = ({note}) => {
         style={ { top: '50px', padding: '0', margin: '0' } }
       >
         <HeaderDropDown>
-          <HeaderDropDown primary><Link to='/user/profile'>Profile</Link></HeaderDropDown>
+          <HeaderDropDown primary>
+            <Link to='/api/users/profile'>
+              <h4>{ fullName }</h4>
+              <Avatar>{ nameToInitials( fullName ) }</Avatar>
+            </Link>
+             <p>See your profile</p>
+          </HeaderDropDown>
+          <Divider />
+          <HeaderDropDown primary><Link to='/api/users/profile'>Profile</Link></HeaderDropDown>
           <HeaderDropDown primary><Link to='/user/profile'>Friends Posts</Link></HeaderDropDown>
           <HeaderDropDown primary><Button variant='contained' color='secondary' onClick={ handleLogout }>Log Out</Button></HeaderDropDown>
         </HeaderDropDown>
