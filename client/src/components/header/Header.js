@@ -16,7 +16,7 @@ const Header = () => {
 
       {user ? (
         <HeadersRight>
-            <Link>
+            <Link to='/api/users/profile'>
               <h4>{ fullName }</h4>
             <Avatar>{ nameToInitials( fullName ) }</Avatar>
             </Link>
