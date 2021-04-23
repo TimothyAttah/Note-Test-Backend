@@ -13,6 +13,7 @@ import Signup from './pages/user/Signup';
 import Signin from './pages/user/Signin';
 import NotesDelete from './pages/notes/NotesDelete';
 import NotesCreate from './pages/notes/NotesCreate';
+import { user } from './components/NameInitials';
 
 const MainContainer = styled.main`
   *{
@@ -33,7 +34,7 @@ const MainContainer = styled.main`
   margin: 0 auto;
 `;
 
-export const user = JSON.parse( localStorage.getItem('user'))
+// export const user = JSON.parse( localStorage.getItem('user'))
 
 const App = () => {
   toast.configure()
