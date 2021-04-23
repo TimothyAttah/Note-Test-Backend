@@ -27,7 +27,7 @@ const NoteLists = () => {
       {notes.length ? (
         notes.map( note => {
           return (
-            <Notes key={ note.id }>
+            <Notes key={ note._id }>
               <Notes primary>
                 <NoteLeft>
                   <Avatar>

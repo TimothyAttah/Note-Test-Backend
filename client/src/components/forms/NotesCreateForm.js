@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { Save } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { notesCreate } from '../../redux/actions/notesActions';
-import history from '../../history';
-import { v4 } from 'uuid';
+
 
 const FormContainer = styled.form`
   box-sizing: border-box;
@@ -41,10 +40,8 @@ const NotesCreateForm = () => {
     const newNote = {
       title,
       content,
-      id: v4()
     }
     dispatch( notesCreate( newNote ) );
-    history.push( '/api/users/notes' );
     setTitle( '' )
     setContent( '' )
   }
