@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
-import nameToInitials from '../../components/NameInitials';
+import nameToInitials, {user} from '../../components/NameInitials';
 
 
 import PopupNav from '../../components/navs/PopupNav';
@@ -25,24 +25,17 @@ const NoteLists = () => {
   console.log( notes );
 
 
-  //     const nameToInitials =(fullName) => {
-  // const namesArray = fullName.trim().split(' ');
-  // if (namesArray.length === 1) return `${namesArray[0].charAt(0)}`;
-  //           else return `${ namesArray[ 0 ].charAt( 0 ) }${ namesArray[ namesArray.length - 1 ].charAt( 0 ) }`;
-  // }
- 
-  
   return (
     <>
       {notes.length ? (
         notes.map( note => {
-          const fullName = `${note.postedBy.firstName} ${note.postedBy.lastName}`
+          const fullName = `${ note.postedBy.firstName } ${ note.postedBy.lastName }`
           return (
             <Notes key={ note._id }>
               <Notes primary>
                 <NoteLeft>
                   <Avatar>
-                    {nameToInitials(fullName)}
+                    { nameToInitials( fullName ) }
                   </Avatar>
                   <NoteLeft primary>
                     <h4>{ fullName }</h4>
@@ -55,7 +48,11 @@ const NoteLists = () => {
                   <p>{ note.content }</p>
                 </NoteCenter>
                 <div>
-                  <PopupNav note={note} />
+                  { note.postedBy ? (
+                    <div>
+                      { note && note.postedBy._id === user._id && <PopupNav note={ note } /> }
+                    </div>
+                  ) : ( <p>loading</p> ) }
                 </div>
               </Notes>
               <Divider />
@@ -71,7 +68,7 @@ const NoteLists = () => {
               </NoteComments>
               <Divider />
               <NoteComments primary>
-                <IconButton style={{position: 'absolute', left: '0'}}><ThumbUp /><span>Like</span></IconButton>
+                <IconButton style={ { position: 'absolute', left: '0' } }><ThumbUp /><span>Like</span></IconButton>
                 <div>
                   <OpenComment myComment={ <Comment /> } />
                 </div>

@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { ArrowDropDown } from '@material-ui/icons';
 import history from '../../history';
 import { logout } from '../../redux/actions/authActions';
+import {HeaderDropDown} from './HeaderNavsStyles'
 
 
 const HeaderNavs = ({note}) => {
@@ -28,25 +29,26 @@ const HeaderNavs = ({note}) => {
   }
  
   return (
-    <div>
-      <IconButton onClick={handleClick}>
+    <>
+      <IconButton onClick={ handleClick }>
         <ArrowDropDown />
       </IconButton>
-       <Menu
+      <Menu
         id="simple-menu"
         anchorEl={ anchorEl }
         keepMounted
         open={ Boolean( anchorEl ) }
         onClose={ handleClose }
+        style={ { top: '50px', padding: '0', margin: '0' } }
       >
-        <ul>
-          <li><Link to='/user/profile'>Profile</Link></li>
-          <li><Link to='/user/profile'>Friends Posts</Link></li>
-          <li><Button variant='contained' color='secondary' onClick={handleLogout}>Log Out</Button></li>
-        </ul>
+        <HeaderDropDown>
+          <HeaderDropDown primary><Link to='/user/profile'>Profile</Link></HeaderDropDown>
+          <HeaderDropDown primary><Link to='/user/profile'>Friends Posts</Link></HeaderDropDown>
+          <HeaderDropDown primary><Button variant='contained' color='secondary' onClick={ handleLogout }>Log Out</Button></HeaderDropDown>
+        </HeaderDropDown>
       </Menu>
-    </div>
-  )
+    </>
+  );
 }
 
 export default HeaderNavs;

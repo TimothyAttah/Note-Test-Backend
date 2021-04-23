@@ -33,7 +33,8 @@ export const signinUser = ( userData ) => async dispatch => {
     } )
     localStorage.setItem( 'jwt', data.token );
     localStorage.setItem( 'user', JSON.stringify( data.users ) );
-    history.push('/api/users/notes')
+    history.push( '/api/users/notes' );
+    window.location.reload( false );
   } catch (err) {
      if ( err.response && err.response.data ) { 
       toast.error( err.response.data.error);
