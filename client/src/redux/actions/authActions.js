@@ -1,5 +1,5 @@
 import {
-  SIGNIN_USER, SIGNUP_USER, GET_USERS
+  SIGNIN_USER, SIGNUP_USER, GET_USERS, LOGOUT_USER
 } from '../type';
 
 import * as api from '../api/authApi';
@@ -53,5 +53,12 @@ export const getUsers = () => async dispatch => {
       if ( err.response && err.response.data ) { 
       toast.error( err.response.data.error);
     }
+  }
+}
+
+export const logout = () => {
+  return {
+    type: LOGOUT_USER,
+    payload: null
   }
 }

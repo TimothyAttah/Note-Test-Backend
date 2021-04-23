@@ -46,3 +46,17 @@ export const Headers = styled.header`
     }
   }
 `;
+
+export const HeadersRight = styled.div`
+display: flex;
+
+a {
+  display: flex;
+  color: black;
+  align-items: center;
+  h4 {
+    padding-right: 10px;
+    color: #000;
+  }
+}
+`

@@ -1,10 +1,12 @@
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
-import {  Favorite, Person, ThumbUp, } from '@material-ui/icons';
+import {  Favorite, ThumbUp, } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
+import nameToInitials from '../../components/NameInitials';
+
 
 import PopupNav from '../../components/navs/PopupNav';
 
@@ -23,11 +25,11 @@ const NoteLists = () => {
   console.log( notes );
 
 
-      const nameToInitials =(fullName) => {
-  const namesArray = fullName.trim().split(' ');
-  if (namesArray.length === 1) return `${namesArray[0].charAt(0)}`;
-            else return `${ namesArray[ 0 ].charAt( 0 ) }${ namesArray[ namesArray.length - 1 ].charAt( 0 ) }`;
-  }
+  //     const nameToInitials =(fullName) => {
+  // const namesArray = fullName.trim().split(' ');
+  // if (namesArray.length === 1) return `${namesArray[0].charAt(0)}`;
+  //           else return `${ namesArray[ 0 ].charAt( 0 ) }${ namesArray[ namesArray.length - 1 ].charAt( 0 ) }`;
+  // }
  
   
   return (
