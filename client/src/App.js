@@ -15,6 +15,7 @@ import NotesDelete from './pages/notes/NotesDelete';
 import NotesCreate from './pages/notes/NotesCreate';
 import { user } from './components/NameInitials';
 import Profile from './pages/profile/Profile';
+import Todos from './pages/todos/Todos';
 
 const MainContainer = styled.main`
   *{
@@ -59,6 +60,7 @@ const App = () => {
           <Route path='/api/users/notes' exact component={Notes} />
           <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
           <Route path='/api/users/notes/create/note' component={NotesCreate} />
+          <Route path='/api/users/todos' exact component={Todos} />
         </Switch>
       </Router>
     </MainContainer>

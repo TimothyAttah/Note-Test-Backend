@@ -19,7 +19,8 @@ const HeaderNavs = ({note}) => {
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl( null );
+    window.location.reload( false );
   };
 
   const handleLogout = () => {
@@ -51,7 +52,7 @@ const HeaderNavs = ({note}) => {
              <p>See your profile</p>
           </HeaderDropDown>
           <Divider />
-          <HeaderDropDown primary><Link to='/api/users/profile'>Profile</Link></HeaderDropDown>
+          <HeaderDropDown  onClick={handleClose} primary><Link to='/api/users/profile'>Profile</Link></HeaderDropDown>
           <HeaderDropDown primary><Link to='/user/profile'>Friends Posts</Link></HeaderDropDown>
           <HeaderDropDown primary><Button variant='contained' color='secondary' onClick={ handleLogout }>Log Out</Button></HeaderDropDown>
         </HeaderDropDown>

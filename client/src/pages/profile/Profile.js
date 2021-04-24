@@ -24,11 +24,10 @@ const ProfileCardIcon = styled.div`
     .MuiAvatar-root {
       width: 150px;
       height: 150px;
-     border: 2px solid blue;
-
+      border: 2px solid #bdbdbd;
      img {
-       width: 150px;
-       background: #fff;
+       object-fit: contain;
+       max-width: 100%;
      }
     }
   `}
@@ -42,6 +41,11 @@ const ProfileRight = styled.div`
     padding-top: 50px;
     h4 {
       color: #bdbdbd;
+        display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+       height: 85px;
     }
     span {
       color: #fff;
