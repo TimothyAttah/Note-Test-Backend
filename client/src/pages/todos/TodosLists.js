@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { todosLists } from '../../redux/actions/todosAction';
+import { todosLists, todosDelete } from '../../redux/actions/todosAction';
 import { IconButton } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
+
 
 const Todos = styled.ul`
   margin: 0;
@@ -43,7 +44,10 @@ const TodosLists = () => {
     dispatch( todosLists() );
   }, [ dispatch ] );
   const {todos} = useSelector( state => state.todosReducer )
-  console.log(todos);
+  
+  const handleDelete = ( id ) => {
+    dispatch( todosDelete( id ) );
+  }
   return (
     <div>
       {todos.length ? (
@@ -54,7 +58,7 @@ const TodosLists = () => {
                 { item.todo }
                 <TodosIcon>
                   <IconButton><Edit/></IconButton>
-                  <IconButton><Delete /></IconButton>
+                  <IconButton onClick={() => handleDelete(item.id)}><Delete /></IconButton>
                 </TodosIcon>
               </li>
             </Todos>
