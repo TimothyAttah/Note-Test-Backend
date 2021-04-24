@@ -27,7 +27,7 @@ const todosReducer = ( state = initialState, action ) => {
     case TODOS_LISTS:
       return {
         ...state,
-        todos: action.payload
+        todos: state.todos
       };
     case TODOS_CREATE:
       return {
