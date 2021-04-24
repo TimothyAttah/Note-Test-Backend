@@ -5,19 +5,19 @@ const initialState = {
   todos: [
     {
       id: v4(),
-      content: 'Buy milk'
+      todo: 'Buy milk'
     },
     {
       id: v4(),
-      content: 'Finish homework'
+      todo: 'Finish homework'
     },
     {
       id: v4(),
-      content: 'Pray to God'
+      todo: 'Pray to God'
     },
     {
       id: v4(),
-      content: 'Submit assignment'
+      todo: 'Submit assignment'
     },
   ]
 }
