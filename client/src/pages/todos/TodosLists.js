@@ -14,16 +14,16 @@ const TodosLists = () => {
       {todos.length ? (
         todos.map( todo => {
           return (
-            <ul key={todo.id}>
+            <ul key={ todo.id }>
               <li>{ todo.content }</li>
             </ul>
           )
-        })
-      ): (
+        } )
+      ) : (
         <h2>You have nothing to do</h2>
-        )}
+      ) }
     </div>
-  )
+  );
 }
 
-export default TodosLists
+export default TodosLists;
