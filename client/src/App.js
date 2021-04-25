@@ -36,8 +36,6 @@ const MainContainer = styled.main`
   margin: 0 auto;
 `;
 
-// export const user = JSON.parse( localStorage.getItem('user'))
-
 const App = () => {
   toast.configure()
   const dispatch = useDispatch();

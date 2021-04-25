@@ -6,6 +6,17 @@ import { IconButton } from '@material-ui/core';
 import { Edit, Delete } from '@material-ui/icons';
 
 
+const TodosContainer = styled.div`
+   h2 {
+  font-size: 2em;
+  text-align: center;
+  color: teal;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+   }
+`
+
 const Todos = styled.ul`
   margin: 0;
   padding: 0;
@@ -49,7 +60,7 @@ const TodosLists = () => {
     dispatch( todosDelete( id ) );
   }
   return (
-    <div>
+    <TodosContainer>
       {todos.length ? (
         todos.map( item => {
           return (
@@ -67,7 +78,8 @@ const TodosLists = () => {
       ) : (
         <h2>You have nothing to do</h2>
       ) }
-    </div>
+      <h2>You have { todos.length } things to do</h2>
+    </TodosContainer>
   );
 }
 

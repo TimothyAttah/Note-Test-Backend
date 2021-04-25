@@ -8,15 +8,14 @@ const MainContainer = styled.main`
    background-color: #e5e5e5;
   width: 100%;
   min-height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 `
 
 const TodosContainer = styled.div`
    width: 400px;
-  min-height: 500px;
-  position: absolute;
-  top: 300px;
-  left: 50%;
-  transform: translateX(-50%);
+   min-height: 500px;
   border-radius: 20px;
   box-shadow: 10px 10px 13px #0002,
               -10px -10px 13px #fff7;
