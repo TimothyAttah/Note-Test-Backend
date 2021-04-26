@@ -8,6 +8,8 @@ export const NOTES_CREATE = 'NOTES_CREATE'
 export const NOTES_LISTS = 'NOTES_LISTS'
 export const NOTES_DELETE = 'NOTES_DELETE'
 export const NOTES_EDIT = 'NOTES_EDIT'
+export const USERS_NOTES_LISTS = 'USERS_NOTES_LISTS'
+export const USER_NOTES_LISTS = 'USER_NOTES_LISTS'
 
 export const TODOS_CREATE = 'TODOS_CREATE'
 export const TODOS_LISTS = 'TODOS_LISTS'
