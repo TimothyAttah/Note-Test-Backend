@@ -99,7 +99,7 @@ export const likeNotes = (id) => dispatch => {
 }
 
 export const unlikeNotes = (id) => dispatch => {
-  fetch( '/notes/like', {
+  fetch( '/notes/unlike', {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

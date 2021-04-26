@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
-import {  Favorite, ThumbUp, } from '@material-ui/icons';
+import {  Favorite, ThumbDown, ThumbUp, } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import nameToInitials, {user} from '../../components/NameInitials';
 
 import PopupNav from '../../components/navs/PopupNav';
 
-import { listNotes, likeNotes } from '../../redux/actions/notesActions';
+import { listNotes, likeNotes, unlikeNotes } from '../../redux/actions/notesActions';
 import {
   NoteComments, NoteCommentsLeft, Notes, NoteLeft, NoteCenter
 } from './NoteListsStyles';
@@ -70,6 +70,9 @@ const NoteLists = () => {
               <NoteComments primary>
                 <IconButton style={ { position: 'absolute', left: '0' } } onClick={ () => dispatch( likeNotes( note._id ) ) }>
                   <ThumbUp /><span>Like</span>
+                </IconButton>
+                <IconButton style={ { position: 'absolute', left: '50px' } } onClick={ () => dispatch( unlikeNotes( note._id ) ) }>
+                  <ThumbDown /><span>unlike</span>
                 </IconButton>
                 <div>
                   <OpenComment myComment={ <Comment /> } />

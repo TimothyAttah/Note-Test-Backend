@@ -108,20 +108,38 @@ module.exports.likeNote = async ( req, res ) => {
 }
 
 
+// module.exports.unlikeNote = async ( req, res ) => {
+//   try {
+//     await Notes.findByIdAndUpdate( req.body.noteId, {
+//       $pull: {likes: req.user._id}
+//     }, { new: true } ).populate('postedBy', '-password')
+//       .exec( async ( err, result ) => {
+//       if ( err ) {
+//         return res.status(404).json({error: err.message})
+//       } else {
+//         await res.status(200).json({message: 'You unlike this notes', result})
+//       }
+//     })
+
+//   } catch (error) {
+//     return res.status( 500 ).json( { error: error } );
+//   }
+// }
+
 module.exports.unlikeNote = async ( req, res ) => {
   try {
     await Notes.findByIdAndUpdate( req.body.noteId, {
       $pull: {likes: req.user._id}
-    }, { new: true } ).populate('postedBy', '-password')
-      .exec( async ( err, result ) => {
+    }, {
+      new: true
+    } ).populate('postedBy', '-password').exec( ( err, result ) => {
       if ( err ) {
         return res.status(404).json({error: err.message})
-      } else {
-        await res.status(200).json({message: 'You unlike this notes', result})
-      }
-    })
-
+      }else {
+      return res.status(200).json({message: 'You unlike this note', result})
+    }
+    } )
   } catch (error) {
-    return res.status( 500 ).json( { error: error } );
+     res.status( 500 ).json( { error: error.message } );
   }
 }
