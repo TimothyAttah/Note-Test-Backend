@@ -6,7 +6,7 @@ const {
 
 router.post( '/create', auth, notesCreate );
 
-router.get( '/', auth, allNotes );
+router.get( '/', allNotes );
 
 router.get( '/user/note', auth, myNotes );
 

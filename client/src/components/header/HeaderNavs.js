@@ -20,7 +20,6 @@ const HeaderNavs = ({note}) => {
 
   const handleClose = () => {
     setAnchorEl( null );
-    window.location.reload( false );
   };
 
   const handleLogout = () => {
@@ -44,7 +43,7 @@ const HeaderNavs = ({note}) => {
         style={ { top: '50px', padding: '0', margin: '0' } }
       >
         <HeaderDropDown>
-          <HeaderDropDown primary>
+          <HeaderDropDown primary onClick={()=> window.location.reload(false)}>
             <Link to='/api/users/profile'>
               <h4>{ fullName }</h4>
               <Avatar>{ nameToInitials( fullName ) }</Avatar>
@@ -52,9 +51,9 @@ const HeaderNavs = ({note}) => {
              <p>See your profile</p>
           </HeaderDropDown>
           <Divider />
-          <HeaderDropDown  onClick={handleClose} primary><Link to='/api/users/profile'>Profile</Link></HeaderDropDown>
-          <HeaderDropDown primary><Link to='/user/profile'>Friends Posts</Link></HeaderDropDown>
-          <HeaderDropDown primary><Button variant='contained' color='secondary' onClick={ handleLogout }>Log Out</Button></HeaderDropDown>
+          <HeaderDropDown  onClick={()=> window.location.reload(false)} primary><Link to='/api/users/profile'>Profile</Link></HeaderDropDown>
+          <HeaderDropDown onClick={()=> window.location.reload(false)} primary><Link to='/user/profile'>Friends Posts</Link></HeaderDropDown>
+          <HeaderDropDown  primary><Button variant='contained' color='secondary' onClick={ handleLogout }>Log Out</Button></HeaderDropDown>
         </HeaderDropDown>
       </Menu>
     </>
