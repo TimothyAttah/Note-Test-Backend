@@ -16,3 +16,5 @@ export const notesCreate = ( notesData ) => API.post( '/notes/create', notesData
 export const allNotes = () => API.get( '/notes' );
 
 export const myNotes = () => API.get( '/notes/user/note' );
+
+export const likeNotes = ( noteId ) => API.put( '/notes/like', noteId );
