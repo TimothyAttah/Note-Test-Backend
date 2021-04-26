@@ -105,6 +105,29 @@ module.exports.unlikeNote = async ( req, res ) => {
       }
     } )
   } catch ( error ) {
-    res.status( 500 ).json( { error: error.message } );
+    return res.status( 500 ).json( { error: error.message } );
   }
 };
+
+module.exports.notesComments = async ( req, res ) => {
+  const comment = {
+    text: req.body.text,
+    postedBy: req.user._id
+  }
+  try {
+    await Notes.findByIdAndUpdate( req.body.noteId, {
+      $push: {comments: comment}
+    }, { new: true } )
+      .populate( 'postedBy', '-password' )
+      .populate('comments.postedBy', '_id firstName lastName')
+      .exec( ( err, result ) => {
+        if ( err ) {
+          return res.status( 404 ).json( { error: err.message } );
+        } else {
+          res.status( 200 ).json( result );
+      }
+    })
+  } catch (error) {
+    return res.status( 500 ).json( { error: error.message } );
+  }
+}
