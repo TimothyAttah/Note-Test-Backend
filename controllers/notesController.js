@@ -108,11 +108,12 @@ module.exports.likeNote = async ( req, res ) => {
 }
 
 
-module.exports.unlike = async ( req, res ) => {
+module.exports.unlikeNote = async ( req, res ) => {
   try {
     await Notes.findByIdAndUpdate( req.body.noteId, {
       $pull: {likes: req.user._id}
-    }, { new: true } ).exec( async ( err, result ) => {
+    }, { new: true } ).populate('postedBy', '-password')
+      .exec( async ( err, result ) => {
       if ( err ) {
         return res.status(404).json({error: err.message})
       } else {

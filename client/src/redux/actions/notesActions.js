@@ -1,4 +1,4 @@
-import { NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
+import { NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTES_UNLIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
 import * as api from '../api/notesApi';
 import { toast } from 'react-toastify';
 import history from '../../history';
@@ -90,6 +90,30 @@ export const likeNotes = (id) => dispatch => {
         console.log( data.message );
         dispatch( {
           type: NOTES_LIKE,
+          payload: data.result
+        } )
+    }
+    } ).catch( err => {
+    console.log(err);
+  })
+}
+
+export const unlikeNotes = (id) => dispatch => {
+  fetch( '/notes/like', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+localStorage.getItem('jwt')
+    },
+    body: JSON.stringify({noteId: id})
+  } ).then( res => res.json() )
+    .then( data => {
+      if ( data.error ) {
+        console.log( data.error );
+      } else {
+        console.log( data.message );
+        dispatch( {
+          type: NOTES_UNLIKE,
           payload: data.result
         } )
     }

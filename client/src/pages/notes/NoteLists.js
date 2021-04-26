@@ -68,7 +68,9 @@ const NoteLists = () => {
               </NoteComments>
               <Divider />
               <NoteComments primary>
-                <IconButton style={ { position: 'absolute', left: '0' } } onClick={() => dispatch(likeNotes(note._id))}><ThumbUp /><span>Like</span></IconButton>
+                <IconButton style={ { position: 'absolute', left: '0' } } onClick={ () => dispatch( likeNotes( note._id ) ) }>
+                  <ThumbUp /><span>Like</span>
+                </IconButton>
                 <div>
                   <OpenComment myComment={ <Comment /> } />
                 </div>
