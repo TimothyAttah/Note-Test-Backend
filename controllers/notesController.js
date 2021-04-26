@@ -70,3 +70,19 @@ module.exports.notesEdit = async ( req, res ) => {
     res.status( 500 ).json( { error: error.message } );
   }
 }
+
+module.exports.like = async ( req, res ) => {
+  try {
+    await Notes.findByIdAndUpdate( req.body.noteId, {
+      $push: {likes: req.user._id}
+    }, { new: true } ).exec( async ( err, result ) => {
+      if ( err ) {
+        return res.status(404).json({error: err.message})
+      } else {
+        await res.status(200).json(result)
+      }
+    })
+  } catch (error) {
+    
+  }
+}
