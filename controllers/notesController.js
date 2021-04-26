@@ -79,7 +79,7 @@ module.exports.like = async ( req, res ) => {
       if ( err ) {
         return res.status( 404 ).json( { error: err.message } )
       } else {
-        await res.status( 200 ).json( result )
+        await res.status( 200 ).json( {message: 'You like this note', result} )
       }
     } )
   } catch ( error ) {
@@ -95,7 +95,7 @@ module.exports.unlike = async ( req, res ) => {
       if ( err ) {
         return res.status(404).json({error: err.message})
       } else {
-        await res.status(200).json(result)
+        await res.status(200).json({message: 'You unlike this notes', result})
       }
     })
 

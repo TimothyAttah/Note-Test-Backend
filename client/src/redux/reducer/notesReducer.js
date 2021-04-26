@@ -1,4 +1,4 @@
-import { NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
+import { NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTES_UNLIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
 
 const initialState = {
   notes: []
@@ -23,7 +23,13 @@ const notesReducer = ( state = initialState, action ) => {
         notes: state.notes.filter( note => note.id !== action.payload )
       }
     case NOTES_EDIT:
-      return state.notes.map(note => note.id ? action.payload.id : note)
+      return state.notes.map( note => note.id ? action.payload.id : note )
+    case NOTES_LIKE:
+    case NOTES_UNLIKE:
+      return {
+        ...state,
+        notes: state.notes.map( note => note._id === action.payload._id ? action.payload : note )
+      };
     default:
       return state
   }
