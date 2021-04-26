@@ -28,7 +28,7 @@ const notesReducer = ( state = initialState, action ) => {
     case NOTES_UNLIKE:
       return {
         ...state,
-        notes: state.notes.map( note => note._id === action.payload._id ? action.payload : note )
+        notes: state.notes.map(note => note._id === action.payload._id ? action.payload : note)
       };
     default:
       return state

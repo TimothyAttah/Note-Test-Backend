@@ -10,7 +10,7 @@ import nameToInitials, {user} from '../../components/NameInitials';
 
 import PopupNav from '../../components/navs/PopupNav';
 
-import { listNotes } from '../../redux/actions/notesActions';
+import { listNotes, likeNotes } from '../../redux/actions/notesActions';
 import {
   NoteComments, NoteCommentsLeft, Notes, NoteLeft, NoteCenter
 } from './NoteListsStyles';
@@ -60,7 +60,7 @@ const NoteLists = () => {
                 <NoteCommentsLeft>
                   <ThumbUp color='primary' />
                   <Favorite color='secondary' />
-                  <h4><span>200</span> Likes</h4>
+                  <h4><span>{note.likes.length}</span> Likes</h4>
                 </NoteCommentsLeft>
                 <div>
                   <h4>152 Comments</h4>
@@ -68,7 +68,7 @@ const NoteLists = () => {
               </NoteComments>
               <Divider />
               <NoteComments primary>
-                <IconButton style={ { position: 'absolute', left: '0' } }><ThumbUp /><span>Like</span></IconButton>
+                <IconButton style={ { position: 'absolute', left: '0' } } onClick={() => dispatch(likeNotes(note._id))}><ThumbUp /><span>Like</span></IconButton>
                 <div>
                   <OpenComment myComment={ <Comment /> } />
                 </div>

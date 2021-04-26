@@ -60,15 +60,40 @@ export const notesEdit = ( id ) => {
   };
 };
 
-export const likeNotes = ( noteId ) => async dispatch => {
-  try {
-    const { data } = await api.likeNotes( noteId );
-    console.log( data );
-    dispatch( {
-      type: NOTES_LIKE,
-      payload: data
-    })
-  } catch (error) {
-    console.log(error);
-  }
+// export const likeNotes = ( id ) => async dispatch => {
+//   try {
+//     const { data } = await api.likeNotes( id );
+//     console.log( data );
+//     dispatch( {
+//       type: NOTES_LIKE,
+//       payload: data.result
+//     })
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+
+export const likeNotes = (id) => dispatch => {
+  fetch( '/notes/like', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+localStorage.getItem('jwt')
+    },
+    body: JSON.stringify({noteId: id})
+  } ).then( res => res.json() )
+    .then( data => {
+      if ( data.error ) {
+        console.log( data.error );
+      } else {
+        console.log( data.message );
+        dispatch( {
+          type: NOTES_LIKE,
+          payload: data.result
+        } )
+    }
+    } ).catch( err => {
+    console.log(err);
+  })
 }
