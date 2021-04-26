@@ -1,8 +1,12 @@
+import React, {useEffect} from 'react';
 import { Avatar, Divider, Fab } from '@material-ui/core'
-import React from 'react'
 import nameToInitials, {fullName, user} from '../../components/NameInitials'
 import styled, { css } from 'styled-components';
-import {images} from '../../components/Images'
+import { images } from '../../components/Images';
+import { useDispatch, useSelector } from 'react-redux';
+import { myNotes } from '../../redux/actions/notesActions';
+
+
 
 
 const Profiles = styled.div`
@@ -57,10 +61,16 @@ const ProfileRight = styled.div`
 `
 
 
-const Profile = ( ) => {
-  
+const Profile = () => {
+  const dispatch = useDispatch();
+  useEffect( () => {
+    dispatch(myNotes())
+  },[dispatch])
+  const notes = useSelector( state => state.notesReducer.notes );
+  console.log(notes);
   return (
-    <Profiles>
+    <div>
+      <Profiles>
       <ProfileCardIcon>
         <ProfileCardIcon primary>
           { images ? (
@@ -82,7 +92,23 @@ const Profile = ( ) => {
           <h4><span><Fab color='secondary'>304</Fab></span>Following</h4>
         </ProfileRight>
       </ProfileRight>
-    </Profiles>
+      </Profiles>
+      <Divider />
+      <div>
+        { notes ? (
+          notes.map( note => {
+            return (
+              <div key={note._id}>
+                <h2>{note.title}</h2>
+                <p>{ note.content }</p>
+              </div>
+            )
+          })
+        ): (
+          <h2>Loading...</h2>
+       )}
+      </div>
+    </div>
   )
 }
 
