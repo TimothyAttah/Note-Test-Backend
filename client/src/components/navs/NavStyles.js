@@ -4,7 +4,8 @@ export const Navs = styled.nav`
   background-color: #3f51b5;
   display: flex;
   justify-content: space-between;
-   padding: 9px 20px 2px 10px;
+  align-items: center;
+   padding: 15px 20px 5px 10px;
    position: sticky;
   top: 67px;
    z-index: 100;
@@ -63,8 +64,11 @@ export const NavsLeft = styled.div`
 .MuiButton-root {
   padding: 5px 12px;
    background-color: #e5e5e5;
-   button {
+    a {
      color: black;
+     display: flex;
+     justify-content: center;
+     align-items: center;
    }
 }
 
