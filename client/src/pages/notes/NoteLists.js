@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
-import {  Favorite, ThumbDown, ThumbUp, } from '@material-ui/icons';
+import {  ThumbDown, ThumbUp, } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -59,7 +59,6 @@ const NoteLists = () => {
               <NoteComments>
                 <NoteCommentsLeft>
                   <ThumbUp color='primary' />
-                  <Favorite color='secondary' />
                   <h4><span>{note.likes.length}</span> Likes</h4>
                 </NoteCommentsLeft>
                 <div>
@@ -68,12 +67,15 @@ const NoteLists = () => {
               </NoteComments>
               <Divider />
               <NoteComments primary>
-                <IconButton style={ { position: 'absolute', left: '0' } } onClick={ () => dispatch( likeNotes( note._id ) ) }>
+                { note && note.likes.includes( user._id ) ? (
+                   <IconButton style={ { position: 'absolute', left: '0' } } onClick={ () => dispatch( unlikeNotes( note._id ) ) }>
+                  <ThumbDown /><span>Unlike</span>
+                </IconButton>
+                ): (
+                   <IconButton style={ { position: 'absolute', left: '0' } } onClick={ () => dispatch( likeNotes( note._id ) ) }>
                   <ThumbUp /><span>Like</span>
                 </IconButton>
-                <IconButton style={ { position: 'absolute', left: '50px' } } onClick={ () => dispatch( unlikeNotes( note._id ) ) }>
-                  <ThumbDown /><span>unlike</span>
-                </IconButton>
+                )}
                 <div>
                   <OpenComment myComment={ <Comment /> } />
                 </div>
