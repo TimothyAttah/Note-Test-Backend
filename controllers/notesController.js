@@ -77,7 +77,7 @@ module.exports.notesEdit = async ( req, res ) => {
 module.exports.likeNote = async ( req, res ) => {
   try {
     await Notes.findByIdAndUpdate( req.body.noteId, {
-      $push: { likes: req.user._id }
+      $addToSet: { likes: req.user._id }
     }, {
       new: true
     } ).populate( 'postedBy', '-password' )

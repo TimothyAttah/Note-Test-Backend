@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
 import {  ThumbDown, ThumbUp, } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,6 @@ import {
 
 const NoteLists = () => {
   const dispatch = useDispatch()
-  const [double, setDouble] = useState(false)
   useEffect( () => {
     dispatch( listNotes() )
   }, [ dispatch ] )
@@ -28,11 +27,12 @@ const NoteLists = () => {
 
   const handleLikeNotes = (id) => {
     dispatch( likeNotes( id ) );
-    setDouble( true );
   }
+
+  const hasUserLiked = (note) => note && note.likes.includes( user._id )
+
   const handleUnlikeNotes = (id) => {
     dispatch( unlikeNotes( id ) );
-    setDouble( false );
   }
 
   return (
@@ -79,10 +79,10 @@ const NoteLists = () => {
               <NoteComments primary>
                 { note && note.likes.includes( user._id ) ? (
                    <IconButton style={ { position: 'absolute', left: '0' } }  onClick={ () => handleUnlikeNotes(note._id) } >
-                  <ThumbDown /><span>Unlike</span>
-                </IconButton>
+                      <ThumbDown /><span>Unlike</span>
+                    </IconButton>
                 ): (
-                   <IconButton style={ { position: 'absolute', left: '0' } } disabled={double} onClick={ () => handleLikeNotes(note._id) } >
+                   <IconButton style={ { position: 'absolute', left: '0' } }  onClick={ () => handleLikeNotes(note._id) } >
                   <ThumbUp /><span>Like</span>
                 </IconButton>
                 )}
