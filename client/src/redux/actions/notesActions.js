@@ -70,12 +70,13 @@ export const notesEdit = ( id ) => {
 };
 
 // export const likeNotes = ( id ) => async dispatch => {
+//   const body = JSON.stringify({noteId: id})
 //   try {
-//     const { data } = await api.likeNotes( id );
+//     const { data } = await api.likeNotes( body );
 //     console.log( data );
 //     dispatch( {
 //       type: NOTES_LIKE,
-//       payload: data.result
+//       payload: data
 //     })
 //   } catch (error) {
 //     console.log(error);
@@ -84,7 +85,7 @@ export const notesEdit = ( id ) => {
 
 
 export const likeNotes = (id) => dispatch => {
-  fetch( '/notes/like', {
+  fetch( 'http://localhost:8080/notes/like', {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -106,6 +107,31 @@ export const likeNotes = (id) => dispatch => {
     console.log(err);
   })
 }
+
+
+// export const likeNotes = (id) => dispatch => {
+//   fetch( '/notes/like', {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": "Bearer "+localStorage.getItem('jwt')
+//     },
+//     body: JSON.stringify({noteId: id})
+//   } ).then( res => res.json() )
+//     .then( data => {
+//       if ( data.error ) {
+//         console.log( data.error );
+//       } else {
+//         console.log( data.message );
+//         dispatch( {
+//           type: NOTES_LIKE,
+//           payload: data.result
+//         } )
+//     }
+//     } ).catch( err => {
+//     console.log(err);
+//   })
+// }
 
 export const unlikeNotes = (id) => dispatch => {
   fetch( '/notes/unlike', {
