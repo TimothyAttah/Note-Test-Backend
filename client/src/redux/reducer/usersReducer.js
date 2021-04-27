@@ -14,12 +14,18 @@ const usersReducer = ( state = initialState, action ) => {
         user: action.payload
       }
     case FOLLOW_USER:
-    case UNFOLLOW_USER:
       return {
         ...state,
         user: action.payload,
         followers: [...state.followers, action.payload.followers],
         following: [...state.following, action.payload.following],
+      }
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        user: action.payload,
+        followers: state.followers.filter(item => item !== action.payload),
+        following: state.following.filter(item => item !== action.payload),
       }
     default:
       return state
