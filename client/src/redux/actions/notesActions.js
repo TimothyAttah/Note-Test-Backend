@@ -46,11 +46,20 @@ export const notesCreate = ( notesData ) => async dispatch => {
   }
 };
 
-export const notesDelete = ( id ) => {
-  return {
-    type: NOTES_DELETE,
-    payload: id
-  };
+export const notesDelete = ( noteId ) => async dispatch => {
+ try {
+   const { data } = await api.notesDelete( noteId );
+   toast.success(data.message)
+   dispatch( {
+     type: NOTES_DELETE,
+     payload: data.deletedNote
+   } )
+   history.push( '/api/users/notes' );
+ } catch (err) {
+  if ( err.response && err.response.data ) {
+      toast.error(err.response.data.error)
+    }
+ }
 };
 
 export const notesEdit = ( id ) => {
