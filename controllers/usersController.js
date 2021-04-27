@@ -16,6 +16,27 @@ module.exports.getUser = async ( req, res ) => {
       })
     }
   } catch (error) {
-    return res.status(500).json({error: error})
+    return res.status( 500 ).json( { error: error } );
+  }
+}
+
+module.exports.followUsers = async ( req, res ) => {
+  try {
+    await User.findByIdAndUpdate( req.body.followId, {
+      $addToSet: {followers: req.user._id}
+    },
+      { new: true },
+      ( async ( err, result ) => {
+        if ( err ) {
+        return  res.status(404).json({error: err.message})
+        }
+      const results = await  User.findByIdAndUpdate( req.user._id, {
+          $addToSet: {following: req.body.followId}
+        }, { new: true } )
+        res.status( 200 ).json( { message: 'You followed this user', results } );
+      })
+    )
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } );
   }
 }
