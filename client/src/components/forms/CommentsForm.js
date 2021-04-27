@@ -1,10 +1,13 @@
 import { Avatar } from '@material-ui/core';
 import React from 'react'
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { notesComments } from '../../redux/actions/notesActions';
 
 const Form = styled.form`
   display: flex;
   width: 700px;
+  padding-top: 40px;
  .icon-image {
    padding: 0px 10px;
  }
@@ -21,10 +24,14 @@ const Form = styled.form`
   }
 `
 
-const CommentsForm = ({src}) => {
+const CommentsForm = ( { src, note } ) => {
+  const dispatch = useDispatch();
   return (
     <div>
-      <Form>
+      <Form onSubmit={ ( e ) => {
+        e.preventDefault();
+        dispatch(notesComments(note._id, e.target[0].value))
+      }}>
         <div className='icon-image'>{ src && <Avatar src={ src } /> }</div>
         <input
           placeholder='Write a comment...'

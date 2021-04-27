@@ -1,7 +1,7 @@
 const router = require( 'express' ).Router();
 const auth = require( '../middlewares/auth' );
 const {
-  notesCreate, allNotes, myNotes, noteDelete, notesEdit, likeNote, unlikeNote
+  notesCreate, allNotes, myNotes, noteDelete, notesEdit, likeNote, unlikeNote, notesComments
 } = require( '../controllers/notesController' );
 
 router.post( '/create', auth, notesCreate );
@@ -17,6 +17,8 @@ router.put( '/:noteId/edit', auth, notesEdit );
 router.put( '/like', auth, likeNote );
 
 router.put( '/unlike', auth, unlikeNote );
+
+router.put( '/comments', auth, notesComments );
 
 
 module.exports = router;

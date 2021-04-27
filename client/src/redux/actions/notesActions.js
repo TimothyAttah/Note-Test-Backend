@@ -121,3 +121,28 @@ export const unlikeNotes = (id) => dispatch => {
     console.log(err);
   })
 }
+
+export const notesComments = (id, text) => dispatch => {
+  fetch( '/notes/comments', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+localStorage.getItem('jwt')
+    },
+    body: JSON.stringify({noteId: id, text})
+  } ).then( res => res.json() )
+    .then( data => {
+      if ( data.error ) {
+        console.log( data.error );
+      } else {
+        console.log( data );
+        dispatch( {
+          type: NOTES_LIKE,
+          payload: data.result
+        } )
+    }
+    } ).catch( err => {
+    console.log(err);
+  })
+}
+
