@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import { Avatar, Divider, Fab } from '@material-ui/core'
-import nameToInitials, {fullName, user} from '../../components/NameInitials'
+import nameToInitials from '../../components/NameInitials'
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch, useSelector } from 'react-redux';
-import { myNotes } from '../../redux/actions/notesActions';
+import {getUser} from '../../redux/actions/usersActions'
 import { useParams } from 'react-router-dom'
 
 
@@ -66,54 +66,62 @@ const ProfileRight = styled.div`
 const UserProfile = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id);
   useEffect( () => {
-    dispatch(myNotes())
-  },[dispatch])
-  const notes = useSelector( state => state.notesReducer.notes );
-  console.log(notes);
+    dispatch( getUser( id ) );
+  }, [ dispatch, id ] );
+  const users = useSelector( state => state.usersReducer.user );
+  const fullName = `${users.user && users.user.firstName } ${ users.user && users.user.lastName }`
+  console.log( users );
   return (
-    <div>
-      <Profiles>
-      <ProfileCardIcon>
-        <ProfileCardIcon primary>
-          { images ? (
-            <Avatar>{ images && <img src={images.Benita} alt='' />}</Avatar>
-          ) : (
-              <Avatar>{ nameToInitials( fullName ) }</Avatar>
-          )}
-          </ProfileCardIcon>
+    <>
+      {users.user || users.result ? (
+        <>
+          <Profiles>
+            <ProfileCardIcon>
+              <ProfileCardIcon primary>
+                { images ? (
+                  <Avatar>{ images && <img src={ images.Benita } alt='' /> }</Avatar>
+                ) : (
+                  <Avatar>{ nameToInitials( fullName ) }</Avatar>
+                ) }
+              </ProfileCardIcon>
         
-      </ProfileCardIcon>
+            </ProfileCardIcon>
 
-      <ProfileRight>
-        <h1>{ fullName }</h1>
-        <h4>{ user && user.email }</h4>
-        <Divider/>
-        <ProfileRight primary>
-          <h4><span><Fab color='secondary'>90</Fab></span>Posts</h4>
-          <h4><span><Fab color='secondary'>1.5k</Fab></span>Followers</h4>
-          <h4><span><Fab color='secondary'>304</Fab></span>Following</h4>
-        </ProfileRight>
-      </ProfileRight>
-      </Profiles>
-      <Divider />
-      <div>
-        { notes ? (
-          notes.map( note => {
-            return (
-              <div key={note._id}>
-                <h2>{note.title}</h2>
-                <p>{ note.content }</p>
-              </div>
-            )
-          })
-        ): (
-          <h2>Loading...</h2>
-       )}
-      </div>
-    </div>
-  )
-}
+            <ProfileRight>
+              <>
+                <h1>{ fullName }</h1>
+                <h4>{ users.user.email }</h4>
+              </>
+              <Divider />
+              { users.result && (
+                <ProfileRight primary>
+                  <h4><span><Fab color='secondary'>{ users.result.length }</Fab></span>Posts</h4>
+                  <h4><span><Fab color='secondary'>1.5k</Fab></span>Followers</h4>
+                  <h4><span><Fab color='secondary'>304</Fab></span>Following</h4>
+                </ProfileRight>
+              ) }
+            </ProfileRight>
+          </Profiles>
+          <Divider />
+          <div>
+            {
+              users.result.map( note => {
+                return (
+                  <div key={ note._id }>
+                    <h2>{ note.title }</h2>
+                    <p>{ note.content }</p>
+                  </div>
+                );
+              } )
+            }
+          </div>
+        </>
+      ) : (
+        <h2>Loading profile...</h2>
+      ) }
+    </>
+  );
+};
 
 export default UserProfile;
