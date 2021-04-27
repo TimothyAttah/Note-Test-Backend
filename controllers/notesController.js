@@ -124,7 +124,7 @@ module.exports.notesComments = async ( req, res ) => {
         if ( err ) {
           return res.status( 404 ).json( { error: err.message } );
         } else {
-          res.status( 200 ).json( result );
+          return res.status( 200 ).json( { message: 'You commented', result } )
       }
     })
   } catch (error) {
