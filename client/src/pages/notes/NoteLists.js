@@ -29,7 +29,7 @@ const NoteLists = () => {
     dispatch( likeNotes( id ) );
   }
 
-  const hasUserLiked = (note) => note && note.likes.includes( user._id )
+  // const hasUserLiked = (note) => note && note.likes.includes( user._id )
 
   const handleUnlikeNotes = (id) => {
     dispatch( unlikeNotes( id ) );
@@ -48,7 +48,7 @@ const NoteLists = () => {
                     { nameToInitials( fullName ) }
                   </Avatar>
                   <NoteLeft primary>
-                    <h4>{ fullName }</h4>
+                    <h4><Link to={`/api/auth/users/${note.postedBy._id}/user/profile`}>{ fullName }</Link></h4>
                     <h5>24 followers</h5>
                   </NoteLeft>
                 </NoteLeft>

@@ -16,6 +16,7 @@ import NotesCreate from './pages/notes/NotesCreate';
 import { user } from './components/NameInitials';
 import Profile from './pages/profile/Profile';
 import Todos from './pages/todos/Todos';
+import UserProfile from './pages/profile/UserProfile';
 
 const MainContainer = styled.main`
   *{
@@ -54,7 +55,8 @@ const App = () => {
           <Route path='/' exact component={Home} />
           <Route path='/api/users/signup' component={Signup} />
           <Route path='/api/users/signin' component={Signin} />
-          <Route path='/api/users/profile' component={Profile} />
+          <Route path='/api/users/profile' exact component={Profile} />
+          <Route path='/api/auth/users/:id/user/profile' exact component={UserProfile} />
           <Route path='/api/users/notes' exact component={Notes} />
           <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
           <Route path='/api/users/notes/create/note' component={NotesCreate} />

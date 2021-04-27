@@ -31,6 +31,10 @@ display: flex;
 align-items: center;
 height: 55px;
 
+h4 > a {
+  color: #000;
+}
+
 .MuiAvatar-root{
   height: 60px;
   width: 60px;
