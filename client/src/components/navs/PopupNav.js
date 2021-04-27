@@ -32,7 +32,7 @@ const PopupNav = ({note}) => {
           { popupNav.map( (item, index) => {
             return (
               <PopupContainer primary key={index}>
-                <Link to={`${item.url}/${note.id}/${item.path}`}>
+                <Link to={`${item.url}/${note._id}/${item.path}`}>
                   {item.icon }
                   <span>{item.name}</span>
                 </Link>

@@ -52,44 +52,39 @@ display: flex;
 `;
 
 const NotesDelete = () => {
-  const { noteId } = useParams()
-  const dispatch = useDispatch()
-  console.log(noteId);
-  const notes = useSelector( state => noteId !== null ? state.notesReducer.notes.find( note => note.id === noteId ) : null )
-  
-  const handleDelete = (note) => {
-    dispatch( notesDelete( note ) )
-    history.push('/api/users/notes')
+  const { noteId } = useParams();
+  const dispatch = useDispatch();
+  const notes = useSelector( state => noteId !== null ? state.notesReducer.notes.find( note => note._id === noteId ) : null )
+  const handleDelete = ( note ) => {
+    dispatch( notesDelete( note ) );
   }
   return (
     <>
-      
       <Backdrop onClick={ () => history.push( '/api/users/notes' ) } />
       <Notes />
       <Modal >
         <Header>
           <Header primary>
-        <span><Delete /></span>
-          <p>Delete Old Notes</p>
+            <span><Delete /></span>
+            <p>Delete Old Notes</p>
           </Header>
-          <div><IconButton aria-label="close"  onClick={() => history.push('/api/users/notes')}><Close /></IconButton></div>
+          <div><IconButton aria-label="close" onClick={ () => history.push( '/api/users/notes' ) }><Close /></IconButton></div>
         </Header>
         <Divider />
         <Content>
           { notes ? (
-            <p>Are you sure you want to delete this note? <br /> <span>{notes.title }</span></p>
-          ):
-            ( <h3>Please select a note to delete ?</h3>)}
-          
+            <p>Are you sure you want to delete this note? <br /> <span>{ notes.title }</span></p>
+          ) :
+            ( <h3>Please select a note to delete ?</h3> ) }
         </Content>
         <Divider />
-        {notes ? ( <ButtonContainer>
+        { notes ? ( <ButtonContainer>
           <Button
             variant='contained'
             size='small'
             color='secondary'
             startIcon={ <Close /> }
-            onClick={() => history.push('/api/users/notes')}
+            onClick={ () => history.push( '/api/users/notes' ) }
           >
             No
             </Button>
@@ -98,14 +93,14 @@ const NotesDelete = () => {
             size='small'
             style={ { backgroundColor: green[ 800 ], color: '#fff' } }
             startIcon={ <Check /> }
-            onClick={() => handleDelete(notes.id) }
+            onClick={ () => handleDelete( notes._id ) }
           >
             Yes
           </Button>
-        </ButtonContainer>) : ''}   
+        </ButtonContainer> ) : '' }
       </Modal>
     </>
   );
-}
+};
 
 export default NotesDelete;
