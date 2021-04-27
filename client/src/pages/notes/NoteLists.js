@@ -29,6 +29,10 @@ const NoteLists = () => {
     dispatch( likeNotes( id ) );
     setDouble( true );
   }
+  const handleUnlikeNotes = (id) => {
+    dispatch( unlikeNotes( id ) );
+    setDouble( false );
+  }
 
   return (
     <>
@@ -67,13 +71,13 @@ const NoteLists = () => {
                   <h4><span>{note.likes.length}</span> Likes</h4>
                 </NoteCommentsLeft>
                 <div>
-                  <h4>152 Comments</h4>
+                  <h4>{note.comments.length} Comments</h4>
                 </div>
               </NoteComments>
               <Divider />
               <NoteComments primary>
                 { note && note.likes.includes( user._id ) ? (
-                   <IconButton style={ { position: 'absolute', left: '0' } } onClick={ () => dispatch( unlikeNotes( note._id ) ) } >
+                   <IconButton style={ { position: 'absolute', left: '0' } }  onClick={ () => handleUnlikeNotes(note._id) } >
                   <ThumbDown /><span>Unlike</span>
                 </IconButton>
                 ): (
@@ -82,7 +86,7 @@ const NoteLists = () => {
                 </IconButton>
                 )}
                 <div>
-                  <OpenComment myComment={ <Comment /> } />
+                  <OpenComment myComment={ <Comment note={note} /> } />
                 </div>
                 <Button variant='contained' size='small'><Link to='#'>Read More</Link></Button>
               </NoteComments>

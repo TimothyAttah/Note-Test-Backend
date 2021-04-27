@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import CommentRow from './CommentRow';
 import {images} from '../Images'
 import CommentsForm from '../forms/CommentsForm';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Comments = styled.div`
 padding-top: 50px;
@@ -12,25 +14,39 @@ padding-top: 50px;
 }
 `;
 
-const Comment = () => {
+const Comment = ( { note } ) => {
+  const dispatch = useDispatch();
+  const notes = useSelector(state => state.notesReducer.notes)
+  console.log(note);
   return (
     <Comments>
       <Divider />
       <h3>Recent comments</h3>
-      <CommentRow
-        src={ images.Alex }
-        name='Alex'
+      {note? (
+        
+        note.comments.map( item => {
+          console.log(item);
+          return (
+                   <CommentRow
+              src={ images.Alex }
+              key={item._id}
+        name={item && item.postedBy && item.postedBy.firstName}
         date='1 day ago'
-        comments='Contrary to popular belief, Lorem Ipsum is not simply random text.'
+        comments={item && item.text}
       />
-      <CommentRow
+          )
+        })
+      ): (
+        <h2>loading...</h2>
+      )}
+      {/* <CommentRow
         src={ images.Benita }
         name='Benita'
         date='5 hours ago'
         comments='Hello, how are you doing.'
-      />
+      /> */}
       <h4 className='view'>View more comments...</h4>
-      <CommentsForm src={ images.Benita } />
+      <CommentsForm src={ images.Benita } note={note} />
     </Comments>
   )
 }

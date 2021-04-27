@@ -24,6 +24,7 @@ module.exports.allNotes = async ( req, res ) => {
   try {
     const notes = await Notes.find()
       .populate( 'postedBy', '-password' )
+    .populate('comments.postedBy', '_id firstName lastName')
     res.status(200).json(notes)
   } catch (error) {
     return res.status( 500 ).json( { error: error } );
@@ -32,8 +33,9 @@ module.exports.allNotes = async ( req, res ) => {
 
 module.exports.myNotes = async ( req, res ) => {
   try {
-    const notes = await Notes.find({postedBy: req.user._id})
+    const notes = await Notes.find( { postedBy: req.user._id } )
       .populate( 'postedBy', '-password' )
+    .populate('comments.postedBy', '_id firstName lastName')
     res.status(200).json(notes)
   } catch (error) {
     return res.status( 500 ).json( { error: error } );
@@ -78,7 +80,9 @@ module.exports.likeNote = async ( req, res ) => {
       $push: { likes: req.user._id }
     }, {
       new: true
-    } ).populate( 'postedBy', '-password' ).exec( ( err, result ) => {
+    } ).populate( 'postedBy', '-password' )
+      .populate('comments.postedBy', '_id firstName lastName')
+      .exec( ( err, result ) => {
       if ( err ) {
         return res.status( 404 ).json( { error: err.message } )
       } else {
@@ -97,7 +101,9 @@ module.exports.unlikeNote = async ( req, res ) => {
       $pull: { likes: req.user._id }
     }, {
       new: true
-    } ).populate( 'postedBy', '-password' ).exec( ( err, result ) => {
+    } ).populate( 'postedBy', '-password' )
+      .populate('comments.postedBy', '_id firstName lastName')
+      .exec( ( err, result ) => {
       if ( err ) {
         return res.status( 404 ).json( { error: err.message } )
       } else {

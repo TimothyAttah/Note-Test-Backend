@@ -10,8 +10,8 @@ const CommentRow = ( { src, name, date, comments } ) => {
   return (
     <Comments>
       <CommentsLeft>{ src && <Avatar src={ src } /> }</CommentsLeft>
-      <CommentsTop>
-        <CommentsTop primary>
+      <CommentsTop >
+        <CommentsTop primary >
           <div>
             <h4>{ name }</h4>
             <p>{ comments }</p>
