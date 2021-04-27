@@ -40,3 +40,23 @@ module.exports.followUsers = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } );
   }
 }
+
+module.exports.unfollowUsers = async ( req, res ) => {
+  try {
+    await User.findByIdAndUpdate( req.body.unfollowId, {
+      $pull: {followers: req.user._id}
+    }, {
+      new: true
+    }, ( async ( err, result ) => {
+      if ( err ) {
+        res.status(404).json({error: err.message})
+      }
+      const results = await User.findByIdAndUpdate( req.user._id, {
+        $pull: {following: req.body.unfollowId}
+      }, {new: true} )
+      res.status( 200 ).json( { message: 'You unfollow this user', results } );
+    }) )
+  } catch (error) {
+     return res.status( 500 ).json( { error: error } );
+  }
+}
