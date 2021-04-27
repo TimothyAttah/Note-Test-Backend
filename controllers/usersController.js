@@ -32,7 +32,7 @@ module.exports.followUsers = async ( req, res ) => {
         }
       const results = await  User.findByIdAndUpdate( req.user._id, {
           $addToSet: {following: req.body.followId}
-        }, { new: true } )
+        }, { new: true } ).select('-password')
         res.status( 200 ).json( { message: 'You followed this user', results } );
       })
     )
@@ -53,7 +53,7 @@ module.exports.unfollowUsers = async ( req, res ) => {
       }
       const results = await User.findByIdAndUpdate( req.user._id, {
         $pull: {following: req.body.unfollowId}
-      }, {new: true} )
+      }, {new: true} ).select('-password')
       res.status( 200 ).json( { message: 'You unfollow this user', results } );
     }) )
   } catch (error) {

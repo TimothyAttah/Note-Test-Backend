@@ -14,23 +14,23 @@ export const getUser = (id) => async dispatch => {
 }
 
 
-export const followUsers = (followId) => dispatch => {
+export const followUsers = (id) => dispatch => {
   fetch( 'http://localhost:8080/auth/users/follow', {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer "+localStorage.getItem('jwt')
     },
-    body: JSON.stringify({followId})
+    body: JSON.stringify({followId: id})
   } ).then( res => res.json() )
     .then( data => {
       if ( data.error ) {
         console.log( data.error );
       } else {
-        console.log( data.message );
+        console.log( data );
         dispatch( {
           type: FOLLOW_USER,
-          payload: data.result
+          payload: data.results
         } )
     }
     } ).catch( err => {

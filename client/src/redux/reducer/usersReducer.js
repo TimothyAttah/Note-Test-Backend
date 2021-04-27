@@ -18,8 +18,8 @@ const usersReducer = ( state = initialState, action ) => {
       return {
         ...state,
         user: action.payload,
-        followers: state.followers.map(item => item._id ? action.payload._id : item),
-        following: state.following.map(item => item._id ? action.payload._id : item),
+        followers: [...state.followers, action.payload.followers],
+        following: [...state.following, action.payload.following],
       }
     default:
       return state

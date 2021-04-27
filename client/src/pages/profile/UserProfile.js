@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import { Avatar, Divider, Fab } from '@material-ui/core'
+import { Avatar, Button, Divider, Fab } from '@material-ui/core'
 import nameToInitials from '../../components/NameInitials'
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch, useSelector } from 'react-redux';
-import {getUser} from '../../redux/actions/usersActions'
+import {getUser, followUsers} from '../../redux/actions/usersActions'
 import { useParams } from 'react-router-dom'
 
 
@@ -44,7 +44,7 @@ const ProfileRight = styled.div`
  ${props => props.primary && css`
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
+    padding: 50px 0;
     h4 {
       color: #bdbdbd;
         display: flex;
@@ -70,8 +70,17 @@ const UserProfile = () => {
     dispatch( getUser( id ) );
   }, [ dispatch, id ] );
   const users = useSelector( state => state.usersReducer.user );
+  const followers = useSelector( state => state.usersReducer.followers );
+  const following = useSelector( state => state.usersReducer.following );
   const fullName = `${users.user && users.user.firstName } ${ users.user && users.user.lastName }`
   console.log( users );
+  console.log( followers );
+  console.log( following );
+
+  const handleFollowUsers = ( id ) => {
+    dispatch( followUsers( id ) )
+    window.location.reload(false)
+  }
   return (
     <>
       {users.user || users.result ? (
@@ -97,10 +106,15 @@ const UserProfile = () => {
               { users.result && (
                 <ProfileRight primary>
                   <h4><span><Fab color='secondary'>{ users.result.length }</Fab></span>Posts</h4>
-                  <h4><span><Fab color='secondary'>1.5k</Fab></span>Followers</h4>
-                  <h4><span><Fab color='secondary'>304</Fab></span>Following</h4>
+                  <h4><span><Fab color='secondary'>{ users.user.followers.length }</Fab></span>Followers</h4>
+                  <h4><span><Fab color='secondary'>{ users.user.following.length }</Fab></span>Following</h4>
                 </ProfileRight>
               ) }
+              <div>
+                <Button variant='contained' color='primary' onClick={()=> handleFollowUsers(users.user._id)}>Follow</Button>
+                <Button variant='contained' color='primary'>Unfollow</Button>
+              </div>
+              
             </ProfileRight>
           </Profiles>
           <Divider />
