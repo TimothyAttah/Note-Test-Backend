@@ -4,12 +4,13 @@ import { Delete, ThumbUp } from '@material-ui/icons';
 import {
   CommentsBottom, CommentsTop, CommentsLeft, Comments
 } from './CommentRowStyles';
+import nameToInitials, { fullName } from '../NameInitials';
 
 
 const CommentRow = ( { src, name, date, comments } ) => {
   return (
     <Comments>
-      <CommentsLeft>{ src && <Avatar src={ src } /> }</CommentsLeft>
+      <CommentsLeft>{ src ? src && <Avatar src={ src } /> : <Avatar>{ nameToInitials( fullName)}</Avatar> }</CommentsLeft>
       <CommentsTop >
         <CommentsTop primary >
           <div>

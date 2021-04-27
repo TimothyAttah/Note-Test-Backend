@@ -7,6 +7,7 @@ import { notesComments } from '../../redux/actions/notesActions';
 const Form = styled.form`
   display: flex;
   width: 700px;
+  padding-top: 40px;
  .icon-image {
    padding: 0px 10px;
  }
