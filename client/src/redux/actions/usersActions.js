@@ -1,4 +1,4 @@
-import { FOLLOW_USER, GET_USER } from '../type';
+import { FOLLOW_USER, GET_USER, UNFOLLOW_USER } from '../type';
 import * as api from '../api/notesApi';
 
 export const getUser = (id) => async dispatch => {
@@ -30,6 +30,30 @@ export const followUsers = (id) => dispatch => {
         console.log( data );
         dispatch( {
           type: FOLLOW_USER,
+          payload: data.results
+        } )
+    }
+    } ).catch( err => {
+    console.log(err);
+  })
+}
+
+export const unfollowUsers = (id) => dispatch => {
+  fetch( 'http://localhost:8080/auth/users/unfollow', {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+localStorage.getItem('jwt')
+    },
+    body: JSON.stringify({unfollowId: id})
+  } ).then( res => res.json() )
+    .then( data => {
+      if ( data.error ) {
+        console.log( data.error );
+      } else {
+        console.log( data );
+        dispatch( {
+          type: UNFOLLOW_USER,
           payload: data.results
         } )
     }
