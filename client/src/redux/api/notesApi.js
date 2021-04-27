@@ -21,3 +21,5 @@ export const myNotes = () => API.get( '/notes/user/note' );
 export const likeNotes = ( id ) => API.put( '/notes/like', id );
 
 export const notesDelete = ( noteId ) => API.delete( `/notes/${ noteId }/delete` );
+
+export const getUser = ( id ) => API.get( `/auth/users/${ id }/user` );
