@@ -4,7 +4,7 @@ export const Notes = styled.div`
   width: 700px;
   height: auto;
   box-shadow: 5px 6px 8px -9px rgba(0, 0, 0, 0.5);
-  padding: 20px 10px;
+  padding: 20px 10px 30px 10px;
   box-sizing: content-box;
   position: relative;
   ${props => props.primary && css`
