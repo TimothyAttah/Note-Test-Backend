@@ -1,7 +1,7 @@
 const router = require( 'express' ).Router();
 const auth = require( '../middlewares/auth' );
 const {
-  notesCreate, allNotes, myNotes, noteDelete, notesEdit, likeNote, unlikeNote, notesComments
+  notesCreate, allNotes, myNotes, noteDelete, notesEdit, likeNote, unlikeNote, notesComments, allFriendsNotes
 } = require( '../controllers/notesController' );
 
 router.post( '/create', auth, notesCreate );
@@ -9,6 +9,8 @@ router.post( '/create', auth, notesCreate );
 router.get( '/', allNotes );
 
 router.get( '/user/note', auth, myNotes );
+
+router.get( '/friends/notes', auth, allFriendsNotes );
 
 router.delete( '/:noteId/delete', auth, noteDelete );
 
