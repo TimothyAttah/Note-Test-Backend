@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { Avatar, Button, Divider, Fab } from '@material-ui/core'
-import nameToInitials, {user, info} from '../../components/NameInitials'
+import { Avatar, Button, Divider, Fab } from '@material-ui/core';
+import nameToInitials, { user } from '../../components/NameInitials';
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom'
-
+import { useParams } from 'react-router-dom';
 
 
 
@@ -22,7 +21,7 @@ const Profiles = styled.div`
   @media (max-width: 450px){
     padding-left: 30px;
   }
-`
+`;
 
 const ProfileCardIcon = styled.div`
   border: 2px solid green;
@@ -33,7 +32,7 @@ const ProfileCardIcon = styled.div`
     justify-content: center;
     align-items: center;
     .MuiAvatar-colorDefault{
-       background-color: #fff;
+      background-color: #fff;
     }
     .MuiAvatar-root {
       width: 150px;
@@ -44,7 +43,6 @@ const ProfileCardIcon = styled.div`
        max-width: 100%;
      }
     }
-    
   `}
   @media (max-width: 600px){
    width: 200px;
@@ -64,11 +62,11 @@ const ProfileRight = styled.div`
     padding: 50px 0;
     h4 {
       color: #bdbdbd;
-        display: flex;
+      display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: column;
-       height: 85px;
+      height: 85px;
     }
     span {
       color: #fff;
@@ -84,7 +82,7 @@ const ProfileRight = styled.div`
         width: 35px;
         height: 35px;    
       }
- }
+ };
  @media (max-width: 450px){
    padding: 30px 0;
     h4 {
@@ -95,31 +93,24 @@ const ProfileRight = styled.div`
       align-items: flex-start;
     }
   }
- `}
+ `};
  @media (max-width: 850px){
    width: 300px;
- }
+ };
 
  @media (max-width: 450px){
-   h1 {
-       font-size: 20px;
-     }
-     h4{
-       font-size: 12px;
-     }
- }
-
+   h1 {font-size: 20px;}
+   h4{font-size: 12px;}
+ };
   @media (max-width: 300px){
-     width: 150px;
-    
- }
- 
+    width: 150px;
+ };
 `
 
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const [ userProfile, setUserProfile ] = useState( null )
+  const [ userProfile, setUserProfile ] = useState( null );
   const { id } = useParams();
   
   useEffect( () => {
@@ -127,69 +118,65 @@ const UserProfile = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer "+localStorage.getItem('jwt')
+      "Authorization": "Bearer " + localStorage.getItem( 'jwt' )
     }
   } ).then( res => res.json() )
     .then( data => {
       if ( data.error ) {
         console.log( data.error );
       } else {
-        setUserProfile(data)
+        setUserProfile( data );
     }
     } ).catch( err => {
     console.log(err);
   })
   }, [ dispatch, id ] );
 
-  const [showFollow, setShowFollow] = useState(user && user.results ? !user.results.following.includes(id ): true)
+  const [ showFollow, setShowFollow ] = useState( user && user.results ? !user.results.following.includes( id ) : true );
  
   const fullName = `${userProfile && userProfile.user.firstName } ${ userProfile && userProfile.user.lastName }`
- 
 
-
-const followUser = () => {
+  const followUser = () => {
     fetch( 'http://localhost:8080/auth/users/follow', {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer "+ localStorage.getItem('jwt')
+        "Authorization": "Bearer " + localStorage.getItem( 'jwt' )
       },
-      body: JSON.stringify({followId: id})
+      body: JSON.stringify( { followId: id } )
     } ).then( res => res.json() )
       .then( data => {
-        console.log(data);
-        localStorage.setItem('user', JSON.stringify(data))
+        console.log( data );
+        localStorage.setItem( 'user', JSON.stringify( data ) );
         setUserProfile( ( prevState ) => {
           return {
             ...prevState,
             user: {
               ...prevState.user,
-            followers: [...prevState.user.followers, data._id]
+              followers: [ ...prevState.user.followers, data._id ]
             }
           }
-        } )
-        setShowFollow( false )
+        } );
+        setShowFollow( false );
       } )
       .catch( err => {
-      console.log(err);
-    })
-  }
-
-   
+        console.log( err );
+      } )
+  };
 
   const unFollowUser = () => {
     fetch( 'http://localhost:8080/auth/users/unfollow', {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer "+ localStorage.getItem('jwt')
+        "Authorization": "Bearer " + localStorage.getItem( 'jwt' )
       },
-      body: JSON.stringify({unfollowId: id})
+      body: JSON.stringify( { unfollowId: id } )
     } ).then( res => res.json() )
       .then( data => {
-       localStorage.setItem('user', JSON.stringify(data))
+        localStorage.setItem( 'user', JSON.stringify( data ) );
         setUserProfile( ( prevState ) => {
-          const newFollower = prevState.user.followers.filter(item => item !== data._id)
+          const newFollower = prevState.user.followers.filter( item => item !== data._id );
           return {
             ...prevState,
             user: {
@@ -197,19 +184,16 @@ const followUser = () => {
               followers: newFollower
             }
           }
-        } )
-         setShowFollow( true );
-      //  window.location.reload( false );
-      
+        } );
+        setShowFollow( true );
+        //  window.location.reload( false );
       } )
       .catch( err => {
-      console.log(err);
-    })
-  }
+        console.log( err );
+      } )
+  };
 
-console.log(userProfile);
-
-
+  console.log( userProfile );
 
   return (
     <>
@@ -241,14 +225,12 @@ console.log(userProfile);
                 </ProfileRight>
               ) }
               <div>
-                {  showFollow ? (
+                { showFollow ? (
                   <Button variant='contained' color='primary' onClick={ () => followUser() }>Follow</Button>
-                  ) : (
-                    <Button variant='contained' color='primary' onClick={()=> unFollowUser()}>Unfollow</Button>
-                     )
-                  }
-               {/* <Button variant='contained' color='primary' onClick={ () => followUser() }>Follow</Button>
-                 <Button variant='contained' color='primary' onClick={()=> unFollowUser()}>Unfollow</Button> */}
+                ) : (
+                  <Button variant='contained' color='primary' onClick={ () => unFollowUser() }>Unfollow</Button>
+                )
+                }
               </div>
               
             </ProfileRight>
