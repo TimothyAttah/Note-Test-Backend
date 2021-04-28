@@ -10,7 +10,7 @@ import nameToInitials, {user} from '../../components/NameInitials';
 
 import PopupNav from '../../components/navs/PopupNav';
 
-import { listNotes, likeNotes, unlikeNotes } from '../../redux/actions/notesActions';
+import { friendsNotes, likeNotes, unlikeNotes } from '../../redux/actions/notesActions';
 import {
   NoteComments, NoteCommentsLeft, Notes, NoteLeft, NoteCenter
 } from '../notes/NoteListsStyles';
@@ -20,7 +20,7 @@ console.log(user);
 const FriendsProfile = () => {
   const dispatch = useDispatch()
   useEffect( () => {
-    dispatch( listNotes() )
+    dispatch( friendsNotes() )
   }, [ dispatch ] )
   const notes = useSelector( state => state.notesReducer.notes )
   console.log( notes );

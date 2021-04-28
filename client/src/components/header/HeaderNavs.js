@@ -52,7 +52,7 @@ const HeaderNavs = ({note}) => {
           </HeaderDropDown>
           <Divider />
           <HeaderDropDown  onClick={()=> window.location.reload(false)} primary><Link to='/api/users/profile'>Profile</Link></HeaderDropDown>
-          <HeaderDropDown onClick={()=> window.location.reload(false)} primary><Link to='/user/profile'>Friends Posts</Link></HeaderDropDown>
+          <HeaderDropDown onClick={()=> window.location.reload(false)} primary><Link to='/api/users/friends/profile'>Friends Posts</Link></HeaderDropDown>
           <HeaderDropDown  primary><Button variant='contained' color='secondary' onClick={ handleLogout }>Log Out</Button></HeaderDropDown>
         </HeaderDropDown>
       </Menu>
