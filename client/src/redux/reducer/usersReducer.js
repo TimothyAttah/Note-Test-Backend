@@ -1,7 +1,9 @@
-import { GET_USER } from '../type';
+import { FOLLOW_USER, GET_USER, UNFOLLOW_USER } from '../type';
 
 const initialState = {
-  user: []
+  user: [],
+  followers: [],
+  following: []
 }
 
 const usersReducer = ( state = initialState, action ) => {
@@ -10,6 +12,19 @@ const usersReducer = ( state = initialState, action ) => {
       return {
         ...state,
         user: action.payload
+      }
+    case FOLLOW_USER:
+      return {
+        ...state,
+        followers: [action.payload.followers, ...state.user],
+        following: [action.payload.following, ...state.user] 
+      }
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        user: action.payload,
+        followers: state.followers.filter(item => item !== action.payload),
+        following: state.following.filter(item => item !== action.payload),
       }
     default:
       return state

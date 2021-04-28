@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react';
-import { Avatar, Divider, Fab } from '@material-ui/core'
-import nameToInitials from '../../components/NameInitials'
+import React, {useEffect, useState} from 'react';
+import { Avatar, Button, Divider, Fab } from '@material-ui/core'
+import nameToInitials, {user, info} from '../../components/NameInitials'
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
-import { useDispatch, useSelector } from 'react-redux';
-import {getUser} from '../../redux/actions/usersActions'
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-
 
 
 
@@ -44,7 +42,7 @@ const ProfileRight = styled.div`
  ${props => props.primary && css`
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
+    padding: 50px 0;
     h4 {
       color: #bdbdbd;
         display: flex;
@@ -65,16 +63,103 @@ const ProfileRight = styled.div`
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const [ userProfile, setUserProfile ] = useState( null )
   const { id } = useParams();
+  
   useEffect( () => {
-    dispatch( getUser( id ) );
+    JSON.parse( localStorage.getItem( 'info' ) );
+     fetch( `http://localhost:8080/auth/users/${ id }/user`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+localStorage.getItem('jwt')
+    }
+  } ).then( res => res.json() )
+    .then( data => {
+      if ( data.error ) {
+        console.log( data.error );
+      } else {
+        setUserProfile(data)
+    }
+    } ).catch( err => {
+    console.log(err);
+  })
   }, [ dispatch, id ] );
-  const users = useSelector( state => state.usersReducer.user );
-  const fullName = `${users.user && users.user.firstName } ${ users.user && users.user.lastName }`
-  console.log( users );
+
+  const [showFollow, setShowFollow] = useState( info.result ? !info.result.following.includes(id ): true)
+ 
+  const fullName = `${userProfile && userProfile.user.firstName } ${ userProfile && userProfile.user.lastName }`
+ 
+
+
+const followUser = () => {
+    fetch( 'http://localhost:8080/auth/users/follow', {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer "+ localStorage.getItem('jwt')
+      },
+      body: JSON.stringify({followId: id})
+    } ).then( res => res.json() )
+      .then( data => {
+        console.log(data);
+        localStorage.setItem('info', JSON.stringify(data))
+        setUserProfile( ( prevState ) => {
+          return {
+            ...prevState,
+            info: {
+              ...prevState.user,
+            followers: [...prevState.user.followers, data._id]
+            }
+          }
+        } )
+        setShowFollow( false )
+        window.location.reload(false)
+      } )
+      .catch( err => {
+      console.log(err);
+    })
+  }
+
+   
+
+  const unFollowUser = () => {
+    fetch( 'http://localhost:8080/auth/users/unfollow', {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer "+ localStorage.getItem('jwt')
+      },
+      body: JSON.stringify({unfollowId: id})
+    } ).then( res => res.json() )
+      .then( data => {
+       localStorage.setItem('info', JSON.stringify(data))
+        setUserProfile( ( prevState ) => {
+          const newFollower = prevState.user.followers.filter(item => item !== data._id)
+          return {
+            ...prevState,
+            user: {
+              ...prevState.user,
+              followers: newFollower
+            }
+          }
+        } )
+         setShowFollow( true );
+       window.location.reload( false );
+      
+      } )
+      .catch( err => {
+      console.log(err);
+    })
+  }
+
+console.log(userProfile);
+
+
+
   return (
     <>
-      {users.user || users.result ? (
+      {userProfile ? (
         <>
           <Profiles>
             <ProfileCardIcon>
@@ -91,22 +176,33 @@ const UserProfile = () => {
             <ProfileRight>
               <>
                 <h1>{ fullName }</h1>
-                <h4>{ users.user.email }</h4>
+                <h4>{ userProfile.user.email }</h4>
               </>
               <Divider />
-              { users.result && (
+              { userProfile.posts && (
                 <ProfileRight primary>
-                  <h4><span><Fab color='secondary'>{ users.result.length }</Fab></span>Posts</h4>
-                  <h4><span><Fab color='secondary'>1.5k</Fab></span>Followers</h4>
-                  <h4><span><Fab color='secondary'>304</Fab></span>Following</h4>
+                  <h4><span><Fab color='secondary'>{ userProfile.posts.length }</Fab></span>Posts</h4>
+                  <h4><span><Fab color='secondary'>{ userProfile.user.followers.length }</Fab></span>Followers</h4>
+                  <h4><span><Fab color='secondary'>{ userProfile.user.following.length }</Fab></span>Following</h4>
                 </ProfileRight>
               ) }
+              <div>
+                {  showFollow ? (
+                  <Button variant='contained' color='primary' onClick={ () => followUser() }>Follow</Button>
+                  ) : (
+                    <Button variant='contained' color='primary' onClick={()=> unFollowUser()}>Unfollow</Button>
+                     )
+                  }
+               {/* <Button variant='contained' color='primary' onClick={ () => followUser() }>Follow</Button>
+                 <Button variant='contained' color='primary' onClick={()=> unFollowUser()}>Unfollow</Button> */}
+              </div>
+              
             </ProfileRight>
           </Profiles>
           <Divider />
           <div>
             {
-              users.result.map( note => {
+              userProfile.posts.map( note => {
                 return (
                   <div key={ note._id }>
                     <h2>{ note.title }</h2>
