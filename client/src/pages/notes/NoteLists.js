@@ -15,7 +15,7 @@ import {
   NoteComments, NoteCommentsLeft, Notes, NoteLeft, NoteCenter
 } from './NoteListsStyles';
 
-
+console.log(user);
 
 const NoteLists = () => {
   const dispatch = useDispatch()
@@ -44,13 +44,13 @@ const NoteLists = () => {
             <Notes key={ note._id }>
               <Notes primary>
                 <NoteLeft>
-                  <Link to={  note && note.postedBy._id !== user._id ? `/api/auth/users/${note.postedBy._id}/user/profile`: `/api/users/profile`}>
+                  <Link to={  note && note.postedBy._id !== user._id ? `/api/auth/users/${note.postedBy._id}/user/profile` : `/api/users/profile`}>
                   <Avatar>
                     { nameToInitials( fullName ) }
                     </Avatar>
                     </Link>
                   <NoteLeft primary>
-                    <h4><Link to={  note && note.postedBy._id !== user._id ? `/api/auth/users/${note.postedBy._id}/user/profile`: `/api/users/profile`}>{ fullName }</Link></h4>
+                    <h4> <Link to={  note && note.postedBy._id !== user._id ? `/api/auth/users/${note.postedBy._id}/user/profile` : `/api/users/profile`}>{ fullName }</Link></h4>
                     <h5>24 followers</h5>
                   </NoteLeft>
                 </NoteLeft>

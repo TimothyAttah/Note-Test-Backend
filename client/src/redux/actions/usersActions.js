@@ -28,10 +28,12 @@ export const followUsers = (id) => dispatch => {
         console.log( data.error );
       } else {
         console.log( data );
+         localStorage.setItem('user', JSON.stringify(data))
         dispatch( {
           type: FOLLOW_USER,
-          payload: data.results
+          payload: {following: data.following, followers: data.followers}
         } )
+        // window.location.reload(false)
     }
     } ).catch( err => {
     console.log(err);
@@ -52,10 +54,12 @@ export const unfollowUsers = (id) => dispatch => {
         console.log( data.error );
       } else {
         console.log( data );
+         localStorage.setItem('user', JSON.stringify(data))
         dispatch( {
           type: UNFOLLOW_USER,
           payload: data.results
         } )
+         
     }
     } ).catch( err => {
     console.log(err);
