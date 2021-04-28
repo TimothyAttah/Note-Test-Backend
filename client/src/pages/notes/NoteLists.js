@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Avatar, Button, Divider, IconButton } from '@material-ui/core';
 import {  ThumbDown, ThumbUp, } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,12 +36,13 @@ const NoteLists = () => {
   }
 
   return (
-    <>
+    <Fragment>
       {notes.length ? (
         notes.map( note => {
           const fullName = `${ note.postedBy.firstName } ${ note.postedBy.lastName }`
           return (
-            <Notes key={ note._id }>
+            <div key={ note._id } style={{ paddingBottom: '30px'}}>
+              <Notes >
               <Notes primary>
                 <NoteLeft>
                   <Link to={  note && note.postedBy._id !== user.results._id ? `/api/auth/users/${note.postedBy._id}/user/profile` : `/api/users/profile`}>
@@ -59,13 +60,13 @@ const NoteLists = () => {
                   <small>24th feb 2021</small>
                   <p>{ note.content }</p>
                 </NoteCenter>
-                <div>
+                <Fragment>
                   { note.postedBy ? (
                     <div>
                       { note && note.postedBy._id === user.results._id && <PopupNav note={ note } /> }
                     </div>
                   ) : ( <p>loading</p> ) }
-                </div>
+                </Fragment>
               </Notes>
               <Divider />
               <NoteComments>
@@ -73,9 +74,9 @@ const NoteLists = () => {
                   <ThumbUp color='primary' />
                   <h4><span>{note.likes.length}</span> Likes</h4>
                 </NoteCommentsLeft>
-                <div>
+                <Fragment>
                   <h4>{note.comments.length} Comments</h4>
-                </div>
+                </Fragment>
               </NoteComments>
               <Divider />
               <NoteComments primary>
@@ -88,18 +89,19 @@ const NoteLists = () => {
                   <ThumbUp /><span>Like</span>
                 </IconButton>
                 )}
-                <div>
+                <Fragment>
                   <OpenComment myComment={ <Comment note={note} /> } />
-                </div>
+                </Fragment>
                 <Button variant='contained' size='small'><Link to='#'>Read More</Link></Button>
               </NoteComments>
             </Notes>
+            </div>
           );
         } )
       ) : (
         <h2>Loading notes...</h2>
       ) }
-    </>
+    </Fragment>
   );
 };
 
