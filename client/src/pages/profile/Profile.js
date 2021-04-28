@@ -67,10 +67,14 @@ const Profile = () => {
     dispatch(myNotes())
   },[dispatch])
   const notes = useSelector( state => state.notesReducer.notes );
-  console.log(notes);
+  console.log( notes );
+  console.log( user );
+  
   return (
-    <div>
-      <Profiles>
+    <>
+      {user || notes ? (
+        <>
+           <Profiles>
       <ProfileCardIcon>
         <ProfileCardIcon primary>
           { images ? (
@@ -84,12 +88,12 @@ const Profile = () => {
 
       <ProfileRight>
         <h1>{ fullName }</h1>
-        <h4>{ user && user.email }</h4>
+        <h4>{ user.results.email }</h4>
         <Divider/>
         <ProfileRight primary>
-          <h4><span><Fab color='secondary'>90</Fab></span>Posts</h4>
-          <h4><span><Fab color='secondary'>1.5k</Fab></span>Followers</h4>
-          <h4><span><Fab color='secondary'>304</Fab></span>Following</h4>
+            <h4><span><Fab color='secondary'>{ notes.length }</Fab></span>Posts</h4>
+          <h4><span><Fab color='secondary'>{user.results.followers.length}</Fab></span>Followers</h4>
+          <h4><span><Fab color='secondary'>{user.results.following.length}</Fab></span>Following</h4>
         </ProfileRight>
       </ProfileRight>
       </Profiles>
@@ -108,7 +112,11 @@ const Profile = () => {
           <h2>Loading...</h2>
        )}
       </div>
-    </div>
+        </>
+      ): (
+        <h2>Loading...</h2>
+      )}
+    </>
   )
 }
 

@@ -10,7 +10,6 @@ export const signupUser = ( userData ) => async dispatch => {
   try {
     const{data}= await api.signupUser( userData )
     toast.success( data.message );
-    console.log(data);
     dispatch( {
       type: SIGNUP_USER,
       payload: data.users
@@ -27,7 +26,6 @@ export const signinUser = ( userData ) => async dispatch => {
   try {
     const { data } = await api.signinUser( userData )
     toast.success( data.message );
-    console.log(data);
     dispatch( {
       type: SIGNIN_USER,
       payload: data.users
@@ -46,7 +44,6 @@ export const signinUser = ( userData ) => async dispatch => {
 export const getUsers = () => async dispatch => {
   try {
     const { data } = await api.getUsers();
-    console.log(data);
     dispatch( {
       type: GET_USERS,
       payload: data.savedUsers

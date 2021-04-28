@@ -1,6 +1,5 @@
 
 export const user = JSON.parse( localStorage.getItem( 'user' ) );
-console.log(user);
 
 
 export const fullName = `${ user && user.results && user.results.firstName } ${ user && user.results && user.results.lastName  }`
