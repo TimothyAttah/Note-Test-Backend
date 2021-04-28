@@ -31,6 +31,17 @@ module.exports.allNotes = async ( req, res ) => {
   }
 }
 
+module.exports.allFriendsNotes = async ( req, res ) => {
+  try {
+    const notes = await Notes.find({postedBy: {$in: req.user.following}})
+      .populate( 'postedBy', '-password' )
+    .populate('comments.postedBy', '_id firstName lastName')
+    res.status(200).json(notes)
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } );
+  }
+}
+
 module.exports.myNotes = async ( req, res ) => {
   try {
     const notes = await Notes.find( { postedBy: req.user._id } )

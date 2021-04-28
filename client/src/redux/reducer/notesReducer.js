@@ -1,4 +1,4 @@
-import { NOTES_COMMENTS, NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTES_UNLIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
+import { FRIENDS_NOTES, NOTES_COMMENTS, NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTES_UNLIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
 
 const initialState = {
   notes: []
@@ -8,6 +8,7 @@ const notesReducer = ( state = initialState, action ) => {
   switch ( action.type ) {
     case USERS_NOTES_LISTS:
     case USER_NOTES_LISTS:
+    case FRIENDS_NOTES:
       return {
         ...state,
         notes: action.payload
