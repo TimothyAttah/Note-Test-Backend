@@ -86,7 +86,7 @@ const UserProfile = () => {
   })
   }, [ dispatch, id ] );
 
-  const [showFollow, setShowFollow] = useState( info.result ? !info.result.following.includes(id ): true)
+  const [showFollow, setShowFollow] = useState(info && info.result ? !info.result.following.includes(id ): true)
  
   const fullName = `${userProfile && userProfile.user.firstName } ${ userProfile && userProfile.user.lastName }`
  
