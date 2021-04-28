@@ -1,4 +1,4 @@
-import { NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTES_UNLIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
+import { FRIENDS_NOTES, NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTES_UNLIKE, USERS_NOTES_LISTS, USER_NOTES_LISTS } from '../type';
 import * as api from '../api/notesApi';
 import { toast } from 'react-toastify';
 import history from '../../history';
@@ -23,6 +23,19 @@ export const myNotes = () => async dispatch => {
     console.log( data );
     dispatch( {
       type: USER_NOTES_LISTS,
+      payload: data
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const friendsNotes = () => async dispatch => {
+  try {
+    const { data } = await api.friendsNotes();
+    console.log( data );
+    dispatch( {
+      type: FRIENDS_NOTES,
       payload: data
     })
   } catch (error) {
