@@ -63,7 +63,7 @@ const App = () => {
           <Route path='/api/users/notes' exact component={Notes} />
           <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
           <Route path='/api/users/notes/create/note' component={NotesCreate} />
-          <Route path='/api/users/notes/noteId/note/read' component={NotesRead} />
+          <Route path='/api/users/notes/:noteId/note/read' component={NotesRead} />
           <Route path='/api/users/todos' exact component={Todos} />
         </Switch>
       </Router>
