@@ -1,10 +1,9 @@
 
 export const user = JSON.parse( localStorage.getItem( 'user' ) );
-export const info = JSON.parse( localStorage.getItem( 'info' ) );
- 
+console.log(user);
 
- export const fullName = `${ user &&  user.firstName } ${ user && user.lastName }`
-//  export const fullName = `${ user.result ? user.result.firstName : user.firstName } ${ user.result ? user.result.lastName : user.lastName }`
+
+export const fullName = `${ user && user.results && user.results.firstName } ${ user && user.results && user.results.lastName  }`
 
 
 const nameToInitials = (  ) => {

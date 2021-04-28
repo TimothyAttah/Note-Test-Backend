@@ -12,6 +12,16 @@ import { useParams } from 'react-router-dom'
 const Profiles = styled.div`
   display: flex;
   justify-content: space-around;
+  @media (max-width: 700px){
+    display: block;
+  padding-left: 200px;
+  }
+  @media (max-width: 545px){
+    padding-left: 100px;
+  }
+  @media (max-width: 450px){
+    padding-left: 30px;
+  }
 `
 
 const ProfileCardIcon = styled.div`
@@ -34,7 +44,16 @@ const ProfileCardIcon = styled.div`
        max-width: 100%;
      }
     }
+    
   `}
+  @media (max-width: 600px){
+   width: 200px;
+   height: 200px;
+     .MuiAvatar-root {
+      width: 100px;
+      height: 100px;
+    }
+  }
 `;
 
 const ProfileRight = styled.div`
@@ -57,7 +76,44 @@ const ProfileRight = styled.div`
       justify-content: center;
       align-items: center;
     }
+    @media (max-width: 600px){
+      h4{
+        height: 65px;
+      }
+      .MuiFab-root {
+        width: 35px;
+        height: 35px;    
+      }
+ }
+ @media (max-width: 450px){
+   padding: 30px 0;
+    h4 {
+      width: 100px;
+      font-size: 12px;
+      font-weight: bolder;
+      padding-right: 15px;
+      align-items: flex-start;
+    }
+  }
  `}
+ @media (max-width: 850px){
+   width: 300px;
+ }
+
+ @media (max-width: 450px){
+   h1 {
+       font-size: 20px;
+     }
+     h4{
+       font-size: 12px;
+     }
+ }
+
+  @media (max-width: 300px){
+     width: 150px;
+    
+ }
+ 
 `
 
 
@@ -67,7 +123,6 @@ const UserProfile = () => {
   const { id } = useParams();
   
   useEffect( () => {
-    JSON.parse( localStorage.getItem( 'info' ) );
      fetch( `http://localhost:8080/auth/users/${ id }/user`, {
     method: "GET",
     headers: {
@@ -86,7 +141,7 @@ const UserProfile = () => {
   })
   }, [ dispatch, id ] );
 
-  const [showFollow, setShowFollow] = useState(info && info.result ? !info.result.following.includes(id ): true)
+  const [showFollow, setShowFollow] = useState(user && user.results ? !user.results.following.includes(id ): true)
  
   const fullName = `${userProfile && userProfile.user.firstName } ${ userProfile && userProfile.user.lastName }`
  
@@ -103,18 +158,17 @@ const followUser = () => {
     } ).then( res => res.json() )
       .then( data => {
         console.log(data);
-        localStorage.setItem('info', JSON.stringify(data))
+        localStorage.setItem('user', JSON.stringify(data))
         setUserProfile( ( prevState ) => {
           return {
             ...prevState,
-            info: {
+            user: {
               ...prevState.user,
             followers: [...prevState.user.followers, data._id]
             }
           }
         } )
         setShowFollow( false )
-        window.location.reload(false)
       } )
       .catch( err => {
       console.log(err);
@@ -133,7 +187,7 @@ const followUser = () => {
       body: JSON.stringify({unfollowId: id})
     } ).then( res => res.json() )
       .then( data => {
-       localStorage.setItem('info', JSON.stringify(data))
+       localStorage.setItem('user', JSON.stringify(data))
         setUserProfile( ( prevState ) => {
           const newFollower = prevState.user.followers.filter(item => item !== data._id)
           return {
@@ -145,7 +199,7 @@ const followUser = () => {
           }
         } )
          setShowFollow( true );
-       window.location.reload( false );
+      //  window.location.reload( false );
       
       } )
       .catch( err => {

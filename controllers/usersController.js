@@ -30,8 +30,8 @@ module.exports.followUsers = async ( req, res ) => {
       }
       User.findByIdAndUpdate( req.user._id, {
         $push: {following: req.body.followId}
-      }, { new: true } ).select( '-password' ).then( result => {
-          res.status(200).json({message: 'You are following', result})
+      }, { new: true } ).select( '-password' ).then( results => {
+          res.status(200).json({message: 'You are following', results})
       })  
    })
   } catch (error) {
@@ -49,8 +49,8 @@ module.exports.unfollowUsers = async ( req, res ) => {
       }
       User.findByIdAndUpdate( req.user._id, {
         $pull: {following: req.body.unfollowId}
-      }, { new: true } ).select( '-password' ).then( result => {
-          res.status(200).json({message: 'You are unFollowing', result})
+      }, { new: true } ).select( '-password' ).then( results => {
+          res.status(200).json({message: 'You are unFollowing', results})
       })  
    })
   } catch (error) {

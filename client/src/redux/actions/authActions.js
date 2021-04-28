@@ -27,12 +27,13 @@ export const signinUser = ( userData ) => async dispatch => {
   try {
     const { data } = await api.signinUser( userData )
     toast.success( data.message );
+    console.log(data);
     dispatch( {
       type: SIGNIN_USER,
       payload: data.users
     } )
     localStorage.setItem( 'jwt', data.token );
-    localStorage.setItem( 'user', JSON.stringify( data.users ) );
+    localStorage.setItem( 'user', JSON.stringify( data ) );
     history.push( '/api/users/notes' );
     window.location.reload( false );
   } catch (err) {
