@@ -12,7 +12,17 @@ import { myNotes } from '../../redux/actions/notesActions';
 const Profiles = styled.div`
   display: flex;
   justify-content: space-around;
-`
+  @media (max-width: 700px){
+    display: block;
+  padding-left: 200px;
+  }
+  @media (max-width: 545px){
+    padding-left: 100px;
+  }
+  @media (max-width: 450px){
+    padding-left: 30px;
+  }
+`;
 
 const ProfileCardIcon = styled.div`
   border: 2px solid green;
@@ -23,7 +33,7 @@ const ProfileCardIcon = styled.div`
     justify-content: center;
     align-items: center;
     .MuiAvatar-colorDefault{
-       background-color: #fff;
+      background-color: #fff;
     }
     .MuiAvatar-root {
       width: 150px;
@@ -35,6 +45,14 @@ const ProfileCardIcon = styled.div`
      }
     }
   `}
+  @media (max-width: 600px){
+   width: 200px;
+   height: 200px;
+     .MuiAvatar-root {
+      width: 100px;
+      height: 100px;
+    }
+  }
 `;
 
 const ProfileRight = styled.div`
@@ -42,14 +60,14 @@ const ProfileRight = styled.div`
  ${props => props.primary && css`
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
+    padding: 50px 0;
     h4 {
       color: #bdbdbd;
-        display: flex;
+      display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: column;
-       height: 85px;
+      height: 85px;
     }
     span {
       color: #fff;
@@ -57,7 +75,37 @@ const ProfileRight = styled.div`
       justify-content: center;
       align-items: center;
     }
- `}
+    @media (max-width: 600px){
+      h4{
+        height: 65px;
+      }
+      .MuiFab-root {
+        width: 35px;
+        height: 35px;    
+      }
+ };
+ @media (max-width: 450px){
+   padding: 30px 0;
+    h4 {
+      width: 100px;
+      font-size: 12px;
+      font-weight: bolder;
+      padding-right: 15px;
+      align-items: flex-start;
+    }
+  }
+ `};
+ @media (max-width: 850px){
+   width: 300px;
+ };
+
+ @media (max-width: 450px){
+   h1 {font-size: 20px;}
+   h4{font-size: 12px;}
+ };
+  @media (max-width: 300px){
+    width: 150px;
+ };
 `
 
 
