@@ -13,7 +13,7 @@ import PopupNav from '../../components/navs/PopupNav';
 import { listNotes, likeNotes, unlikeNotes } from '../../redux/actions/notesActions';
 import {
   NoteComments, NoteCommentsLeft, Notes, NoteLeft, NoteCenter
-} from './NoteListsStyles';
+} from '../notes/NoteListsStyles';
 
 console.log(user);
 
