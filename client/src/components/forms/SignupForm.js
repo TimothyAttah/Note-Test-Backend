@@ -53,8 +53,7 @@ const Signup = () => {
       email,
       password
     }
-    dispatch(signupUser( newUser ) )
-    console.log(newUser);
+    dispatch( signupUser( newUser ) );
   }
   return (
     <>

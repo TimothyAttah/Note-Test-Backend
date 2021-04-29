@@ -42,8 +42,6 @@ const NotesCreateForm = () => {
       content,
     }
     dispatch( notesCreate( newNote ) );
-    setTitle( '' )
-    setContent( '' )
   }
   return (
     <div>

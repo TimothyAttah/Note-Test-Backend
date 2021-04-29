@@ -50,7 +50,6 @@ const Signin = () => {
       password
     }
     dispatch( signinUser( savedUser ) );
-    console.log(savedUser);
   }
   return (
     <>

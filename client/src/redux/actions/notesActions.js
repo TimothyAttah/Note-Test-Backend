@@ -54,7 +54,7 @@ export const notesCreate = ( notesData ) => async dispatch => {
     history.push('/api/users/notes')
   } catch (err) {
     if ( err.response && err.response.data ) {
-      toast.error(err.response.data.error)
+     return toast.error(err.response.data.error)
     }
   }
 };
