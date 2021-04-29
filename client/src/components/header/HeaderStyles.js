@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colors } from '../elements';
 
 export const Headers = styled.header`
   display: flex;
