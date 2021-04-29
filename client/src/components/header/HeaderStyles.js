@@ -12,7 +12,7 @@ export const Headers = styled.header`
   background-color: white;
   box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
   h1 > a {
-    color: ${colors.teal};
+    color: #3f51b5;
     font-family: 'Cursive', serif;
     text-shadow:  -3px -3px 3px #fff7,
                3px 3px 3px #0003;

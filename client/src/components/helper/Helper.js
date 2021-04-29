@@ -1,9 +1,9 @@
-import { AttachMoneyOutlined, Delete, Edit, Event, ListAlt, MenuBookOutlined, Print, Settings } from "@material-ui/icons";
+import { AttachMoneyOutlined, Delete, Edit, Event, ListAlt, Notes, Print, Settings } from "@material-ui/icons";
 
 export const navMenu = [
   {
     name: 'Notes',
-    icon: <MenuBookOutlined />,
+    icon: <Notes />,
     url: '/api/users/notes'
   },
   {
