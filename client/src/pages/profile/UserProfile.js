@@ -107,6 +107,18 @@ const ProfileRight = styled.div`
  };
 `
 
+const ProfilePostContainer = styled.div`
+  width: 100%;
+  border: 2px dashed green;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ProfilePost = styled.div`
+  width: 400px;
+  border: 2px solid blue;
+`;
+
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -236,18 +248,18 @@ const UserProfile = () => {
             </ProfileRight>
           </Profiles>
           <Divider />
-          <div>
+          <ProfilePostContainer>
             {
               userProfile.posts.map( note => {
                 return (
-                  <div key={ note._id }>
+                  <ProfilePost key={ note._id }>
                     <h2>{ note.title }</h2>
                     <p>{ note.content }</p>
-                  </div>
+                  </ProfilePost>
                 );
               } )
             }
-          </div>
+          </ProfilePostContainer>
         </>
       ) : (
         <h2>Loading profile...</h2>

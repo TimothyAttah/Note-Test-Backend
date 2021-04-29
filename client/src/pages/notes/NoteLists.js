@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
-import nameToInitials, {user} from '../../components/NameInitials';
+import nameToInitials, { user } from '../../components/NameInitials';
+import ReadMore from '../../components/ReadMore'
 
 
 import PopupNav from '../../components/navs/PopupNav';
@@ -58,7 +59,9 @@ const NoteLists = () => {
                 <NoteCenter>
                   <h2>{ note.title }</h2>
                   <small>24th feb 2021</small>
-                  <p>{ note.content }</p>
+                    <ReadMore>
+                       { note.content }
+                 </ReadMore>
                 </NoteCenter>
                 <Fragment>
                   { note.postedBy ? (
