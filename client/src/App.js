@@ -19,6 +19,7 @@ import Todos from './pages/todos/Todos';
 import UserProfile from './pages/profile/UserProfile';
 import FriendsProfile from './pages/profile/FriendsProfile';
 import NotesRead from './pages/notes/NotesRead';
+import NotesEdit from './pages/notes/NotesEdit';
 
 const MainContainer = styled.main`
   *{
@@ -62,6 +63,7 @@ const App = () => {
           <Route path='/api/auth/users/:id/user/profile' exact component={UserProfile} />
           <Route path='/api/users/notes' exact component={Notes} />
           <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
+          <Route path='/api/users/notes/:noteId/note/edit' component={NotesEdit} />
           <Route path='/api/users/notes/create/note' component={NotesCreate} />
           <Route path='/api/users/notes/:noteId/note/read' component={NotesRead} />
           <Route path='/api/users/todos' exact component={Todos} />
