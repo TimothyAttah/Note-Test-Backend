@@ -4,7 +4,8 @@ import nameToInitials, { user } from '../../components/NameInitials';
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import ReadMore from '../../components/ReadMore';
 
 
 
@@ -109,15 +110,39 @@ const ProfileRight = styled.div`
 
 const ProfilePostContainer = styled.div`
   width: 100%;
-  border: 2px dashed green;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding-top: 20px;
 `;
 
 const ProfilePost = styled.div`
   width: 400px;
-  border: 2px solid blue;
+  height: 300px;
+  border: 2px solid gray;
+  position: relative;
+  border-radius: 5px;
+  h2 {
+    padding: 20px 10px 10px 10px;
+  }
 `;
+
+
+
+const ProfilePostContent = styled.div`
+padding: 10px 10px 20px 10px;
+
+`;
+
+
+const ProfilePostButton = styled.div`
+padding-top: 50px;
+position: absolute;
+bottom: 20px;
+right: 10px;
+`;
+
+
 
 
 const UserProfile = () => {
@@ -252,10 +277,24 @@ const UserProfile = () => {
             {
               userProfile.posts.map( note => {
                 return (
-                  <ProfilePost key={ note._id }>
-                    <h2>{ note.title }</h2>
-                    <p>{ note.content }</p>
-                  </ProfilePost>
+                   <div key={note._id} style={{paddingBottom: '30px'}}>
+                <ProfilePost >
+                  <h2>{ note.title }</h2>
+                  <Divider />
+                  <ProfilePostContent>
+                     <ReadMore>
+                  { note.content }
+                    </ReadMore>
+                </ProfilePostContent>
+                  <ProfilePostButton>
+                     <Button variant='contained' size='small' color='primary'>
+                      <Link to={ `/api/users/notes/${ note._id }/note/read` }>Read More</Link>
+                    </Button>
+                 </ProfilePostButton>
+                   
+                  
+              </ProfilePost>
+              </div>
                 );
               } )
             }
