@@ -125,6 +125,12 @@ const ProfilePost = styled.div`
   h2 {
     padding: 20px 10px 10px 10px;
   }
+   @media (max-width:450px){
+    width: 250px;
+    h2 {
+      font-size: 18px;
+    }
+  }
 `;
 
 
