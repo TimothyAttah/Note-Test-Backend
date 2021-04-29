@@ -27,14 +27,19 @@ export const Headers = styled.header`
     h2 {
      display: block;
      a {
-      color: ${colors.teal};
+      color: #3f51b5;
      }
+      .MuiSvgIcon-root {
+      width: 35px;
+      height: 35px;
+    }
     }
     .MuiButtonGroup-groupedContainedPrimary:not(:last-child),
     .MuiButtonGroup-groupedHorizontal:not(:first-child){
        font-size: 12px;
        padding: 5px;
     }
+   
   }
   @media (max-width: 375px){
      .MuiButtonGroup-groupedContainedPrimary:not(:last-child),
@@ -56,6 +61,11 @@ a {
   h4 {
     padding-right: 10px;
     color: #000;
+  }
+  @media (max-width: 414px){
+    h4 {
+      display: none;
+    }
   }
 }
 `
