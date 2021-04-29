@@ -4,7 +4,8 @@ import nameToInitials, { user } from '../../components/NameInitials';
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import ReadMore from '../../components/ReadMore';
 
 
 
@@ -106,6 +107,48 @@ const ProfileRight = styled.div`
     width: 150px;
  };
 `
+
+const ProfilePostContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding-top: 20px;
+`;
+
+const ProfilePost = styled.div`
+  width: 400px;
+  height: 300px;
+  border: 2px solid gray;
+  position: relative;
+  border-radius: 5px;
+  h2 {
+    padding: 20px 10px 10px 10px;
+  }
+   @media (max-width:450px){
+    width: 250px;
+    h2 {
+      font-size: 18px;
+    }
+  }
+`;
+
+
+
+const ProfilePostContent = styled.div`
+padding: 10px 10px 20px 10px;
+
+`;
+
+
+const ProfilePostButton = styled.div`
+padding-top: 50px;
+position: absolute;
+bottom: 20px;
+right: 10px;
+`;
+
+
 
 
 const UserProfile = () => {
@@ -236,18 +279,32 @@ const UserProfile = () => {
             </ProfileRight>
           </Profiles>
           <Divider />
-          <div>
+          <ProfilePostContainer>
             {
               userProfile.posts.map( note => {
                 return (
-                  <div key={ note._id }>
-                    <h2>{ note.title }</h2>
-                    <p>{ note.content }</p>
-                  </div>
+                   <div key={note._id} style={{paddingBottom: '30px'}}>
+                <ProfilePost >
+                  <h2>{ note.title }</h2>
+                  <Divider />
+                  <ProfilePostContent>
+                     <ReadMore>
+                  { note.content }
+                    </ReadMore>
+                </ProfilePostContent>
+                  <ProfilePostButton>
+                     <Button variant='contained' size='small' color='primary'>
+                      <Link to={ `/api/users/notes/${ note._id }/note/read` }>Read More</Link>
+                    </Button>
+                 </ProfilePostButton>
+                   
+                  
+              </ProfilePost>
+              </div>
                 );
               } )
             }
-          </div>
+          </ProfilePostContainer>
         </>
       ) : (
         <h2>Loading profile...</h2>
