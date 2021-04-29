@@ -21,10 +21,10 @@ const notesReducer = ( state = initialState, action ) => {
     case NOTES_DELETE:
       return {
         ...state,
-        notes: state.notes.filter( note => note.id !== action.payload )
+        notes: state.notes.filter( note => note._id !== action.payload )
       }
     case NOTES_EDIT:
-      return state.notes.map( note => note.id ? action.payload.id : note )
+      return state.notes.map( note => note._id ? action.payload.id : note )
     case NOTES_LIKE:
     case NOTES_UNLIKE:
     case NOTES_COMMENTS:
