@@ -92,7 +92,7 @@ const NoteLists = () => {
                 <Fragment>
                   <OpenComment myComment={ <Comment note={note} /> } />
                 </Fragment>
-                <Button variant='contained' size='small'><Link to='#'>Read More</Link></Button>
+                <Button variant='contained' size='small'><Link to={`/api/users/notes/${note._id}/note/read`}>Read More</Link></Button>
               </NoteComments>
             </Notes>
             </div>
