@@ -71,16 +71,85 @@ module.exports.noteDelete = async ( req, res ) => {
   }
 }
 
+
+
+// module.exports.notesEdit = async ( req, res ) => {
+//   const { noteId: _id } = req.params;
+//   const notesData = req.body;
+//   const { title, content } = notesData;
+//   try {
+//     if ( !title || !content )
+//        return res.status( 404 ).json( { error: 'Please enter your title and content ' } );
+//     if ( !mongoose.Types.ObjectId.isValid )
+//       return res.status( 404 ).json( { error: 'No note found with that id' } );
+//     const updatedNote = await Notes.findByIdAndUpdate( {
+//       _id,
+//       title,
+//       content,
+      
+//     }, { new: true } )
+//      .populate( 'postedBy', '-password' )
+//     res.status( 200 ).json( { message: 'Note Updated Successfully', updatedNote } );
+//   } catch (error) {
+//     res.status( 500 ).json( { error: error.message } );
+//   }
+// }
+
+
+
+
+
 module.exports.notesEdit = async ( req, res ) => {
-  const { id: _id } = req.params;
+  const { noteId: _id } = req.params;
   const notesData = req.body;
+  const { title, content } = notesData;
   try {
-    if ( !mongoose.Types.ObjectId.isValid )
-      return res.status( 404 ).json( { error: 'No note found with that id' } );
-    const updatedNote = await Notes.findByIdAndUpdate( _id, notesData, { new: true } );
-    res.status( 200 ).json( { message: 'Note Updated Successfully', updatedNote } );
+     if ( !title || !content )
+      return res.status( 404 ).json( { error: 'Please enter your title and content ' } );
+  const post =  await Notes.findByIdAndUpdate( {
+      _id: req.params.noteId,
+      title,
+      content,
+      postedBy: req.user
+    },
+      {
+        new: true
+      } )
+      .populate( 'postedBy', '-password' )
+    const editedNote = await post.updateOne(
+      { _id: req.params.noteId },
+      {$set: {"title": notesData.title, "content": notesData.content}}
+    )
+     return res.status(200).json({message: 'Note edited successfully', editedNote, post})
+    
+    // .exec( async ( err, result ) => {
+    //   if ( err, !result ) {
+    //      return res.status( 404 ).json( { error: err.message } );
+    //   }
+    //   if ( result.postedBy._id.toString() === req.user._id.toString() ) {
+    //     const editedNote = await result.updateOne( notesData, {
+    //       new: true
+    //     });
+    //     return res.status(200).json({message: 'Note edited successfully', editedNote, result: editedNote})
+    //   }
+    // })
+
+
+
+    // if ( result._id.toString() === req.user._id.toString() ) {
+    //    return res.status(200).json({message: 'Note edited successfully', post})
+    // }
+      // .exec( async (err, post) => {
+      //  if ( err, !post ) {
+      //     return res.status( 404 ).json( { error: err.message } );
+      //   }
+      //   if ( post.postedBy._id.toString() === req.user._id.toString() ) {
+      //     const editedNote = await post.save();
+      //     return res.status(200).json({message: 'Note edited successfully', editedNote})
+      //   }
+    //})
   } catch (error) {
-    res.status( 500 ).json( { error: error.message } );
+    return res.status( 500 ).json( { error: error.message } );
   }
 }
 
