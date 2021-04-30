@@ -36,14 +36,13 @@ const NotesCreateForm = () => {
   const [ content, setContent ] = useState( '' );
   const dispatch = useDispatch();
   const { noteId } = useParams();
-
+  const note = useSelector( state => noteId ? state.notesReducer.notes.find( note => note._id === noteId ): null );
+  
   useEffect( () => {
-    dispatch(listNotes())
-  }, [ dispatch, noteId ] )
-  
-  const note = useSelector( state => noteId && state.notesReducer.notes.find( note => note._id === noteId ) )
-  
-  console.log(note);
+    
+     if ( note ) setTitle( note.title );
+    if ( note ) setContent( note.content );
+  }, [ noteId, note ] )
   
 
   const handleSubmit = ( e ) => {
@@ -86,7 +85,7 @@ const NotesCreateForm = () => {
           type='submit'
           startIcon={ <Save /> }
         >
-          Create Note
+         {noteId ? 'Edit Note' : ' Create Note'}
           </Button>
       </FormContainer>
     </div>

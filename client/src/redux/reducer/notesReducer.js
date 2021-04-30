@@ -24,7 +24,10 @@ const notesReducer = ( state = initialState, action ) => {
         notes: state.notes.filter( note => note._id !== action.payload )
       }
     case NOTES_EDIT:
-      return state.notes.map( note => note._id ? action.payload.id : note )
+      return {
+        ...state,
+        notes: state.notes.map( note => note._id === action.payload._id ? action.payload : note )
+      }
     case NOTES_LIKE:
     case NOTES_UNLIKE:
     case NOTES_COMMENTS:

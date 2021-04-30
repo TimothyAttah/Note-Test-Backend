@@ -62,7 +62,7 @@ const App = () => {
           <Route path='/api/users/friends/profile' component={FriendsProfile} />
           <Route path='/api/auth/users/:id/user/profile' exact component={UserProfile} />
           <Route path='/api/users/notes' exact component={Notes} />
-          <Route path='/api/users/notes/:noteId/delete' component={NotesDelete} />
+          <Route path='/api/users/notes/:noteId/note/delete' component={NotesDelete} />
           <Route path='/api/users/notes/:noteId/note/edit' component={NotesEdit} />
           <Route path='/api/users/notes/create/note' component={NotesCreate} />
           <Route path='/api/users/notes/:noteId/note/read' component={NotesRead} />

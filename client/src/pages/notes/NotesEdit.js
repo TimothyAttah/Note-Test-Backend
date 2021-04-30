@@ -17,7 +17,8 @@ const Header = styled.header`
 const NotesEdit = () => {
   return (
     <div>
-      <Backdrop onClick={()=> history.push('/api/users/notes')} />
+      <Backdrop onClick={ () => history.push( '/api/users/notes' ) } />
+      <h1>Edit Page</h1>
       <Modal>
         <Header>
           <p>Edit a note</p>

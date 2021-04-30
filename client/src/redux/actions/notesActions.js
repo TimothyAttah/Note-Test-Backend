@@ -79,10 +79,12 @@ export const notesEdit = ( noteId, notesData ) =>  async dispatch =>{
  try {
    const { data } = await api.notesEdit( noteId, notesData )
    console.log( data );
+   toast.success(data.message)
    dispatch( {
      type: NOTES_EDIT,
-     payload: data
-   })
+     payload: data.updatedNote
+   } )
+   history.push( '/api/users/notes' );
  } catch (err) {
     if ( err.response && err.response.data ) {
       toast.error(err.response.data.error)
