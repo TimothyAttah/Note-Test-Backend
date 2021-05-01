@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 import { Save } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { notesCreate, notesEdit, listNotes } from '../../redux/actions/notesActions';
+import { notesCreate, notesEdit } from '../../redux/actions/notesActions';
 import {useParams} from 'react-router-dom'
 
 

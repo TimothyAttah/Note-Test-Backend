@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listIncomes } from '../../redux/actions/incomesAction';
+import { listExpenses } from '../../redux/actions/expensesActions';
 
 import styled from 'styled-components';
 import { Delete, Edit } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
 
-const IncomesContainer = styled.div`
+const ExpensesContainer = styled.div`
   width: 500px;
 `;
 
-const Incomes = styled.ul`
+const Expenses = styled.ul`
   padding: 0;
   margin: 0;
   li {
@@ -23,7 +23,7 @@ const Incomes = styled.ul`
   }
 `;
 
-const IncomesItems = styled.div`
+const ExpensesItems = styled.div`
   display: flex;
   align-items: center;
   text-transform: capitalize;
@@ -34,43 +34,43 @@ const IncomesItems = styled.div`
   }
 `;
 
-const IncomesButton = styled.div`
+const ExpensesButton = styled.div`
   .MuiIconButton-root {
     padding: 0;
   }
 `;
 
 
-const IncomeBudgets = () => {
+const ExpensesBudgets = () => {
   const dispatch = useDispatch();
   useEffect( () => {
-    dispatch( listIncomes() )
+    dispatch( listExpenses() )
   }, [ dispatch ] );
 
-  const incomes = useSelector( state => state.incomesReducer.incomes );
-  console.log(incomes);
+  const expenses = useSelector( state => state.expensesReducer.expenses );
+  console.log(expenses);
   return (
-    <IncomesContainer>
-      <h1>Income Transaction</h1>
-      {incomes ? (
-        incomes.map( income => {
+    <ExpensesContainer>
+      <h1>Expenses Transaction</h1>
+      {expenses ? (
+        expenses.map( expense => {
           return (
-            <Incomes key={income.id}>
+            <Expenses key={expense.id}>
               <li>
-                <IncomesItems>{ income.item }: <span>{ income.value }</span></IncomesItems>
-                <IncomesButton>
+                <ExpensesItems>{ expense.item }: <span>{ expense.value }</span></ExpensesItems>
+                <ExpensesButton>
                   <IconButton><Edit /></IconButton>
                   <IconButton> <Delete /></IconButton>
-                </IncomesButton>
+                </ExpensesButton>
               </li>
-            </Incomes>
+            </Expenses>
           )
         })
       ): (
         <h2>Loading...</h2>
       )}
-    </IncomesContainer>
+    </ExpensesContainer>
   )
 }
 
-export default IncomeBudgets
+export default ExpensesBudgets
