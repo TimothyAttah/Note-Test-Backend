@@ -20,6 +20,7 @@ import UserProfile from './pages/profile/UserProfile';
 import FriendsProfile from './pages/profile/FriendsProfile';
 import NotesRead from './pages/notes/NotesRead';
 import NotesEdit from './pages/notes/NotesEdit';
+import Budgets from './pages/budgets/Budgets';
 
 const MainContainer = styled.main`
   *{
@@ -67,6 +68,7 @@ const App = () => {
           <Route path='/api/users/notes/create/note' component={NotesCreate} />
           <Route path='/api/users/notes/:noteId/note/read' component={NotesRead} />
           <Route path='/api/users/todos' exact component={Todos} />
+          <Route path='/api/users/budgets' exact component={Budgets} />
         </Switch>
       </Router>
     </MainContainer>
