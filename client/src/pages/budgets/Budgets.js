@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import IncomeForm from '../../components/forms/IncomeForm';
 import Nav from '../../components/navs/Nav';
 import ExpensesBudgets from './ExpensesBudgets';
 import IncomeBudgets from './IncomeBudgets';
@@ -14,6 +15,9 @@ const Budgets = () => {
     <div>
       <Nav />
       <h1>Budgets Page</h1>
+      <div>
+        <IncomeForm />
+      </div>
       <BudgetsContainer>
         <IncomeBudgets />
         <ExpensesBudgets />
