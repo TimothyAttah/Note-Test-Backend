@@ -6,7 +6,6 @@ import { createExpenses } from '../../redux/actions/expensesActions';
 import styled from 'styled-components';
 import BudgetsNav from '../navs/BudgetsNav';
 import { Add } from '@material-ui/icons';
-import e from 'cors';
 import { v4 } from 'uuid';
 
 
@@ -53,8 +52,6 @@ const IncomeForm = () => {
   const [ item, setItem ] = useState( '' )
   const [ value, setValue ] = useState( '')
   const dispatch = useDispatch();
-  
-  
 
   const handleSubmit = ( e ) => {
     e.preventDefault();
@@ -63,17 +60,15 @@ const IncomeForm = () => {
       item,
       value
     }
-  
+
     isOpen ? (
       dispatch( createExpenses( newTransaction ) )
     ) : (
       dispatch( createIncome( newTransaction ) )
     )
-    
   }
 
-   
- 
+
   return (
     <FormContainer >
       <FormBudgetButton>
@@ -81,43 +76,43 @@ const IncomeForm = () => {
         <BudgetsNav setIsOpen={ setIsOpen } />
       </FormBudgetButton>
       { isOpen ? (
-        <IncomeType primary onSubmit={handleSubmit}>
+        <IncomeType primary onSubmit={ handleSubmit }>
           <label>Expenses Item:</label>
           <input
             type='text'
             placeholder='Enter expenses items...'
             className='input-text'
-            onChange={ (e)=> setItem(e.target.value) }
+            onChange={ ( e ) => setItem( e.target.value ) }
             value={ item }
             name='item'
           />
           <label>Expenses Value:</label>
           <input
             type='number'
-            onChange={ (e) => setValue(e.target.value)}
+            onChange={ ( e ) => setValue( e.target.value ) }
             name='value'
-            value={value}
+            value={ value }
           />
           <Button type='submit' variant='contained' size='small'>-</Button>
         </IncomeType>
       ) : (
-        <IncomeType onSubmit={handleSubmit}>
+        <IncomeType onSubmit={ handleSubmit }>
           <label>Income Item:</label>
           <input
             type='text'
             placeholder='Enter income items...'
-              className='input-text'
-              onChange={ (e)=> setItem(e.target.value) }
-              name='item'
-              value={item}
+            className='input-text'
+            onChange={ ( e ) => setItem( e.target.value ) }
+            name='item'
+            value={ item }
           />
           <label>Income Value:</label>
           <input
             type='number'
-              className='input-value'
-              onChange={ (e) => setValue(e.target.value)}
-              name='value'
-              value={value}
+            className='input-value'
+            onChange={ ( e ) => setValue( e.target.value ) }
+            name='value'
+            value={ value }
           />
           <Button type='submit' variant='contained' size='small' color='inherit'><Add /></Button>
         </IncomeType>
