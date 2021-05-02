@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listIncomes } from '../../redux/actions/incomesAction';
+import { listIncomes, deleteIncome } from '../../redux/actions/incomesAction';
 
 import styled from 'styled-components';
 import { Delete, Edit } from '@material-ui/icons';
@@ -52,7 +52,7 @@ const IncomeBudgets = () => {
   return (
     <IncomesContainer>
       <h1>Income Transaction</h1>
-      {incomes ? (
+      {incomes.length ? (
         incomes.map( income => {
           return (
             <Incomes key={income.id}>
@@ -60,7 +60,7 @@ const IncomeBudgets = () => {
                 <IncomesItems>{ income.item }: <span>{ income.value }</span></IncomesItems>
                 <IncomesButton>
                   <IconButton><Edit /></IconButton>
-                  <IconButton> <Delete /></IconButton>
+                  <IconButton onClick={() => dispatch(deleteIncome(income.id))}> <Delete /></IconButton>
                 </IncomesButton>
               </li>
             </Incomes>

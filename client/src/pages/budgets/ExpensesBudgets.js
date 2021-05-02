@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listExpenses } from '../../redux/actions/expensesActions';
+import { listExpenses, deleteExpenses } from '../../redux/actions/expensesActions';
 
 import styled from 'styled-components';
 import { Delete, Edit } from '@material-ui/icons';
@@ -52,7 +52,7 @@ const ExpensesBudgets = () => {
   return (
     <ExpensesContainer>
       <h1>Expenses Transaction</h1>
-      {expenses ? (
+      {expenses.length ? (
         expenses.map( expense => {
           return (
             <Expenses key={expense.id}>
@@ -60,7 +60,7 @@ const ExpensesBudgets = () => {
                 <ExpensesItems>{ expense.item }: <span>{ expense.value }</span></ExpensesItems>
                 <ExpensesButton>
                   <IconButton><Edit /></IconButton>
-                  <IconButton> <Delete /></IconButton>
+                  <IconButton onClick={()=> dispatch(deleteExpenses(expense.id))}> <Delete /></IconButton>
                 </ExpensesButton>
               </li>
             </Expenses>
