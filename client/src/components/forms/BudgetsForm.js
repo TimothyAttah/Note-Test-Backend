@@ -10,10 +10,10 @@ import { v4 } from 'uuid';
 
 
 const FormContainer = styled.div`
-  border: 2px solid yellow;
   display: flex;
   align-items: center;
   position: relative;
+  padding: 30px 20px;
 `;
 
 
@@ -38,19 +38,19 @@ const IncomeType = styled.form`
     background-color: ${ props => props.primary ? 'red' : 'green'};
     color: #fff;
     margin-left: 10px;
+    padding: 5px 0;
   }
 `;
 
 const FormBudgetButton = styled.div`
   display: flex;
   align-items: center;
-  
 `;
 
 const BudgetsForm = () => {
-  const [ isOpen, setIsOpen ] = useState( false )
-  const [ item, setItem ] = useState( '' )
-  const [ value, setValue ] = useState( '')
+  const [ isOpen, setIsOpen ] = useState( false );
+  const [ item, setItem ] = useState( '' );
+  const [ value, setValue ] = useState( '' );
   const dispatch = useDispatch();
 
   const handleSubmit = ( e ) => {
@@ -63,13 +63,13 @@ const BudgetsForm = () => {
 
     if ( isOpen  ) {
       if ( item && value !== '' ) {
-        dispatch( createExpenses( newTransaction ) )
+        dispatch( createExpenses( newTransaction ) );
       } else {
         return null
       }
     } else {
       if ( item && value !== '' ) {
-        dispatch( createIncome( newTransaction ) )
+        dispatch( createIncome( newTransaction ) );
       } else {
         return null;
       }

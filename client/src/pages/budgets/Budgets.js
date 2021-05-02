@@ -1,3 +1,4 @@
+import { Divider } from '@material-ui/core';
 import React from 'react'
 import styled from 'styled-components';
 import BudgetsForm from '../../components/forms/BudgetsForm';
@@ -19,6 +20,7 @@ const Budgets = () => {
       <div>
         <BudgetsForm />
       </div>
+      <Divider />
       <BudgetsContainer>
         <IncomeBudgets />
         <ExpensesBudgets />

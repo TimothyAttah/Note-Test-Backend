@@ -8,15 +8,22 @@ import { IconButton } from '@material-ui/core';
 
 const ExpensesContainer = styled.div`
   width: 500px;
+  padding-top: 20px;
+  padding-right: 20px;
+  h1 {
+    color: red;
+    opacity: 0.7;
+  }
 `;
 
 const Expenses = styled.ul`
   padding: 0;
   margin: 0;
   li {
-    border: 2px solid green;
+    border: 1px solid red;
     padding: 10px;
     margin: 10px 0;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,7 +43,9 @@ const ExpensesItems = styled.div`
 
 const ExpensesButton = styled.div`
   .MuiIconButton-root {
-    padding: 0;
+    padding: 0 5px;
+    color: red;
+    opacity: 0.9;
   }
 `;
 
@@ -48,7 +57,6 @@ const ExpensesBudgets = () => {
   }, [ dispatch ] );
 
   const expenses = useSelector( state => state.expensesReducer.expenses );
-  console.log(expenses);
   return (
     <ExpensesContainer>
       <h1>Expenses Transaction</h1>

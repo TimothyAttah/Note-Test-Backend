@@ -8,13 +8,20 @@ import { IconButton } from '@material-ui/core';
 
 const IncomesContainer = styled.div`
   width: 500px;
+  padding-top: 20px;
+  padding-left: 20px;
+   h1 {
+    color: green;
+    opacity: 0.7;
+  }
 `;
 
 const Incomes = styled.ul`
   padding: 0;
   margin: 0;
   li {
-    border: 2px solid green;
+    border: 1px solid green;
+    border-radius: 10px;
     padding: 10px;
     margin: 10px 0;
     display: flex;
@@ -36,7 +43,9 @@ const IncomesItems = styled.div`
 
 const IncomesButton = styled.div`
   .MuiIconButton-root {
-    padding: 0;
+    padding: 0 5px;
+    color: green;
+    opacity: 0.9;
   }
 `;
 

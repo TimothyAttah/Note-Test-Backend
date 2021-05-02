@@ -6,13 +6,12 @@ import { listExpenses } from '../../redux/actions/expensesActions';
 import {images} from '../../components/Images'
 
 const BalanceContainer = styled.div`
-border: 2px solid red;
-width: 100%;
-background: url(${images.backgroundImgTwo});
-height: 300px;
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center center;
+  width: 100%;
+  height: 350px;
+  background: url(${images.backgroundImgTwo});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 `;
 
 const TotalBalance = styled.div`
@@ -21,35 +20,29 @@ const TotalBalance = styled.div`
   align-items: center;
   color: #fff;
   font-size: 30px;
-  border: 2px solid green;
   position: relative;
+  padding-bottom: 50px;
   width: 1000px;
+  opacity: 0.9;
   span {
     position: absolute;
     right: 20px;
-  }
+  };
 `;
 
 const TotalIncome = styled.div`
-width: 400px;
-   position: relative;
- background-color: green;
+  width: 400px;
+  position: relative;
+  opacity: 0.9;
+  background-color: ${ props => props.primary ? 'red' : 'green' };
+  color: #fff;
+  padding: 10px 20px;
   span {
     position: absolute;
     right: 20px;
-  }
-`
-const TotalExpenses = styled.div`
- display: flex;
-  justify-content: center;
-  align-items: center;
-   position: relative;
-  width: 1000px;
-  span {
-    position: absolute;
-    right: 20px;
-  }
-`
+    letter-spacing: 1.5px;
+  };
+`;
 
 const BudgetsTransaction = () => {
   const dispatch = useDispatch();
@@ -78,7 +71,8 @@ const BudgetsTransaction = () => {
         </span>
       </h1>
       </TotalBalance>
-        <TotalIncome>
+      <div style={{paddingLeft: '500px', paddingTop: '30px'}}>
+         <TotalIncome>
            <h3>
           Income:
           <span> { totalIncome > 1 ? `+ $${ totalIncome.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
@@ -86,7 +80,9 @@ const BudgetsTransaction = () => {
           </span>
         </h3>
        </TotalIncome>
-        <TotalExpenses>
+      </div>
+      <div style={ { paddingLeft: '500px', paddingTop: '30px' } }>
+        <TotalIncome primary>
            <h3>
           Expenses:
           <span>
@@ -94,7 +90,9 @@ const BudgetsTransaction = () => {
               `$${ totalExpenses.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
           </span>
         </h3>
-       </TotalExpenses>
+       </TotalIncome>
+      </div>
+        
     </BalanceContainer>
   );
 };
