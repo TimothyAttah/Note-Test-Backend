@@ -47,7 +47,7 @@ const FormBudgetButton = styled.div`
   
 `;
 
-const IncomeForm = () => {
+const BudgetsForm = () => {
   const [ isOpen, setIsOpen ] = useState( false )
   const [ item, setItem ] = useState( '' )
   const [ value, setValue ] = useState( '')
@@ -58,14 +58,25 @@ const IncomeForm = () => {
     const newTransaction = {
       id: v4(),
       item,
-      value
+      value: parseInt(value)
     }
 
-    isOpen ? (
-      dispatch( createExpenses( newTransaction ) )
-    ) : (
-      dispatch( createIncome( newTransaction ) )
-    )
+    if ( isOpen  ) {
+      if ( item && value !== '' ) {
+        dispatch( createExpenses( newTransaction ) )
+      } else {
+        return null
+      }
+    } else {
+      if ( item && value !== '' ) {
+        dispatch( createIncome( newTransaction ) )
+      } else {
+        return null;
+      }
+    }
+
+    setItem( '' )
+    setValue('')
   }
 
 
@@ -121,4 +132,4 @@ const IncomeForm = () => {
   );
 };
 
-export default IncomeForm;
+export default BudgetsForm;
