@@ -3,49 +3,11 @@ import { Button} from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { createIncome } from '../../redux/actions/incomesAction';
 import { createExpenses } from '../../redux/actions/expensesActions';
-import styled from 'styled-components';
 import BudgetsNav from '../navs/BudgetsNav';
 import { Add } from '@material-ui/icons';
 import { v4 } from 'uuid';
+import { FormBudgetButton, FormContainer, IncomeType} from './BudgetsFormStyles';
 
-
-const FormContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 30px 20px;
-`;
-
-
-const IncomeType = styled.form`
- label {
-   padding-right: 10px;
-   padding-left: 20px;
-   color: ${ props => props.primary ? 'red' : 'green'};
-   font-weight: bold;
- }
- 
-  input{
-    border: 2px solid ${ props => props.primary ? 'red' : 'green'};
-    padding: 10px;
-    outline: none;
-    border-radius: 10px;
-  }
-  .input-text {
-    width: 400px;
-  }
-  .MuiButton-root{
-    background-color: ${ props => props.primary ? 'red' : 'green'};
-    color: #fff;
-    margin-left: 10px;
-    padding: 5px 0;
-  }
-`;
-
-const FormBudgetButton = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const BudgetsForm = () => {
   const [ isOpen, setIsOpen ] = useState( false );
@@ -58,10 +20,10 @@ const BudgetsForm = () => {
     const newTransaction = {
       id: v4(),
       item,
-      value: parseInt(value)
+      value: parseInt( value )
     }
 
-    if ( isOpen  ) {
+    if ( isOpen ) {
       if ( item && value !== '' ) {
         dispatch( createExpenses( newTransaction ) );
       } else {
@@ -74,10 +36,9 @@ const BudgetsForm = () => {
         return null;
       }
     }
-
-    setItem( '' )
-    setValue('')
-  }
+    setItem( '' );
+    setValue( '' );
+  };
 
 
   return (
@@ -103,6 +64,7 @@ const BudgetsForm = () => {
             onChange={ ( e ) => setValue( e.target.value ) }
             name='value'
             value={ value }
+            className='input-value'
           />
           <Button type='submit' variant='contained' size='small'>-</Button>
         </IncomeType>

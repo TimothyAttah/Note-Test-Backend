@@ -145,41 +145,44 @@ const BudgetsTransaction = () => {
   const totalBalance = totalIncome - totalExpenses;
   
   return (
-    <BalanceContainer>
-        <BalanceWrapper>
-      <TotalBalance>
-           <h1> Balance: </h1>
+    // <BalanceContainer>
+    //     <BalanceWrapper>
+    //   <TotalBalance>
+    //        <h1> Balance: </h1>
        
-            <h2>
-               { totalBalance > 1 ? `+ $${ totalBalance.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
-            ` $${ totalBalance.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
-         </h2>
+    //         <h2>
+    //            { totalBalance > 1 ? `+ $${ totalBalance.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
+    //         ` $${ totalBalance.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
+    //      </h2>
        
-      </TotalBalance>
-         </BalanceWrapper>
-      <TotalContainer>
-         <TotalIncome>
-           <h3>
-          Income:
-          <span> { totalIncome > 1 ? `+ $${ totalIncome.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
-            `$${ totalIncome.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
-          </span>
-        </h3>
-       </TotalIncome>
-      </TotalContainer>
-      <TotalContainer>
-        <TotalIncome primary>
-           <h3>
-          Expenses:
-          <span>
-            { totalExpenses > 1 ? `- $${ totalExpenses.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
-              `$${ totalExpenses.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
-          </span>
-        </h3>
-       </TotalIncome>
-      </TotalContainer>
+    //   </TotalBalance>
+    //      </BalanceWrapper>
+    //   <TotalContainer>
+    //      <TotalIncome>
+    //        <h3>
+    //       Income:
+    //       <span> { totalIncome > 1 ? `+ $${ totalIncome.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
+    //         `$${ totalIncome.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
+    //       </span>
+    //     </h3>
+    //    </TotalIncome>
+    //   </TotalContainer>
+    //   <TotalContainer>
+    //     <TotalIncome primary>
+    //        <h3>
+    //       Expenses:
+    //       <span>
+    //         { totalExpenses > 1 ? `- $${ totalExpenses.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` :
+    //           `$${ totalExpenses.toString().replace( /\B(?=(\d{3})+(?!\d))/g, ',' ) }` }
+    //       </span>
+    //     </h3>
+    //    </TotalIncome>
+    //   </TotalContainer>
         
-    </BalanceContainer>
+    // </BalanceContainer>
+    <div>
+      <h1>Balance Page</h1>
+    </div>
   );
 };
 
