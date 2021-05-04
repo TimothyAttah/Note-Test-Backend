@@ -47,7 +47,6 @@ export const IncomeType = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 2px solid black;
     height: 160px;
     label {
       padding-top: 20px;

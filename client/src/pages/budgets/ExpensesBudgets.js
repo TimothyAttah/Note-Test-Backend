@@ -14,6 +14,46 @@ const ExpensesContainer = styled.div`
     color: red;
     opacity: 0.7;
   }
+  @media (max-width: 1000px){
+    width: 320px;
+    h1{
+      font-size: 20px;
+    }
+  }
+   @media (max-width: 650px){
+    width: 280px;
+    padding-right: 10px;
+      h1{
+      font-size: 16px;
+    }
+  }
+   @media (max-width: 580px){
+    width: 250px;
+    padding-right: 10px;
+      h1{
+      font-size: 16px;
+    }
+  }
+    @media (max-width: 510px){
+    width: 200px;
+  }
+   @media (max-width: 414px){
+    width: 175px;
+     h1 {
+      font-size: 13px;
+      font-weight: bolder;
+    }
+  }
+   @media (max-width: 360px){
+    width: 160px;
+  }
+  @media (max-width: 320px){
+    width: 130px;
+     h1 {
+      font-size: 11px;
+      font-weight: bolder;
+    }
+  }
 `;
 
 const Expenses = styled.ul`
@@ -28,6 +68,23 @@ const Expenses = styled.ul`
     justify-content: space-between;
     align-items: center;
   }
+   @media (max-width: 1000px){
+    li {
+      font-size: 15px;
+    }
+  }
+   @media (max-width: 580px){
+    li {
+      font-size: 12px;
+    }
+  }
+   @media (max-width: 414px){
+    li {
+      font-size: 10px;
+      font-weight: bolder;
+    }
+  }
+  
 `;
 
 const ExpensesItems = styled.div`
@@ -39,6 +96,12 @@ const ExpensesItems = styled.div`
      padding-left: 10px;
      color: gray;
   }
+   @media (max-width: 414px){
+    span {
+      padding-left: 5px;
+      font-weight: bolder;
+    }
+  }
 `;
 
 const ExpensesButton = styled.div`
@@ -46,6 +109,28 @@ const ExpensesButton = styled.div`
     padding: 0 5px;
     color: red;
     opacity: 0.9;
+  }
+  @media (max-width: 580px){
+    padding: 0;
+    .MuiSvgIcon-root {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 510px){
+    .MuiIconButton-root {
+      display: block;
+      padding-bottom: 3px;
+    }
+  }
+    @media (max-width: 414px){
+   .MuiIconButton-root{
+     margin-left: 15px;
+   }
+  }
+    @media (max-width: 320px){
+   .MuiIconButton-root{
+     margin-left: 12px;
+   }
   }
 `;
 
