@@ -39,3 +39,21 @@ module.exports.myIncomes = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } ); 
   }
 }
+
+module.exports.deleteIncome = async ( req, res ) => {
+  try {
+   await Incomes.findOne( { _id: req.params.incomeId } )
+      .populate( 'postedBy', '_id' )
+      .exec( async ( err, income ) => {
+        if ( err && !income ) {
+        return res.status(404).json({error: err.message})
+        }
+        if ( income.postedBy._id.toString() === req.user._id.toString() ) {
+          const deletedIncome = await income.remove()
+          res.status(200).json({message: 'Income deleted successfully', deletedIncome})
+        }
+    })
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } ); 
+  }
+}
