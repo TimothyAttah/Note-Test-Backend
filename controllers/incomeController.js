@@ -15,7 +15,7 @@ module.exports.addIncome = async ( req, res ) => {
       postedBy: req.user
    }).populate('postedBy', '-password')
     await newIncome.save()
-    res.status( 200 ).json( { message: 'Income Added', newIncome } );
+    res.status( 200 ).json( { message: 'New Income Added', newIncome } );
   } catch (error) {
     return res.status( 500 ).json( { error: error } );
   }

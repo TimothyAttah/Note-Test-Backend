@@ -30,4 +30,6 @@ export const notesEdit = ( noteId, notesData ) => API.put( `notes/${ noteId }/ed
 
 export const getIncomes = () => API.get( '/incomes/user/incomes' );
 
+export const createIncomes = ( incomeData ) => API.post( '/incomes/add', incomeData );
+
 export const getExpenses = () => API.get( '/expenses/user/expenses' );
