@@ -20,7 +20,6 @@ export const createIncome = ( incomeData ) => async dispatch => {
 export const listIncomes = () => async dispatch => {
   try {
     const { data } = await api.getIncomes();
-    console.log( data );
     dispatch( {
       type: LIST_INCOMES,
       payload: data

@@ -14,7 +14,6 @@ const IncomeBudgets = () => {
   }, [ dispatch] );
 
   const incomes = useSelector( state => state.incomesReducer.incomes );
-  console.log( incomes );
  
   return (
     <>
@@ -38,7 +37,7 @@ const IncomeBudgets = () => {
               );
             } )
           ) : (
-            <h2>Loading...</h2>
+             <h2>You don't have any income</h2>
           ) }
         </BudgetsContainer>
       ) : (

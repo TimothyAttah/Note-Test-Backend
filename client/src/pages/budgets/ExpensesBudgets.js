@@ -36,7 +36,7 @@ const ExpensesBudgets = () => {
           );
         } )
       ) : (
-        <h2>Loading...</h2>
+        <h2>You don't have any expenses</h2>
       ) }
     </BudgetsContainer>
       ): (
