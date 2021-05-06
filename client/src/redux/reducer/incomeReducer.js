@@ -24,7 +24,7 @@ const incomesReducer = ( state = initialState, action ) => {
     case DELETE_INCOME:
       return {
         ...state,
-        incomes: state.incomes.filter( income => income.id !== action.payload )
+        incomes: state.incomes.filter( income => income._id !== action.payload )
       };
     case EDIT_INCOME:
       return {

@@ -10,6 +10,6 @@ router.get( '/', getAllIncomes );
 
 router.get( '/user/incomes', auth, myIncomes );
 
-router.delete('/:incomeId/delete/income', auth, deleteIncome)
+router.delete('/:incomeId/delete', auth, deleteIncome)
 
 module.exports = router;
