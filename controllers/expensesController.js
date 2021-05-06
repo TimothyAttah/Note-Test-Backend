@@ -20,3 +20,12 @@ module.exports.addExpenses = async ( req, res ) => {
     return res.status(500).json({error: error})
   }
 }
+
+module.exports.getAllExpenses = async ( req, res ) => {
+  try {
+    const allExpenses = await Expenses.find().populate( 'postedBy', '-password' )
+    res.status( 200 ).json( { message: 'All Expenses', allExpenses } );
+  } catch (error) {
+    return res.status(500).json({error: error})
+  }
+}
