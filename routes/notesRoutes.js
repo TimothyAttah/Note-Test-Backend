@@ -14,7 +14,7 @@ router.get( '/friends/notes', auth, allFriendsNotes );
 
 router.delete( '/:noteId/delete', auth, noteDelete );
 
-router.put( '/:noteId/edit', auth, notesEdit );
+router.put( '/edit', auth, notesEdit );
 
 router.put( '/like', auth, likeNote );
 
