@@ -30,12 +30,13 @@ export const listExpenses = () => async dispatch => {
   }
 };
 
-export const deleteExpenses = ( id ) => async dispatch => {
+export const deleteExpenses = ( expensesId ) => async dispatch => {
   try {
-    toast.success('Expenses Deleted')
+    toast.success( 'Expenses Deleted Successfully' )
+    await api.deleteExpenses(expensesId)
     dispatch( {
       type: DELETE_EXPENSES,
-      payload: id
+      payload: expensesId
     })
   } catch (error) {
     console.log(error);

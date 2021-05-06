@@ -23,7 +23,7 @@ const ExpensesReducer = ( state = initialState, action ) => {
     case DELETE_EXPENSES:
       return {
         ...state,
-        expenses: state.expenses.filter( expense=> expense.id !== action.payload )
+        expenses: state.expenses.filter( expense=> expense._id !== action.payload )
       };
     case EDIT_EXPENSES:
       return {
