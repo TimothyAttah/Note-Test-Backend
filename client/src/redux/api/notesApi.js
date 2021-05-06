@@ -33,3 +33,5 @@ export const getIncomes = () => API.get( '/incomes/user/incomes' );
 export const createIncomes = ( incomeData ) => API.post( '/incomes/add', incomeData );
 
 export const getExpenses = () => API.get( '/expenses/user/expenses' );
+
+export const createExpenses = ( expensesData ) => API.post( '/expenses/add', expensesData );
