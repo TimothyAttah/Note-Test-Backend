@@ -29,3 +29,5 @@ export const getUser = ( id ) => API.get( `/auth/users/${ id }/user` );
 export const notesEdit = ( noteId, notesData ) => API.put( `notes/${ noteId }/edit`, notesData );
 
 export const getIncomes = () => API.get( '/incomes/user/incomes' );
+
+export const getExpenses = () => API.get( '/expenses/user/expenses' );
