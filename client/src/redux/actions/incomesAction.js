@@ -32,11 +32,11 @@ export const listIncomes = () => async dispatch => {
 
 export const deleteIncome = ( incomeId ) => async dispatch => {
   try {
-    const {data} = await api.deleteIncome(incomeId)
-    toast.success(data.message)
+     await api.deleteIncome(incomeId)
+    toast.success('Income deleted successfully')
     dispatch( {
       type: DELETE_INCOME,
-      payload: data.deletedIncome
+      payload: incomeId
     })
   } catch (err) {
     if ( err.response && err.response.data ) {

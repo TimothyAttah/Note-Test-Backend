@@ -11,43 +11,40 @@ const IncomeBudgets = () => {
   const dispatch = useDispatch();
   useEffect( () => {
     dispatch( listIncomes() );
-  }, [ dispatch ] );
+  }, [ dispatch] );
 
   const incomes = useSelector( state => state.incomesReducer.incomes );
   console.log( incomes );
-  console.log(user);
  
   return (
-    <div>
+    <>
       {user.results || incomes.postedBy ? (
-
-    <BudgetsContainer>
-      <h1>Income Transaction</h1>
+        <BudgetsContainer>
+          <h1>Income Transaction</h1>
           {incomes.length ? (
             incomes.map( income => {
               return (
                 income.postedBy._id && user.results._id && (
                   <Budgets key={ income._id }>
-                  <li>
-                    <BudgetsItems>{ income.item }: <span>{ income.value }</span></BudgetsItems>
-                    <BudgetsButton>
-                      <IconButton><Edit /></IconButton>
-                      <IconButton onClick={ () => dispatch( deleteIncome( income._id ) ) }> <Delete /></IconButton>
-                    </BudgetsButton>
-                  </li>
-                </Budgets>
+                    <li>
+                      <BudgetsItems>{ income.item }: <span>{ income.value }</span></BudgetsItems>
+                      <BudgetsButton>
+                        <IconButton><Edit /></IconButton>
+                        <IconButton onClick={ () => dispatch( deleteIncome( income._id ) ) }> <Delete /></IconButton>
+                      </BudgetsButton>
+                    </li>
+                  </Budgets>
                 )
-                
               );
             } )
           ) : (
             <h2>Loading...</h2>
           ) }
-    </BudgetsContainer>
-      ): (
+        </BudgetsContainer>
+      ) : (
         <h2>Loading...</h2>
-      )}
-    </div>
+      ) }
+    </>
   );
 };
 
