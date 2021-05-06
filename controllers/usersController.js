@@ -2,6 +2,7 @@ const mongoose = require( 'mongoose' );
 const User = mongoose.model( 'User' );
 const Notes = mongoose.model( 'Notes' );
 const Incomes = mongoose.model( 'Incomes' );
+const Expenses = mongoose.model( 'Expenses' );
 
 module.exports.getUser = async ( req, res ) => {
   try {
@@ -16,9 +17,18 @@ module.exports.getUser = async ( req, res ) => {
           await Incomes.find( { postedBy: req.params.id } )
             .populate( 'postedBy', '-password' )
             .exec( async ( err, incomes ) => {
-              if ( err )
+              if ( err ) {
+                
                 return res.status( 404 ).json( { error: err.message } )
-              res.status( 200 ).json( { message: 'Single user profile', user, posts, incomes } )
+              }
+              await Expenses.find( { postedBy: req.params.id } )
+                .populate( 'postedBy', '-password' )
+                .exec( async ( err, expenses ) => {
+                  if ( err ) {
+                    return res.status( 404 ).json( { error: err.message } )
+                  }
+                  res.status( 200 ).json( { message: 'Single user profile', user, posts, incomes, expenses } )
+                } );
             } );
         } );
     }
