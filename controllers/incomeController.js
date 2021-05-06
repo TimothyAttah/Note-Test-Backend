@@ -20,3 +20,12 @@ module.exports.addIncome = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } );
   }
 }
+
+module.exports.getAllIncomes = async ( req, res ) => {
+  try {
+    const allIncomes = await Incomes.find().populate( 'postedBy', '-password' )
+     res.status( 200 ).json( { message: 'All Users Income', allIncomes } );
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } );
+  }
+}

@@ -27,3 +27,5 @@ export const notesDelete = ( noteId ) => API.delete( `/notes/${ noteId }/delete`
 export const getUser = ( id ) => API.get( `/auth/users/${ id }/user` );
 
 export const notesEdit = ( noteId, notesData ) => API.put( `notes/${ noteId }/edit`, notesData );
+
+export const getIncomes = () => API.get
