@@ -6,6 +6,7 @@ dotenv.config({path: './config/key'})
 require( './models/UserModel' );
 require( './models/NoteModel' );
 require( './models/IncomeModel' );
+require( './models/ExpensesModel' );
 
 const app = express();
 
