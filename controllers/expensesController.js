@@ -29,3 +29,13 @@ module.exports.getAllExpenses = async ( req, res ) => {
     return res.status(500).json({error: error})
   }
 }
+
+module.exports.getUserExpenses = async ( req, res ) => {
+  try {
+    const expenses = await Expenses.find( { postedBy: req.user._id } )
+      .populate( 'postedBy', '-password' )
+    res.status( 200 ).json( { message: 'All User Expenses', expenses } );
+  } catch (error) {
+    return res.status(500).json({error: error})
+  }
+}
