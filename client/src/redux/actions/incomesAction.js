@@ -30,15 +30,18 @@ export const listIncomes = () => async dispatch => {
   }
 };
 
-export const deleteIncome = ( id ) => async dispatch => {
+export const deleteIncome = ( incomeId ) => async dispatch => {
   try {
-    toast.success('Income Deleted')
+    const {data} = await api.deleteIncome(incomeId)
+    toast.success(data.message)
     dispatch( {
       type: DELETE_INCOME,
-      payload: id
+      payload: data.deletedIncome
     })
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    if ( err.response && err.response.data ) {
+      return toast.error(err.response.data.error)
+    }
   }
 }
 export const editIncome = ( incomes, id ) => async dispatch => {
