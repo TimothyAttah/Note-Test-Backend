@@ -5,6 +5,7 @@ dotenv.config({path: './config/key'})
 
 require( './models/UserModel' );
 require( './models/NoteModel' );
+require( './models/IncomeModel' );
 
 const app = express();
 
@@ -16,7 +17,8 @@ app.use( cors() );
 
 app.use( '/users', require( './routes/authRoutes' ) );
 app.use( '/notes', require( './routes/notesRoutes' ) );
-app.use('/auth/users', require('./routes/userRoutes'))
+app.use( '/auth/users', require( './routes/userRoutes' ) );
+app.use( '/incomes', require( './routes/incomeRoutes' ) );
 
 
 const PORT = process.env.PORT || 8080;

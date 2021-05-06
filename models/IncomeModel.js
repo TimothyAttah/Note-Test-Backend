@@ -16,4 +16,4 @@ const IncomeSchema = new mongoose.Schema( {
   }
 }, { timestamps: true } );
 
-mongoose.model( 'Income', IncomeSchema );
+mongoose.model( 'Incomes', IncomeSchema );
