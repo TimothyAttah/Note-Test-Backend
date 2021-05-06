@@ -39,3 +39,21 @@ module.exports.getUserExpenses = async ( req, res ) => {
     return res.status(500).json({error: error})
   }
 }
+
+module.exports.deleteExpenses = async ( req, res ) => {
+  try {
+    await Expenses.findOne( { _id: req.params.expensesId } )
+      .populate( 'postedBy', '_id' )
+      .exec( async ( err, expenses ) => {
+        if ( err && !expenses ) {
+          return res.status( 404 ).json( { error: err.message})
+        }
+        if ( expenses.postedBy._id.toString() === req.user._id.toString() ) {
+          const deletedExpenses = expenses.remove();
+          res.status( 200 ).json( { message: 'Expenses deleted successfully', deletedExpenses } );
+        }
+    })
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } );
+  }
+}
