@@ -27,3 +27,15 @@ export const notesDelete = ( noteId ) => API.delete( `/notes/${ noteId }/delete`
 export const getUser = ( id ) => API.get( `/auth/users/${ id }/user` );
 
 export const notesEdit = ( noteId, notesData ) => API.put( `notes/${ noteId }/edit`, notesData );
+
+export const getIncomes = () => API.get( '/incomes/user/incomes' );
+
+export const createIncomes = ( incomeData ) => API.post( '/incomes/add', incomeData );
+
+export const deleteIncome = (incomeId) => API.delete(`incomes/${incomeId}/delete`)
+
+export const getExpenses = () => API.get( '/expenses/user/expenses' );
+
+export const createExpenses = ( expensesData ) => API.post( '/expenses/add', expensesData );
+
+export const deleteExpenses = ( expensesId ) => API.delete( `expenses/${ expensesId }/delete` );

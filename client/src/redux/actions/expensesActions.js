@@ -1,35 +1,42 @@
 import { toast } from 'react-toastify';
 import { CREATE_EXPENSES, DELETE_EXPENSES, EDIT_EXPENSES, LIST_EXPENSES } from '../type';
+import * as api from '../api/notesApi';
 
 
-export const createExpenses = ( expenses ) => async dispatch => {
+export const createExpenses = ( expensesData ) => async dispatch => {
   try {
-    toast.success( 'Added new expenses' )
+    const { data } = await api.createExpenses( expensesData );
+    toast.success( data.message )
     dispatch( {
       type: CREATE_EXPENSES,
-      payload: expenses
+      payload: data.newExpenses
     } )
-  } catch ( error ) {
-    console.log( error );
+  } catch ( err ) {
+    if ( err.response && err.response.data ) {
+      return toast.error(err.response.data.error)
+    }
   }
 };
 
 export const listExpenses = () => async dispatch => {
   try {
+    const { data } = await api.getExpenses();
     dispatch( {
       type: LIST_EXPENSES,
-    } )
+      payload: data.expenses
+    })
   } catch ( error ) {
     console.log( error );
   }
 };
 
-export const deleteExpenses = ( id ) => async dispatch => {
+export const deleteExpenses = ( expensesId ) => async dispatch => {
   try {
-    toast.success('Expenses Deleted')
+    toast.success( 'Expenses Deleted Successfully' )
+    await api.deleteExpenses(expensesId)
     dispatch( {
       type: DELETE_EXPENSES,
-      payload: id
+      payload: expensesId
     })
   } catch (error) {
     console.log(error);

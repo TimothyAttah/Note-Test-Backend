@@ -5,7 +5,6 @@ import { createIncome } from '../../redux/actions/incomesAction';
 import { createExpenses } from '../../redux/actions/expensesActions';
 import BudgetsNav from '../navs/BudgetsNav';
 import { Add } from '@material-ui/icons';
-import { v4 } from 'uuid';
 import { FormBudgetButton, FormContainer, IncomeType} from './BudgetsFormStyles';
 
 
@@ -18,24 +17,16 @@ const BudgetsForm = () => {
   const handleSubmit = ( e ) => {
     e.preventDefault();
     const newTransaction = {
-      id: v4(),
       item,
       value: parseInt( value )
     }
 
     if ( isOpen ) {
-      if ( item && value !== '' ) {
         dispatch( createExpenses( newTransaction ) );
-      } else {
-        return null
-      }
     } else {
-      if ( item && value !== '' ) {
         dispatch( createIncome( newTransaction ) );
-      } else {
-        return null;
-      }
     }
+
     setItem( '' );
     setValue( '' );
   };
