@@ -13,18 +13,20 @@ const IncomeBudgets = () => {
   }, [ dispatch ] );
 
   const incomes = useSelector( state => state.incomesReducer.incomes );
+  console.log( incomes );
+ 
   return (
     <BudgetsContainer>
       <h1>Income Transaction</h1>
       {incomes.length ? (
         incomes.map( income => {
           return (
-            <Budgets key={ income.id }>
+            <Budgets key={ income._id }>
               <li>
                 <BudgetsItems>{ income.item }: <span>{ income.value }</span></BudgetsItems>
                 <BudgetsButton>
                   <IconButton><Edit /></IconButton>
-                  <IconButton onClick={ () => dispatch( deleteIncome( income.id ) ) }> <Delete /></IconButton>
+                  <IconButton onClick={ () => dispatch( deleteIncome( income._id ) ) }> <Delete /></IconButton>
                 </BudgetsButton>
               </li>
             </Budgets>

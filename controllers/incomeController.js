@@ -29,3 +29,13 @@ module.exports.getAllIncomes = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } );
   }
 }
+
+module.exports.myIncomes = async ( req, res ) => {
+  try {
+    const incomes = await Incomes.find( { postedBy: req.user._id } )
+      .populate( 'postedBy', '-password' );
+     res.status( 200 ).json( incomes );
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } ); 
+  }
+}

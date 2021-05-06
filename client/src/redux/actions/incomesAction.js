@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import { CREATE_INCOME, DELETE_INCOME, EDIT_INCOME, LIST_INCOMES } from '../type';
+import * as api from '../api/notesApi';
 
 export const createIncome = ( incomes ) => async dispatch => {
   try {
@@ -15,9 +16,12 @@ export const createIncome = ( incomes ) => async dispatch => {
 
 export const listIncomes = () => async dispatch => {
   try {
+    const { data } = await api.getIncomes();
+    console.log( data );
     dispatch( {
       type: LIST_INCOMES,
-    } )
+      payload: data
+    })
   } catch ( error ) {
     console.log( error );
   }
