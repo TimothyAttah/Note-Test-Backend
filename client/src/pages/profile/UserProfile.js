@@ -157,7 +157,7 @@ const UserProfile = () => {
   const { id } = useParams();
   
   useEffect( () => {
-     fetch( `${baseURL}/auth/users/${ id }/user`, {
+     fetch( `/auth/users/${ id }/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -181,7 +181,7 @@ const UserProfile = () => {
 
   //http://localhost:8080/auth/users/follow
   const followUser = () => {
-    fetch( `${baseURL}/auth/users/follow`, {
+    fetch( `/auth/users/follow`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const UserProfile = () => {
   };
 
   const unFollowUser = () => {
-    fetch( `${baseURL}/auth/users/unfollow`, {
+    fetch( `/auth/users/unfollow`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",

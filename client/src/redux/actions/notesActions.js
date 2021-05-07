@@ -111,7 +111,7 @@ export const notesEdit = ( noteId, notesData ) =>  async dispatch =>{
 
 
 export const likeNotes = (id) => dispatch => {
-  fetch( `${baseURL}/notes/like`, {
+  fetch( `/notes/like`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export const likeNotes = (id) => dispatch => {
 
 
 export const unlikeNotes = (id) => dispatch => {
-  fetch( `${baseURL}/notes/unlike`, {
+  fetch( `/notes/unlike`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -17,7 +17,7 @@ export const getUser = (id) => async dispatch => {
 //http://localhost:8080/auth/users/follow
 
 export const followUsers = (id) => dispatch => {
-  fetch( `${baseURL}/auth/users/follow`, {
+  fetch( `/auth/users/follow`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export const followUsers = (id) => dispatch => {
 }
 
 export const unfollowUsers = (id) => dispatch => {
-  fetch( `${baseURL}/auth/users/unfollow`, {
+  fetch( `/auth/users/unfollow`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
