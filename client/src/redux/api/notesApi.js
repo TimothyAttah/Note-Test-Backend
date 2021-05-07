@@ -13,6 +13,12 @@ API.interceptors.request.use( ( req ) => {
   return req;
 })
 
+export const signupUser = ( userData ) => API.post( '/users/signup', userData );
+
+export const signinUser = ( userData ) => API.post( '/users/signin', userData );
+
+export const getUsers = () => API.get( '/users' );
+
 export const notesCreate = ( notesData ) => API.post( '/notes/create', notesData )
 
 export const allNotes = () => API.get( '/notes' );

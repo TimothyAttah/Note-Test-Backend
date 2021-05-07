@@ -2,7 +2,7 @@ import {
   SIGNIN_USER, SIGNUP_USER, GET_USERS, LOGOUT_USER
 } from '../type';
 
-import * as api from '../api/authApi';
+import * as api from '../api/notesApi';
 import { toast } from 'react-toastify';
 import history from '../../history';
 
