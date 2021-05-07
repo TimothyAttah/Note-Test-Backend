@@ -175,7 +175,7 @@ const UserProfile = () => {
     } ).catch( err => {
     console.log(err);
   })
-  }, [ dispatch, id ] );
+  }, [ dispatch, id, baseURL ] );
 
   const [ showFollow, setShowFollow ] = useState( user && user.results ? !user.results.following.includes( id ) : true );
  
