@@ -155,9 +155,11 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const [ userProfile, setUserProfile ] = useState( null );
   const { id } = useParams();
+
+  const baseURL = process.env.REACT_APP_BACKEND_API;
   
   useEffect( () => {
-     fetch( `http://localhost:8080/auth/users/${ id }/user`, {
+     fetch( `/${baseURL}/auth/users/${ id }/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -179,8 +181,9 @@ const UserProfile = () => {
  
   const fullName = `${userProfile && userProfile.user.firstName } ${ userProfile && userProfile.user.lastName }`
 
+  //http://localhost:8080/auth/users/follow
   const followUser = () => {
-    fetch( 'http://localhost:8080/auth/users/follow', {
+    fetch( `${baseURL}/auth/users/follow`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -208,7 +211,7 @@ const UserProfile = () => {
   };
 
   const unFollowUser = () => {
-    fetch( 'http://localhost:8080/auth/users/unfollow', {
+    fetch( `${baseURL}/auth/users/unfollow`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
