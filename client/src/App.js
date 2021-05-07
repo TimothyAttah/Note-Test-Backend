@@ -22,6 +22,7 @@ import NotesRead from './pages/notes/NotesRead';
 import NotesEdit from './pages/notes/NotesEdit';
 import Budgets from './pages/budgets/Budgets';
 
+
 const MainContainer = styled.main`
   *{
     margin: 0;

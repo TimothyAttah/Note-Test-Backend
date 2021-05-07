@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API = axios.create( { baseURL: 'http://localhost:8080' } )
+const API = axios.create( { baseURL: process.env.REACT_APP_MY_API_KEY } )
 
 API.interceptors.request.use( ( req ) => {
   if ( localStorage.getItem( 'jwt' ) ) {
