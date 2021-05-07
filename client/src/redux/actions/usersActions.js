@@ -1,5 +1,6 @@
 import { FOLLOW_USER, GET_USER, UNFOLLOW_USER } from '../type';
 import * as api from '../api/notesApi';
+import {baseURL} from '../api/notesApi'
 
 export const getUser = (id) => async dispatch => {
   try {
@@ -13,9 +14,10 @@ export const getUser = (id) => async dispatch => {
   }
 }
 
+//http://localhost:8080/auth/users/follow
 
 export const followUsers = (id) => dispatch => {
-  fetch( 'http://localhost:8080/auth/users/follow', {
+  fetch( `${baseURL}/auth/users/follow`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +43,7 @@ export const followUsers = (id) => dispatch => {
 }
 
 export const unfollowUsers = (id) => dispatch => {
-  fetch( 'http://localhost:8080/auth/users/unfollow', {
+  fetch( `${baseURL}/auth/users/unfollow`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

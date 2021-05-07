@@ -6,6 +6,7 @@ import * as api from '../api/notesApi';
 import { toast } from 'react-toastify';
 import history from '../../history';
 
+
 export const signupUser = ( userData ) => async dispatch => {
   try {
     const{data}= await api.signupUser( userData )

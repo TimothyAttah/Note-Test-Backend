@@ -2,7 +2,7 @@ import { FRIENDS_NOTES, NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTE
 import * as api from '../api/notesApi';
 import { toast } from 'react-toastify';
 import history from '../../history';
-
+import {baseURL} from '../api/notesApi'
 
 
 export const listNotes = () => async dispatch => {
@@ -107,9 +107,11 @@ export const notesEdit = ( noteId, notesData ) =>  async dispatch =>{
 //   }
 // }
 
+//http://localhost:8080/notes/like
+
 
 export const likeNotes = (id) => dispatch => {
-  fetch( 'http://localhost:8080/notes/like', {
+  fetch( `${baseURL}/notes/like`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -134,7 +136,7 @@ export const likeNotes = (id) => dispatch => {
 
 
 export const unlikeNotes = (id) => dispatch => {
-  fetch( 'http://localhost:8080/notes/unlike', {
+  fetch( `${baseURL}/notes/unlike`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

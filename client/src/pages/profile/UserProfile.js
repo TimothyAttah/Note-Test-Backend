@@ -6,7 +6,7 @@ import { images } from '../../components/Images';
 import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import ReadMore from '../../components/ReadMore';
-
+import {baseURL} from '../../redux/api/notesApi'
 
 
 const Profiles = styled.div`
@@ -155,8 +155,6 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const [ userProfile, setUserProfile ] = useState( null );
   const { id } = useParams();
-
-  const baseURL = process.env.REACT_APP_BACKEND_API;
   
   useEffect( () => {
      fetch( `${baseURL}/auth/users/${ id }/user`, {
@@ -175,7 +173,7 @@ const UserProfile = () => {
     } ).catch( err => {
     console.log(err);
   })
-  }, [ dispatch, id, baseURL ] );
+  }, [ dispatch, id ] );
 
   const [ showFollow, setShowFollow ] = useState( user && user.results ? !user.results.following.includes( id ) : true );
  
