@@ -159,7 +159,7 @@ const UserProfile = () => {
   const baseURL = process.env.REACT_APP_BACKEND_API;
   
   useEffect( () => {
-     fetch( `/${baseURL}/auth/users/${ id }/user`, {
+     fetch( `${baseURL}/auth/users/${ id }/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
