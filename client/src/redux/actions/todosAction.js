@@ -1,4 +1,4 @@
-import { TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS } from '../type';
+import { TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS, TODOS_CHECK } from '../type';
 import { toast } from 'react-toastify';
 
 export const todosLists = () => {
@@ -18,6 +18,13 @@ export const todosCreate = ( todos ) => {
 export const todosEdit = ( id ) => {
   return {
     type: TODOS_EDIT,
+    payload: id
+  }
+};
+
+export const todosCheck = ( id ) => {
+  return {
+    type: TODOS_CHECK,
     payload: id
   }
 };
