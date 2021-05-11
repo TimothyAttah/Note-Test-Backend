@@ -14,7 +14,7 @@ const MainContainer = styled.main`
 `
 
 const TodosContainer = styled.div`
-   width: 400px;
+   width: 500px;
    min-height: 500px;
   border-radius: 20px;
   box-shadow: 10px 10px 13px #0002,

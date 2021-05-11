@@ -8,9 +8,12 @@ import { v4 } from 'uuid';
 const FormContainer = styled.form`
   height: 40px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   input, button {
-  width: 250px;
+  width: 100%;
   height: 100%;
   border: none;
   outline: none;
@@ -22,7 +25,7 @@ const FormContainer = styled.form`
   }
 
   button {
-     width: 80px;
+  width: 80px;
   margin-left: 15px;
   letter-spacing: 2px;
   cursor: pointer;
