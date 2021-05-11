@@ -2,7 +2,6 @@ import { FRIENDS_NOTES, NOTES_CREATE, NOTES_DELETE, NOTES_EDIT, NOTES_LIKE, NOTE
 import * as api from '../api/notesApi';
 import { toast } from 'react-toastify';
 import history from '../../history';
-import {baseURL} from '../api/notesApi'
 
 
 export const listNotes = () => async dispatch => {

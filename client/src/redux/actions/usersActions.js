@@ -1,6 +1,5 @@
 import { FOLLOW_USER, GET_USER, UNFOLLOW_USER } from '../type';
 import * as api from '../api/notesApi';
-import {baseURL} from '../api/notesApi'
 
 export const getUser = (id) => async dispatch => {
   try {
