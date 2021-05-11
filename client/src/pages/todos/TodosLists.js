@@ -21,7 +21,8 @@ const TodosLists = () => {
   useEffect( () => {
     dispatch( todosLists() );
   }, [ dispatch ] );
-  const {todos} = useSelector( state => state.todosReducer )
+  const { todos } = useSelector( state => state.todosReducer )
+  console.log(todos);
   
   return (
     <TodosContainer>
@@ -30,7 +31,9 @@ const TodosLists = () => {
           return (
             <TodoItem
               todo={ item.todo }
-              key={item.id}
+              key={ item.id }
+              id={ item.id }
+              isComplete={item.isComplete}
             />
           )
         } )

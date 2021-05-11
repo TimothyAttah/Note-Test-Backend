@@ -22,6 +22,9 @@ const Todos = styled.ul`
     font-weight: 500;
     font-size: 15px;
   }
+  .is__complete {
+    text-decoration: line-through;
+  }
    box-shadow:  -5px -5px 5px #fff7,
               5px 5px 5px #0002;
   animation: opacity 0.2s linear;
@@ -34,13 +37,13 @@ const Todos = styled.ul`
   }
 `;
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({todo, id, isComplete}) => {
   return (
     <div>
       <Todos>
         <li>
           <div>
-            <h4>{ todo }</h4>
+            <h4  className={isComplete && 'is__complete' }>{ todo }</h4>
             <p>Added: 4 days ago</p>
           </div>
           <div>

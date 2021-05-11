@@ -36,14 +36,17 @@ const FormContainer = styled.form`
 
 const TodosForm = () => {
   const dispatch = useDispatch();
-  const [ todo, setTodo ] = useState( '' );
+  const [ todo, setTodo ] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodos = {
       id: v4(),
-      todo
+      todo,
+      isComplete: false,
+      date: new Date()
     }
+    console.log(newTodos);
     dispatch( todosCreate( newTodos ) );
     setTodo( '' );
   }

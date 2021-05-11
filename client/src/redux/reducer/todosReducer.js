@@ -5,19 +5,26 @@ const initialState = {
   todos: [
     {
       id: v4(),
-      todo: 'Buy milk'
+      todo: 'Buy milk',
+      isComplete: false,
+      date: new Date()
     },
     {
       id: v4(),
-      todo: 'Finish homework'
+      todo: 'Finish homework',
+      isComplete: false,
+      date: new Date()
     },
     {
       id: v4(),
-      todo: 'Pray to God'
+      todo: 'Pray to God',
+      isComplete: true
     },
     {
       id: v4(),
-      todo: 'Submit assignment'
+      todo: 'Submit assignment',
+      isComplete: false,
+      date: new Date()
     },
   ]
 }
