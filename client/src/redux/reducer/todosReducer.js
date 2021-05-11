@@ -1,4 +1,4 @@
-import { TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS } from '../type';
+import { TODOS_CHECK, TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS } from '../type';
 import { v4 } from 'uuid';
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
     {
       id: v4(),
       todo: 'Buy milk',
-      isComplete: false,
+      isComplete: true,
       date: new Date()
     },
     {
@@ -50,6 +50,11 @@ const todosReducer = ( state = initialState, action ) => {
       return {
         todos: state.todos.filter( todo => todo.id !== action.payload )
       };
+    case TODOS_CHECK:
+      return {
+        ...state,
+        todos: state.todos.map(todo => todo.id === action.payload && todo.isComplete === true ? todo.isComplete = false : todo.isComplete = true )
+      }
     default:
       return state;
   }
