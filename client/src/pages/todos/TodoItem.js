@@ -3,11 +3,6 @@ import { Button, ButtonGroup } from '@material-ui/core';
 import { CheckCircle, Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
 
-const TodoItemContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-`;
 
 const Todos = styled.ul`
   margin: 0;
@@ -42,7 +37,7 @@ const Todos = styled.ul`
 const TodoItem = ({todo}) => {
   return (
     <div>
-      <Todos key={ todo.id }>
+      <Todos>
         <li>
           <div>
             <h4>{ todo }</h4>

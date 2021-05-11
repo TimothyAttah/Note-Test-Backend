@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { todosLists, todosDelete } from '../../redux/actions/todosAction';
-import { IconButton } from '@material-ui/core';
-import { Edit, Delete } from '@material-ui/icons';
+import { todosLists } from '../../redux/actions/todosAction';
 import TodoItem from './TodoItem';
 
 
@@ -25,9 +23,6 @@ const TodosLists = () => {
   }, [ dispatch ] );
   const {todos} = useSelector( state => state.todosReducer )
   
-  const handleDelete = ( id ) => {
-    dispatch( todosDelete( id ) );
-  }
   return (
     <TodosContainer>
       {todos.length ? (
