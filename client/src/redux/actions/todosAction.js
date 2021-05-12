@@ -15,10 +15,10 @@ export const todosCreate = ( todos ) => {
   }
 };
 
-export const todosEdit = ( id ) => {
+export const todosEdit = (  updatedTodo , id) => {
   return {
     type: TODOS_EDIT,
-    payload: id
+    payload:  updatedTodo, id
   }
 };
 

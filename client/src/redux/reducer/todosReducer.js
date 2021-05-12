@@ -18,7 +18,7 @@ const initialState = {
     {
       id: v4(),
       todo: 'Pray to God',
-      isComplete: true
+      isComplete: false
     },
     {
       id: v4(),
@@ -42,9 +42,10 @@ const todosReducer = ( state = initialState, action ) => {
         todos: [ action.payload, ...state.todos ]
       };
     case TODOS_EDIT:
+      console.log(action.payload);
       return {
         ...state,
-        todos: state.todos.map( todo => todo.id ? action.payload.id : todo )
+        todos: state.todos.map( todo => todo.id === action.payload.id ? action.payload : todo )
       };
     case TODOS_DELETE:
       return {
@@ -53,7 +54,9 @@ const todosReducer = ( state = initialState, action ) => {
     case TODOS_CHECK:
       return {
         ...state,
-        todos: state.todos.map(todo => todo.id === action.payload && todo.isComplete === true ? todo.isComplete = false : todo.isComplete = true )
+        // todos: state.todos.map( item => action.payload === item.id && item.isComplete === true ? item.isComplete = false : item.isComplete = true )
+        //  todos: state.todos.map( todo => !todo.isComplete === action.payload ? todo :  todo.isComplete  )
+       todos: state.todos.map( todo => todo.id === action.payload.id ? action.payload : todo )
       }
     default:
       return state;

@@ -2,6 +2,9 @@ import React from 'react';
 import { Button, ButtonGroup, Checkbox } from '@material-ui/core';
 import { CheckCircle, Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
+import { useDispatch} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { todosCheck, todosDelete } from '../../redux/actions/todosAction';
 
 
 const Todos = styled.ul`
@@ -39,10 +42,13 @@ const Todos = styled.ul`
   }
 `;
 
-const TodoItem = ( { todo, id, isComplete } ) => {
-  const handleCheck = () => {
-    
+const TodoItem = ( { todo } ) => {
+  const dispatch = useDispatch();
+
+  const handleCheck = (id) => {
+    dispatch(todosCheck(id))
   }
+ 
   return (
     <div>
       <Todos>
@@ -50,18 +56,22 @@ const TodoItem = ( { todo, id, isComplete } ) => {
           <div>
             <Checkbox
               color='primary'
-              checked={ isComplete }
-              onChange={ handleCheck }
+              checked={ todo.isComplete }
+              onChange={ ()=>handleCheck(todo.id) }
               inputProps={{'aria-label': 'secondary checkbox'}}
             />
-            <h4 className={isComplete && 'is__complete' }>{ todo }</h4>
+            { todo.isComplete ? (
+              <h4 className='is__complete'>{ todo.todo }</h4>
+            ): (
+              <h4>{ todo.todo }</h4>
+            )}
             <p>Added: 4 days ago</p>
           </div>
           <div>
             <ButtonGroup size='small'>
               <Button><CheckCircle color='action' /></Button>
-              <Button><Create color='primary' /></Button>
-              <Button><Delete color='secondary' /></Button>
+              <Button><Link to={`/api/users/todos/${todo.id}`}><Create color='primary' /></Link></Button>
+              <Button onClick={()=> dispatch(todosDelete(todo.id))}><Delete color='secondary' /></Button>
             </ButtonGroup>
           </div>
         </li>

@@ -27,13 +27,11 @@ const TodosLists = () => {
   return (
     <TodosContainer>
       {todos.length ? (
-        todos.map( item => {
+        todos.map( todo => {
           return (
             <TodoItem
-              todo={ item.todo }
-              key={ item.id }
-              id={ item.id }
-              isComplete={item.isComplete}
+              todo={ todo}
+              key={ todo.id }
             />
           )
         } )

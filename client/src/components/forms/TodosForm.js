@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { todosCreate } from '../../redux/actions/todosAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { todosCreate, todosEdit } from '../../redux/actions/todosAction';
 import { v4 } from 'uuid';
+import { useParams } from 'react-router';
 
 
 const FormContainer = styled.form`
@@ -36,9 +37,16 @@ const FormContainer = styled.form`
 
 const TodosForm = () => {
   const dispatch = useDispatch();
-  const [ todo, setTodo ] = useState('');
+  const { id } = useParams();
+  const [ todo, setTodo ] = useState( '' );
+  let todos = useSelector( state => id !== null ? state.todosReducer.todos.find( item => item.id === id ) : null )
+  useEffect( () => {
+    
+     if ( todos ) setTodo( todos.todo );
+  }, [ id, todos ] )
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = ( e ) => {
     e.preventDefault();
     const newTodos = {
       id: v4(),
@@ -46,9 +54,22 @@ const TodosForm = () => {
       isComplete: false,
       date: new Date()
     }
-    console.log(newTodos);
-    dispatch( todosCreate( newTodos ) );
-    setTodo( '' );
+    
+ 
+    if ( id && todos !== undefined ) {
+      const updatedTodo = {
+      todo,
+      isComplete: todos.isComplete,
+      date: todos.date,
+      id: todos.id
+      }
+      console.log( updatedTodo );
+      dispatch( todosEdit( updatedTodo, id ) );
+      setTodo( todos.todo = null )
+    } else {
+      dispatch( todosCreate( newTodos ) );
+    }
+    setTodo('');
   }
   return (
     <div>
