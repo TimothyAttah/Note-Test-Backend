@@ -4,13 +4,14 @@ const Todos = mongoose.model( 'Todos' );
 
 exports.createTodos = async ( req, res ) => {
   const todosData = req.body;
-  const { name } = todosData;
+  const { name , isComplete} = todosData;
   try {
     if ( !name )
       return status(400).json({error: 'Please enter name of todo'})
     req.user.password = undefined;
     const todos = await new Todos( {
       name,
+      isComplete,
       postedBy: req.user
     } )
     await ( await todos.save() ).populate( 'postedBy', '-password' )

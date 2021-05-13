@@ -6,10 +6,14 @@ const TodosSchema = new mongoose.Schema( {
     required: true
   },
   isComplete: Boolean,
+  date: {
+    type: Date,
+    default: new Date()
+  },
   postedBy: {
     type: ObjectId,
     ref: 'User'
   }
-}, { timestamps: true } );
+});
 
 mongoose.model( 'Todos', TodosSchema );
