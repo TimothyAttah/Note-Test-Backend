@@ -60,6 +60,7 @@ const TodosForm = () => {
       }
       console.log( updatedTodo );
       dispatch( todosEdit( updatedTodo, todosId ) );
+      todos = null
       // setName( todos.name = null )
     } else {
       dispatch( todosCreate( newTodos ) );
@@ -72,10 +73,9 @@ const TodosForm = () => {
         <input
           type='text'
           value={ name }
-          name='name'
           onChange={(e)=> setName(e.target.value)}
         />
-        <button type='submit'>Create</button>
+        <button type='submit'>{ todosId ? 'Edit' : 'Create' }</button>
       </FormContainer>
     </div>
   )

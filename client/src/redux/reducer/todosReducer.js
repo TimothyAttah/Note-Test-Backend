@@ -44,7 +44,7 @@ const todosReducer = ( state = initialState, action ) => {
       console.log(action.payload);
       return {
         ...state,
-        todos: state.todos.map( todo => todo.id === action.payload.id ? action.payload : todo )
+        todos: state.todos.map( todo => todo._id === action.payload._id ? action.payload : todo )
       };
     case TODOS_DELETE:
       return {

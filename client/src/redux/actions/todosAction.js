@@ -1,11 +1,11 @@
 import { TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS, TODOS_CHECK } from '../type';
 import { toast } from 'react-toastify';
 import * as api from '../api/notesApi';
+import history from '../../history';
 
 export const todosLists = () => async dispatch => {
   try {
     const { data } = await api.listTodos();
-    console.log( data );
     dispatch( {
       type: TODOS_LISTS,
       payload: data.todos
@@ -32,12 +32,28 @@ export const todosCreate = ( todosData ) => async dispatch => {
   }
 };
 
-export const todosEdit = (  updatedTodo , id) => {
-  return {
-    type: TODOS_EDIT,
-    payload:  updatedTodo, id
+export const todosEdit = (  todosData, todosId ) => async dispatch => {
+  try {
+    const { data } = await api.editTodos( todosData, todosId )
+     console.log( data );
+    dispatch( {
+      type: TODOS_EDIT,
+      payload: data.updatedTodos
+    } )
+    toast.success( data.message );
+    history.push('/api/users/todos')
+  } catch (err) {
+     if ( err.response && err.response.data ) {
+     return toast.error(err.response.data.error)
+    }
   }
 };
+// export const todosEdit = ( updatedTodo, id ) =>  {
+//   return {
+//     type: TODOS_EDIT,
+//     payload:  updatedTodo, id
+//   }
+// };
 
 export const todosCheck = ( id ) => {
   return {

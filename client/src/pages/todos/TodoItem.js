@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Checkbox } from '@material-ui/core';
 import { CheckCircle, Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
+import moment from 'moment';
 import { useDispatch, useSelector} from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { todosCheck, todosDelete } from '../../redux/actions/todosAction';
+import history from '../../history';
 
 
 const Todos = styled.ul`
@@ -57,9 +59,15 @@ const TodoItem = ( { todo } ) => {
   //   dispatch(todosCheck(id))
   // }
 
-  // const handleChange = ( id ) => {
-  //   setIsDone(!todos.isComplete)
-  // }
+  const handleEdit = ( id ) => {
+    
+    window.scrollTo( {
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }
+
  
   return (
     <div>
@@ -78,12 +86,12 @@ const TodoItem = ( { todo } ) => {
             ): (
               <h4>{ todo.name }</h4>
             )}
-            <p>Added: 4 days ago</p>
+            <p>Added: { moment(todo.date).fromNow()}</p>
           </div>
           <div>
             <ButtonGroup size='small'>
               <Button><CheckCircle color='action' /></Button>
-              <Button><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
+              <Button onClick={handleEdit}><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
               <Button onClick={()=> dispatch(todosDelete(todo._id))}><Delete color='secondary' /></Button>
             </ButtonGroup>
           </div>

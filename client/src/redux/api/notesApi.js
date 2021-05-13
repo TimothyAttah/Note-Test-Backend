@@ -51,4 +51,6 @@ export const listTodos = () => API.get( '/todos/users/todo' );
 
 export const deleteTodos = ( todosId ) => API.delete( `/todos/${ todosId }/delete` );
 
-export const addTodos = (todosData) => API.post('/todos/create', todosData)
+export const addTodos = ( todosData ) => API.post( '/todos/create', todosData )
+
+export const editTodos = ( todosData, todosId ) => API.put( `/todos/${ todosId }/edit`, todosData );
