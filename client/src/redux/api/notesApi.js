@@ -48,3 +48,5 @@ export const createExpenses = ( expensesData ) => API.post( '/expenses/add', exp
 export const deleteExpenses = ( expensesId ) => API.delete( `expenses/${ expensesId }/delete` );
 
 export const listTodos = () => API.get( '/todos/users/todo' );
+
+export const deleteTodos = ( todosId ) => API.delete( `/todos/${ todosId }/delete` );

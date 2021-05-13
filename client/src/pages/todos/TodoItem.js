@@ -84,7 +84,7 @@ const TodoItem = ( { todo } ) => {
             <ButtonGroup size='small'>
               <Button><CheckCircle color='action' /></Button>
               <Button><Link to={`/api/users/todos/${todo.id}`}><Create color='primary' /></Link></Button>
-              <Button onClick={()=> dispatch(todosDelete(todo.id))}><Delete color='secondary' /></Button>
+              <Button onClick={()=> dispatch(todosDelete(todo._id))}><Delete color='secondary' /></Button>
             </ButtonGroup>
           </div>
         </li>

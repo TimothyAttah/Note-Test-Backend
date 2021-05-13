@@ -48,7 +48,7 @@ const todosReducer = ( state = initialState, action ) => {
       };
     case TODOS_DELETE:
       return {
-        todos: state.todos.filter( todo => todo.id !== action.payload )
+        todos: state.todos.filter( todo => todo._id !== action.payload )
       };
     case TODOS_CHECK:
       return {

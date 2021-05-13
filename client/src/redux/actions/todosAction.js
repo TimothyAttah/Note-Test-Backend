@@ -37,10 +37,16 @@ export const todosCheck = ( id ) => {
   }
 };
 
-export const todosDelete = ( id ) => {
-   toast.success('Todos delete successfully')
-  return {
+export const todosDelete = ( todosId ) =>  async dispatch => {
+  try {
+    await api.deleteTodos( todosId )
+  dispatch( {
     type: TODOS_DELETE,
-    payload: id
+    payload: todosId
+  })
+   toast.success('Todos delete successfully')
+  
+  } catch (error) {
+    
   }
 };
