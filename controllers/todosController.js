@@ -29,3 +29,13 @@ exports.getAllTodos = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } );
   }
 }
+
+exports.myTodos = async ( req, res ) => {
+  try {
+    const todos = await Todos.find( { postedBy: req.user._id } )
+      .populate( 'postedBy', '-password' );
+    res.status(200).json({message: 'My todos!!!', todos})
+  } catch ( error ) {
+    return res.status( 500 ).json( { error: error } );
+  }
+}

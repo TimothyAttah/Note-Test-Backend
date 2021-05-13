@@ -3,6 +3,7 @@ const User = mongoose.model( 'User' );
 const Notes = mongoose.model( 'Notes' );
 const Incomes = mongoose.model( 'Incomes' );
 const Expenses = mongoose.model( 'Expenses' );
+const Todos = mongoose.model( 'Todos' );
 
 module.exports.getUser = async ( req, res ) => {
   try {
@@ -27,7 +28,14 @@ module.exports.getUser = async ( req, res ) => {
                   if ( err ) {
                     return res.status( 404 ).json( { error: err.message } )
                   }
-                  res.status( 200 ).json( { message: 'Single user profile', user, posts, incomes, expenses } )
+                  await Todos.find( { postedBy: req.params.id } )
+                    .populate( 'postedBy', '-password' )
+                    .exec( async ( err, todos ) => {
+                      if ( err ) {
+                        return res.status( 404 ).json( { error: err.message } );
+                    }
+                    res.status( 200 ).json( { message: 'Single user profile', user, posts, incomes, expenses, todos} )
+                  })
                 } );
             } );
         } );
