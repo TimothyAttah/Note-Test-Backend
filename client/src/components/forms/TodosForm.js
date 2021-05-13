@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { todosCreate, todosEdit } from '../../redux/actions/todosAction';
-import { v4 } from 'uuid';
 import { useParams } from 'react-router';
 
 
@@ -37,48 +36,44 @@ const FormContainer = styled.form`
 
 const TodosForm = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [ todo, setTodo ] = useState( '' );
-  let todos = useSelector( state => id !== null ? state.todosReducer.todos.find( item => item.id === id ) : null )
+  const { todosId } = useParams();
+  const [ name, setName ] = useState( '' );
+  let todos = useSelector( state => todosId !== null ? state.todosReducer.todos.find( item => item._id === todosId ) : null )
   useEffect( () => {
-    
-     if ( todos ) setTodo( todos.todo );
-  }, [ id, todos ] )
+    if ( todos ) setName( todos.name );
+  }, [ todosId, todos ] )
 
 
   const handleSubmit = ( e ) => {
     e.preventDefault();
     const newTodos = {
-      id: v4(),
-      todo,
+      name,
       isComplete: false,
-      date: new Date()
     }
-    
  
-    if ( id && todos !== undefined ) {
+    if ( todosId && todos !== undefined ) {
       const updatedTodo = {
-      todo,
+      name,
       isComplete: todos.isComplete,
       date: todos.date,
-      id: todos.id
+      id: todos._id
       }
       console.log( updatedTodo );
-      dispatch( todosEdit( updatedTodo, id ) );
-      setTodo( todos.todo = null )
+      dispatch( todosEdit( updatedTodo, todosId ) );
+      // setName( todos.name = null )
     } else {
       dispatch( todosCreate( newTodos ) );
     }
-    setTodo('');
+    setName('');
   }
   return (
     <div>
       <FormContainer onSubmit={handleSubmit}>
         <input
           type='text'
-          value={ todo }
-          name='todo'
-          onChange={(e)=> setTodo(e.target.value)}
+          value={ name }
+          name='name'
+          onChange={(e)=> setName(e.target.value)}
         />
         <button type='submit'>Create</button>
       </FormContainer>

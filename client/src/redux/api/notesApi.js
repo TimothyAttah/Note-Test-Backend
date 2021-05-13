@@ -50,3 +50,5 @@ export const deleteExpenses = ( expensesId ) => API.delete( `expenses/${ expense
 export const listTodos = () => API.get( '/todos/users/todo' );
 
 export const deleteTodos = ( todosId ) => API.delete( `/todos/${ todosId }/delete` );
+
+export const addTodos = (todosData) => API.post('/todos/create', todosData)

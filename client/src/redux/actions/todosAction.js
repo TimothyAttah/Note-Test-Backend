@@ -3,23 +3,32 @@ import { toast } from 'react-toastify';
 import * as api from '../api/notesApi';
 
 export const todosLists = () => async dispatch => {
- try {
-   const { data } = await api.listTodos();
-   console.log( data );
-   dispatch( {
-     type: TODOS_LISTS,
-     payload: data.todos
-   })
- } catch (error) {
-   
- }
+  try {
+    const { data } = await api.listTodos();
+    console.log( data );
+    dispatch( {
+      type: TODOS_LISTS,
+      payload: data.todos
+    } )
+  } catch ( err ) {
+    if ( err.response && err.response.data ) {
+      return toast.error( err.response.data.error )
+    }
+  }
 };
 
-export const todosCreate = ( todos ) => {
-  toast.success( 'You created a todo' );
-  return {
+export const todosCreate = ( todosData ) => async dispatch => {
+  try {
+    const { data } = await api.addTodos( todosData );
+  dispatch( {
     type: TODOS_CREATE,
-    payload: todos
+    payload: data.todos
+  })
+  toast.success( data.message );
+  } catch (err) {
+    if ( err.response && err.response.data ) {
+     return toast.error(err.response.data.error)
+    }
   }
 };
 
@@ -37,16 +46,17 @@ export const todosCheck = ( id ) => {
   }
 };
 
-export const todosDelete = ( todosId ) =>  async dispatch => {
+export const todosDelete = ( todosId ) => async dispatch => {
   try {
-    await api.deleteTodos( todosId )
-  dispatch( {
-    type: TODOS_DELETE,
-    payload: todosId
-  })
-   toast.success('Todos delete successfully')
-  
-  } catch (error) {
-    
+    const { data } = await api.deleteTodos( todosId )
+    dispatch( {
+      type: TODOS_DELETE,
+      payload: todosId
+    } )
+    toast.success( data.message )
+  } catch ( err ) {
+    if ( err.response && err.response.data ) {
+      return toast.error( err.response.data.error )
+    }
   }
 };
