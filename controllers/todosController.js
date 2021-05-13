@@ -58,6 +58,34 @@ exports.deleteTodos = async ( req, res ) => {
   }
 }
 
+// exports.deleteTodos = async ( req, res ) => {
+//   try {
+//     const deletedTodo = await Todos.findByIdAndDelete( req.params.todosId )
+//     res.status(200).json({message: 'Todo deleted', deletedTodo})
+//   } catch (error) {
+//     return res.status( 500 ).json( { error: error } );
+//   }
+// }
+
+// exports.editTodos = async ( req, res ) => {
+//   try {
+//      const todosData = req.body;
+//     const { name, isComplete } = todosData;
+//     const todos = await Todos.findById( req.params.todosId )
+//     if ( !todos )
+//       return res.status( 404 ).json( { error: 'Todos not found...' } )
+//    const updatedTodos =  Todos.findByIdAndUpdate( req.params.todosId, {
+//       name,
+//       isComplete
+//    }, { new: true } );
+//     res.status( 200 ).json( { message: 'Todos edited successfully', updatedTodos } )
+//   } catch (error) {
+//     return res.status( 500 ).json( { error: error } );
+//   }
+// }
+
+
+
 exports.editTodos = async ( req, res ) => {
   try {
     const todosData = req.body;
@@ -81,3 +109,18 @@ exports.editTodos = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } );
   };
 };
+
+exports.editIsComplete = async ( req, res ) => {
+  try {
+    const todos = await Todos.findById( req.params.todosId );
+    if ( !todos )
+      return res.status( 404 ).json( { error: 'Todos not found...' } )
+   const updatedTodos = await Todos.findByIdAndUpdate( req.params.todosId, {
+      isComplete: !todos.isComplete
+   } )
+    res.status( 200 ).json( { message: 'Todos edited successfully', updatedTodos } )
+    
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } );
+  }
+}
