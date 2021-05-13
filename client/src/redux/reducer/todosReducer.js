@@ -34,7 +34,7 @@ const todosReducer = ( state = initialState, action ) => {
     case TODOS_LISTS:
       return {
         ...state,
-        todos: state.todos
+        todos: action.payload
       };
     case TODOS_CREATE:
       return {

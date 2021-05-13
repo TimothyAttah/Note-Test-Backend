@@ -46,3 +46,5 @@ export const getExpenses = () => API.get( '/expenses/user/expenses' );
 export const createExpenses = ( expensesData ) => API.post( '/expenses/add', expensesData );
 
 export const deleteExpenses = ( expensesId ) => API.delete( `expenses/${ expensesId }/delete` );
+
+export const listTodos = () => API.get( '/todos/users/todo' );

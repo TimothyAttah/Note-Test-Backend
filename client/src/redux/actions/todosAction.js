@@ -1,10 +1,18 @@
 import { TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS, TODOS_CHECK } from '../type';
 import { toast } from 'react-toastify';
+import * as api from '../api/notesApi';
 
-export const todosLists = () => {
-  return {
-    type: TODOS_LISTS
-  }
+export const todosLists = () => async dispatch => {
+ try {
+   const { data } = await api.listTodos();
+   console.log( data );
+   dispatch( {
+     type: TODOS_LISTS,
+     payload: data.todos
+   })
+ } catch (error) {
+   
+ }
 };
 
 export const todosCreate = ( todos ) => {
