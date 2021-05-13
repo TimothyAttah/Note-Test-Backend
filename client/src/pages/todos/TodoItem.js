@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Checkbox } from '@material-ui/core';
 import { CheckCircle, Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
-import { useDispatch} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import { todosCheck, todosDelete } from '../../redux/actions/todosAction';
 
 
@@ -44,10 +44,22 @@ const Todos = styled.ul`
 
 const TodoItem = ( { todo } ) => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const [ isDone, setIsDone ] = useState( todo.isComplete );
+   let todos = useSelector( state => id !== null ? state.todosReducer.todos.find( item => item.id === id ) : null )
+  // useEffect( () => {
+    
+  //    if ( todos.isComplete ) setIsDone( !todos.isComplete );
+  // }, [ id, todos ] )
 
-  const handleCheck = (id) => {
-    dispatch(todosCheck(id))
-  }
+
+  // const handleCheck = (id) => {
+  //   dispatch(todosCheck(id))
+  // }
+
+  // const handleChange = ( id ) => {
+  //   setIsDone(!todos.isComplete)
+  // }
  
   return (
     <div>
@@ -56,11 +68,12 @@ const TodoItem = ( { todo } ) => {
           <div>
             <Checkbox
               color='primary'
-              checked={ todo.isComplete }
-              onChange={ ()=>handleCheck(todo.id) }
+              checked={ isDone }
+              onChange={ () => setIsDone(todos.isComplete) }
+              // onClick={()=> handleCheck(id)}
               inputProps={{'aria-label': 'secondary checkbox'}}
             />
-            { todo.isComplete ? (
+            { isDone ? (
               <h4 className='is__complete'>{ todo.todo }</h4>
             ): (
               <h4>{ todo.todo }</h4>

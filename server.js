@@ -7,6 +7,7 @@ require( './models/UserModel' );
 require( './models/NoteModel' );
 require( './models/IncomeModel' );
 require( './models/ExpensesModel' );
+require( './models/TodosModel' );
 
 const app = express();
 
