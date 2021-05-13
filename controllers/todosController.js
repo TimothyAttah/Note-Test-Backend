@@ -42,14 +42,12 @@ exports.myTodos = async ( req, res ) => {
 
 exports.deleteTodos = async ( req, res ) => {
   try {
-   const todos =  await Todos.findOne( { _id: req.params.todosId } )
+  await Todos.findOne( { _id: req.params.todosId } )
       .populate( 'postedBy', '-password' )
       .exec( async ( err, todo ) => {
         if ( err , !todo ) {
           return res.status(404).json({error: err.message})
         }
-        if ( !todos )
-          return res.status(404).json({error: 'Todos not found...'})
         if ( todo.postedBy._id.toString() === req.user._id.toString() ) {
           const deletedTodo = await todo.remove();
           res.status(200).json({message: 'Todo deleted', deletedTodo})
@@ -59,3 +57,27 @@ exports.deleteTodos = async ( req, res ) => {
     return res.status( 500 ).json( { error: error } );
   }
 }
+
+exports.editTodos = async ( req, res ) => {
+  try {
+    const todosData = req.body;
+    const { name, isComplete } = todosData;
+    await Todos.findOne( { _id: req.params.todosId } )
+      .populate( 'postedBy', '-password' )
+      .exec( async ( err, todo ) => {
+        if ( err, !todo ) {
+          return res.status( 404 ).json( { error: err.message } )
+        }
+        if ( todo.postedBy._id.toString() === req.user._id.toString() ) {
+          const updatedTodos = await Todos.findByIdAndUpdate( req.params.todosId, {
+            name,
+            isComplete
+          }, { new: true } );
+          res.status( 200 ).json( { message: 'Todos edited successfully', updatedTodos } )
+        }
+      } );
+  
+  } catch ( error ) {
+    return res.status( 500 ).json( { error: error } );
+  };
+};
