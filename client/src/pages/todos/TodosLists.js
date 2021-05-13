@@ -31,14 +31,14 @@ const TodosLists = () => {
           return (
             <TodoItem
               todo={ todo}
-              key={ todo.id }
+              key={ todo._id }
             />
           )
         } )
       ) : (
         <h2>You have nothing to do</h2>
       ) }
-      <h2>You have { todos.length } things to do</h2>
+     {todos.length > 0 ?  <h2>You have { todos.length } things to do</h2>: ''}
     </TodosContainer>
   );
 }

@@ -74,9 +74,9 @@ const TodoItem = ( { todo } ) => {
               inputProps={{'aria-label': 'secondary checkbox'}}
             />
             { isDone ? (
-              <h4 className='is__complete'>{ todo.todo }</h4>
+              <h4 className='is__complete'>{ todo.name }</h4>
             ): (
-              <h4>{ todo.todo }</h4>
+              <h4>{ todo.name }</h4>
             )}
             <p>Added: 4 days ago</p>
           </div>

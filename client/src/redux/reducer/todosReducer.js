@@ -1,31 +1,30 @@
 import { TODOS_CHECK, TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS } from '../type';
-import { v4 } from 'uuid';
 
 const initialState = {
   todos: [
-    {
-      id: v4(),
-      todo: 'Buy milk',
-      isComplete: true,
-      date: new Date()
-    },
-    {
-      id: v4(),
-      todo: 'Finish homework',
-      isComplete: false,
-      date: new Date()
-    },
-    {
-      id: v4(),
-      todo: 'Pray to God',
-      isComplete: false
-    },
-    {
-      id: v4(),
-      todo: 'Submit assignment',
-      isComplete: false,
-      date: new Date()
-    },
+    // {
+    //   id: v4(),
+    //   todo: 'Buy milk',
+    //   isComplete: true,
+    //   date: new Date()
+    // },
+    // {
+    //   id: v4(),
+    //   todo: 'Finish homework',
+    //   isComplete: false,
+    //   date: new Date()
+    // },
+    // {
+    //   id: v4(),
+    //   todo: 'Pray to God',
+    //   isComplete: false
+    // },
+    // {
+    //   id: v4(),
+    //   todo: 'Submit assignment',
+    //   isComplete: false,
+    //   date: new Date()
+    // },
   ]
 }
 
