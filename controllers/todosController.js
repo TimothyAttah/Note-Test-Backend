@@ -16,6 +16,15 @@ exports.createTodos = async ( req, res ) => {
     await ( await todos.save() ).populate( 'postedBy', '-password' )
     res.status(200).json({message: 'New todo added...', todos})
   } catch (error) {
-    return res.status(500).json({error: error})
+    return res.status( 500 ).json( { error: error } );
+  }
+}
+
+exports.getAllTodos = async ( req, res ) => {
+  try {
+    const todos = await Todos.find().populate( 'postedBy', '-password' );
+    res.status(200).json({message: 'All todos...', todos})
+  } catch (error) {
+    return res.status( 500 ).json( { error: error } );
   }
 }
