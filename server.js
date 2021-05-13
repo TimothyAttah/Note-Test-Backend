@@ -22,6 +22,7 @@ app.use( '/notes', require( './routes/notesRoutes' ) );
 app.use( '/auth/users', require( './routes/userRoutes' ) );
 app.use( '/incomes', require( './routes/incomeRoutes' ) );
 app.use( '/expenses', require( './routes/expensesRoutes' ) );
+app.use( '/todos', require( './routes/todosRoutes' ) );
 
 
 const PORT = process.env.PORT || 8080;

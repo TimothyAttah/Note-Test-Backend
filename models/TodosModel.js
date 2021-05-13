@@ -5,7 +5,11 @@ const TodosSchema = new mongoose.Schema( {
     type: String,
     required: true
   },
-  isComplete: Boolean
+  isComplete: Boolean,
+  postedBy: {
+    type: ObjectId,
+    ref: 'User'
+  }
 }, { timestamps: true } );
 
 mongoose.model( 'Todos', TodosSchema );
