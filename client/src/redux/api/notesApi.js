@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 import axios from 'axios';
 
 
@@ -54,3 +55,5 @@ export const deleteTodos = ( todosId ) => API.delete( `/todos/${ todosId }/delet
 export const addTodos = ( todosData ) => API.post( '/todos/create', todosData )
 
 export const editTodos = ( todosData, todosId ) => API.put( `/todos/${ todosId }/edit`, todosData );
+
+export const checkTodos = ( todosData, todosId ) => API.patch( `/todos/${ todosId }/edit`, todosData );

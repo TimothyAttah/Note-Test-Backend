@@ -35,7 +35,6 @@ export const todosCreate = ( todosData ) => async dispatch => {
 export const todosEdit = (  todosData, todosId ) => async dispatch => {
   try {
     const { data } = await api.editTodos( todosData, todosId )
-     console.log( data );
     dispatch( {
       type: TODOS_EDIT,
       payload: data.updatedTodos
@@ -48,17 +47,19 @@ export const todosEdit = (  todosData, todosId ) => async dispatch => {
     }
   }
 };
-// export const todosEdit = ( updatedTodo, id ) =>  {
-//   return {
-//     type: TODOS_EDIT,
-//     payload:  updatedTodo, id
-//   }
-// };
 
-export const todosCheck = ( id ) => {
-  return {
-    type: TODOS_CHECK,
-    payload: id
+export const checkTodos = (  todosData, todosId ) => async dispatch => {
+  try {
+    const { data } = await api.checkTodos( todosData, todosId )
+    dispatch( {
+      type: TODOS_CHECK,
+      payload: data.updatedTodos
+    } )
+    toast.success( data.message );
+  } catch (err) {
+     if ( err.response && err.response.data ) {
+     return toast.error(err.response.data.error)
+    }
   }
 };
 

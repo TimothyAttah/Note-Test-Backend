@@ -115,10 +115,10 @@ exports.editIsComplete = async ( req, res ) => {
     const todos = await Todos.findById( req.params.todosId );
     if ( !todos )
       return res.status( 404 ).json( { error: 'Todos not found...' } )
-   const updatedTodos = await Todos.findByIdAndUpdate( req.params.todosId, {
+    const updatedTodos = await Todos.findByIdAndUpdate( req.params.todosId, {
       isComplete: !todos.isComplete
-   } )
-    res.status( 200 ).json( { message: 'Todos edited successfully', updatedTodos } )
+   }, {new: true} )
+     res.status( 200 ).json( { message: 'Todos status changed...', updatedTodos } )
     
   } catch (error) {
     return res.status( 500 ).json( { error: error } );

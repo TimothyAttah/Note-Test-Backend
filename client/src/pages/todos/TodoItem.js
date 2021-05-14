@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, ButtonGroup, Checkbox } from '@material-ui/core';
 import { CheckCircle, Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useDispatch, useSelector} from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { todosCheck, todosDelete } from '../../redux/actions/todosAction';
+import { checkTodos, todosDelete } from '../../redux/actions/todosAction';
 import history from '../../history';
 
 
 const Todos = styled.ul`
   margin: 0;
   padding: 0;
+  .status {
+    background-color: teal;
+    color: #fff7;
+    text-decoration: line-through;
+  }
   li {
     display: flex;
     justify-content: space-between;
@@ -46,42 +51,36 @@ const Todos = styled.ul`
 
 const TodoItem = ( { todo } ) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const [ isDone, setIsDone ] = useState( todo.isComplete );
-   let todos = useSelector( state => id !== null ? state.todosReducer.todos.find( item => item.id === id ) : null )
-  // useEffect( () => {
-    
-  //    if ( todos.isComplete ) setIsDone( !todos.isComplete );
-  // }, [ id, todos ] )
+  const { todosId } = useParams();
+  const [isComplete ,setIsComplete ] = useState( todo.isComplete );
 
+  const handleCheck = ( todo, id ) => {
+    dispatch( checkTodos( todo, id ) )
+    history.push('/api/users/todos')
+  }
 
-  // const handleCheck = (id) => {
-  //   dispatch(todosCheck(id))
-  // }
-
-  const handleEdit = ( id ) => {
-    
+  const handleEdit = () => {
     window.scrollTo( {
       top: 0,
       left: 0,
       behavior: 'smooth'
-    })
-  }
+    } )
+  };
 
- 
   return (
     <div>
       <Todos>
-        <li>
+        <li className='status'>
           <div>
-            <Checkbox
+          
+               <Checkbox
               color='primary'
-              checked={ isDone }
-              onChange={ () => setIsDone(todos.isComplete) }
-              // onClick={()=> handleCheck(id)}
+              checked={ todo.isComplete }
+              onChange={ () => setIsComplete(dispatch(checkTodos(todo, todo._id))) }
               inputProps={{'aria-label': 'secondary checkbox'}}
             />
-            { isDone ? (
+           
+            { todo.isComplete ? (
               <h4 className='is__complete'>{ todo.name }</h4>
             ): (
               <h4>{ todo.name }</h4>
@@ -90,7 +89,7 @@ const TodoItem = ( { todo } ) => {
           </div>
           <div>
             <ButtonGroup size='small'>
-              <Button><CheckCircle color='action' /></Button>
+              <Button onClick={() => handleCheck( todo, todosId)}><Link to={`/api/users/todos/${todo._id}/edit`}></Link><CheckCircle color='action' /></Button>
               <Button onClick={handleEdit}><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
               <Button onClick={()=> dispatch(todosDelete(todo._id))}><Delete color='secondary' /></Button>
             </ButtonGroup>
