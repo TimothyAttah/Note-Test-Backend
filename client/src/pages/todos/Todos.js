@@ -24,7 +24,8 @@ const TodosContainer = styled.div`
     text-align: center;
   font-size: 2.5em;
   text-transform: uppercase;
-  color: #e5e5e5;
+  /* color: #e5e5e5; */
+   color: #3d3d3d;
   margin-bottom: 20px;
   text-shadow:  -3px -3px 3px #fff7,
                3px 3px 3px #0003;

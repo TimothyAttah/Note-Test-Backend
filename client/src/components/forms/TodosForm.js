@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 
 
 const FormContainer = styled.form`
-  height: 40px;
+  height: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -24,6 +24,10 @@ const FormContainer = styled.form`
               inset 5px 5px 5px #0002;
   }
 
+  input {
+    padding: 15px;
+  }
+
   button {
   width: 80px;
   margin-left: 15px;
@@ -36,7 +40,7 @@ const FormContainer = styled.form`
 
 const TodosForm = () => {
   const dispatch = useDispatch();
-  const { todosId } = useParams();
+  let { todosId } = useParams();
   const [ name, setName ] = useState( '' );
   let todos = useSelector( state => todosId !== null ? state.todosReducer.todos.find( item => item._id === todosId ) : null )
   useEffect( () => {
@@ -58,14 +62,20 @@ const TodosForm = () => {
       date: todos.date,
       id: todos._id
       }
-      console.log( updatedTodo );
       dispatch( todosEdit( updatedTodo, todosId ) );
-      todos = null
-      // setName( todos.name = null )
+      clear()
+       setName( { name: ''} )
     } else {
       dispatch( todosCreate( newTodos ) );
     }
-    setName('');
+    setName( '' );
+    clear()
+  }
+
+  const clear = () => {
+    setName( '' );
+    setName(todos.name = '')
+    todosId = null
   }
   return (
     <div>

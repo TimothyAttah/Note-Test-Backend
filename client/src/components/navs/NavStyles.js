@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Navs = styled.nav`
-  background-color: #3f51b5;
+  background-color: #377cff;
   display: flex;
   justify-content: space-between;
   align-items: center;
