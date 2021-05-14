@@ -21,6 +21,7 @@ export const TODOS_CREATE = 'TODOS_CREATE'
 export const TODOS_LISTS = 'TODOS_LISTS'
 export const TODOS_EDIT = 'TODOS_EDIT'
 export const TODOS_DELETE = 'TODOS_DELETE'
+export const TODOS_CHECK = 'TODOS_CHECK'
 
 export const CREATE_INCOME = 'CREATE_INCOME'
 export const LIST_INCOMES = 'LIST_INCOMES'

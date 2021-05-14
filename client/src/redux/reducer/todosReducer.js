@@ -1,25 +1,7 @@
-import { TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS } from '../type';
-import { v4 } from 'uuid';
+import { TODOS_CHECK, TODOS_CREATE, TODOS_DELETE, TODOS_EDIT, TODOS_LISTS } from '../type';
 
 const initialState = {
-  todos: [
-    {
-      id: v4(),
-      todo: 'Buy milk'
-    },
-    {
-      id: v4(),
-      todo: 'Finish homework'
-    },
-    {
-      id: v4(),
-      todo: 'Pray to God'
-    },
-    {
-      id: v4(),
-      todo: 'Submit assignment'
-    },
-  ]
+  todos: []
 }
 
 const todosReducer = ( state = initialState, action ) => {
@@ -27,7 +9,7 @@ const todosReducer = ( state = initialState, action ) => {
     case TODOS_LISTS:
       return {
         ...state,
-        todos: state.todos
+        todos: action.payload
       };
     case TODOS_CREATE:
       return {
@@ -37,15 +19,20 @@ const todosReducer = ( state = initialState, action ) => {
     case TODOS_EDIT:
       return {
         ...state,
-        todos: state.todos.map( todo => todo.id ? action.payload.id : todo )
+        todos: state.todos.map( todo => todo._id === action.payload._id ? action.payload : todo )
       };
     case TODOS_DELETE:
       return {
-        todos: state.todos.filter( todo => todo.id !== action.payload )
+        todos: state.todos.filter( todo => todo._id !== action.payload )
+      };
+    case TODOS_CHECK:
+      return {
+        ...state,
+        todos: state.todos.map( todo => todo._id === action.payload._id ? action.payload : todo )
       };
     default:
       return state;
   }
-}
+};
 
 export default todosReducer;

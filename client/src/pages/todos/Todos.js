@@ -14,7 +14,7 @@ const MainContainer = styled.main`
 `
 
 const TodosContainer = styled.div`
-   width: 400px;
+   width: 500px;
    min-height: 500px;
   border-radius: 20px;
   box-shadow: 10px 10px 13px #0002,
@@ -24,7 +24,8 @@ const TodosContainer = styled.div`
     text-align: center;
   font-size: 2.5em;
   text-transform: uppercase;
-  color: #e5e5e5;
+  /* color: #e5e5e5; */
+   color: #3d3d3d;
   margin-bottom: 20px;
   text-shadow:  -3px -3px 3px #fff7,
                3px 3px 3px #0003;
