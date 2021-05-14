@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup, Checkbox } from '@material-ui/core';
-import { CheckCircle, Create, Delete } from '@material-ui/icons';
+import { Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
 import moment from 'moment';
-import { useDispatch, useSelector} from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { checkTodos, todosDelete } from '../../redux/actions/todosAction';
-import history from '../../history';
 
 
 const Todos = styled.ul`
   margin: 0;
   padding: 0;
   .status {
-    background-color: teal;
-    color: #fff7;
+    background-color: #377cff;
+    color: #fff;
     text-decoration: line-through;
+    .MuiCheckbox-root{
+      color: #fff;
+    }
+      h4, p {
+         opacity: 0.7;
+      }
   }
   li {
     display: flex;
@@ -24,17 +29,19 @@ const Todos = styled.ul`
   margin: 15px 0;
   padding: 10px;
   text-transform: capitalize;
-   .is__complete {
-    background-color: teal;
-    text-decoration: line-through;
-  }
-  h4, p {
-    padding-bottom: 10px;
-  }
+ .PrivateSwitchBase-input-4{
+      border: 2px solid red;
+     input {
+       background-color: white;
+       color: -internal-light-dark(white, black);
+     }
+    }
   p {
     color: #3d3d3d;
     font-weight: 500;
     font-size: 15px;
+    display: flex;
+    justify-items: flex-end;
   }
  
    box-shadow:  -5px -5px 5px #fff7,
@@ -49,15 +56,29 @@ const Todos = styled.ul`
   }
 `;
 
+const TodoName = styled.div`
+  display: flex;
+ justify-content: center;
+ h4 {
+   padding: 10px 0;
+ }
+`;
+
+const TodoIcons = styled.div`
+  display: flex;
+  align-items: flex-end;
+  justify-content:flex-end;
+  .MuiSvgIcon-root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+`;
+
 const TodoItem = ( { todo } ) => {
   const dispatch = useDispatch();
-  const { todosId } = useParams();
   const [isComplete ,setIsComplete ] = useState( todo.isComplete );
-
-  const handleCheck = ( todo, id ) => {
-    dispatch( checkTodos( todo, id ) )
-    history.push('/api/users/todos')
-  }
 
   const handleEdit = () => {
     window.scrollTo( {
@@ -70,31 +91,54 @@ const TodoItem = ( { todo } ) => {
   return (
     <div>
       <Todos>
-        <li className='status'>
-          <div>
-          
-               <Checkbox
-              color='primary'
+        { todo.isComplete ? (
+           <li className='status'>
+          <TodoName>
+              <div>
+              <Checkbox
+              color={todo.isComplete ? 'default' : 'primary'}
               checked={ todo.isComplete }
               onChange={ () => setIsComplete(dispatch(checkTodos(todo, todo._id))) }
               inputProps={{'aria-label': 'secondary checkbox'}}
             />
-           
-            { todo.isComplete ? (
-              <h4 className='is__complete'>{ todo.name }</h4>
-            ): (
+             </div>
+              <div>
               <h4>{ todo.name }</h4>
-            )}
-            <p>Added: { moment(todo.date).fromNow()}</p>
-          </div>
-          <div>
+              <p>Added: { moment(todo.date).fromNow()}</p>
+              </div>
+          </TodoName>
+          <TodoIcons>
             <ButtonGroup size='small'>
-              <Button onClick={() => handleCheck( todo, todosId)}><Link to={`/api/users/todos/${todo._id}/edit`}></Link><CheckCircle color='action' /></Button>
               <Button onClick={handleEdit}><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
               <Button onClick={()=> dispatch(todosDelete(todo._id))}><Delete color='secondary' /></Button>
             </ButtonGroup>
-          </div>
+          </TodoIcons>
         </li>
+        ) : (
+             <li>
+         <TodoName>
+              <div>
+              <Checkbox
+              color={todo.isComplete ? 'default' : 'primary'}
+              checked={ todo.isComplete }
+              onChange={ () => setIsComplete(dispatch(checkTodos(todo, todo._id))) }
+              inputProps={{'aria-label': 'secondary checkbox'}}
+            />
+             </div>
+              <div>
+              <h4>{ todo.name }</h4>
+              <p>Added: { moment(todo.date).fromNow()}</p>
+              </div>
+          </TodoName>
+          <TodoIcons>
+            <ButtonGroup size='small'>
+              <Button onClick={handleEdit}><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
+              <Button onClick={()=> dispatch(todosDelete(todo._id))}><Delete color='secondary' /></Button>
+            </ButtonGroup>
+          </TodoIcons>
+        </li>
+        )}
+       
       </Todos>
     </div>
   );
