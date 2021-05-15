@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Checkbox } from '@material-ui/core';
+import { Button, ButtonGroup, Checkbox, Divider } from '@material-ui/core';
 import { Create, Delete } from '@material-ui/icons';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -29,6 +29,9 @@ const Todos = styled.ul`
   margin: 15px 0;
   padding: 10px;
   text-transform: capitalize;
+  @media (max-width: 411px){
+  flex-direction: column;
+}
  .PrivateSwitchBase-input-4{
       border: 2px solid red;
      input {
@@ -42,6 +45,7 @@ const Todos = styled.ul`
     font-size: 15px;
     display: flex;
     justify-items: flex-end;
+    padding-bottom: 10px;
   }
  
    box-shadow:  -5px -5px 5px #fff7,
@@ -54,6 +58,7 @@ const Todos = styled.ul`
   }
 }
   }
+
 `;
 
 const TodoName = styled.div`
@@ -62,17 +67,23 @@ const TodoName = styled.div`
  h4 {
    padding: 10px 0;
  }
+ @media (max-width: 411px){
+   justify-content: flex-start;
+ }
 `;
 
 const TodoIcons = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content:flex-end;
+  padding-top: 70px;
   .MuiSvgIcon-root{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+  }
+  @media (max-width: 411px){
+    padding-top: 20px;
   }
 `;
 
@@ -106,7 +117,8 @@ const TodoItem = ( { todo } ) => {
               <h4>{ todo.name }</h4>
               <p>Added: { moment(todo.date).fromNow()}</p>
               </div>
-          </TodoName>
+            </TodoName>
+            <Divider />
           <TodoIcons>
             <ButtonGroup size='small'>
               <Button onClick={handleEdit}><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
@@ -129,7 +141,8 @@ const TodoItem = ( { todo } ) => {
               <h4>{ todo.name }</h4>
               <p>Added: { moment(todo.date).fromNow()}</p>
               </div>
-          </TodoName>
+              </TodoName>
+               <Divider />
           <TodoIcons>
             <ButtonGroup size='small'>
               <Button onClick={handleEdit}><Link to={`/api/users/todos/${todo._id}/edit`}><Create color='primary' /></Link></Button>
