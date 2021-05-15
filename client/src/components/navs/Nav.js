@@ -6,7 +6,7 @@ import { navMenu } from '../helper/Helper';
 import { NavLink } from 'react-router-dom';
 import Buttons from '../buttons/Button';
 import {
-  Navs, NavsCenter, NavsLeft, NavsRight, activeNav, SidebarContainer
+  Navs, NavsCenter, NavsLeft, NavsRight, activeNav, SidebarContainer, Sidebars
 } from './NavStyles';
 
 const Nav = () => {
@@ -54,7 +54,7 @@ const Nav = () => {
         onClose={ () => setIsOpen( false ) }
       >
         <SidebarContainer>
-          <ul>
+          <Sidebars>
             { navMenu.map( (item, index) => {
               return (
                  <li key={ index }>
@@ -69,7 +69,7 @@ const Nav = () => {
             </li>
               )
             })}
-          </ul>
+          </Sidebars>
         </SidebarContainer>
       </Drawer>
     </Navs>
