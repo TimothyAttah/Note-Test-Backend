@@ -40,7 +40,8 @@ export const todosEdit = (  todosData, todosId ) => async dispatch => {
       payload: data.updatedTodos
     } )
     toast.success( data.message );
-    history.push('/api/users/todos')
+    history.push( '/api/users/todos' );
+    // window.location.reload( false );
   } catch (err) {
      if ( err.response && err.response.data ) {
      return toast.error(err.response.data.error)

@@ -115,7 +115,7 @@ const TodoItem = ( { todo } ) => {
              </div>
               <div>
               <h4>{ todo.name }</h4>
-              <p>Added: { moment(todo.date).fromNow()}</p>
+              <p>Added: { moment(todo.date).calendar()}</p>
               </div>
             </TodoName>
             <Divider />

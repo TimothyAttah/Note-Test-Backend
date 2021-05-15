@@ -97,9 +97,11 @@ exports.editTodos = async ( req, res ) => {
           return res.status( 404 ).json( { error: err.message } )
         }
         if ( todo.postedBy._id.toString() === req.user._id.toString() ) {
+           req.user.password = undefined;
           const updatedTodos = await Todos.findByIdAndUpdate( req.params.todosId, {
             name,
-            isComplete
+            isComplete,
+            postedBy: req.user
           }, { new: true } );
           res.status( 200 ).json( { message: 'Todos edited successfully', updatedTodos } )
         }

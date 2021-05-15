@@ -42,6 +42,10 @@ const TodosForm = () => {
   const dispatch = useDispatch();
   let { todosId } = useParams();
   const [ name, setName ] = useState( '' );
+  // const [ todo, setTodo ] = useState( {
+  //   name: '',
+  //   isComplete: false
+  // } );
   let todos = useSelector( state => todosId !== null ? state.todosReducer.todos.find( item => item._id === todosId ) : null )
   useEffect( () => {
     if ( todos ) setName( todos.name );
@@ -63,30 +67,26 @@ const TodosForm = () => {
       id: todos._id
       }
       dispatch( todosEdit( updatedTodo, todosId ) );
-      clear()
     } else {
       dispatch( todosCreate( newTodos ) );
+      console.log(newTodos);
     }
     setName( '' );
-    clear()
   }
 
-  const clear = () => {
-    setName( '' );
-    todosId = null
-  }
   return (
     <div>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer onSubmit={ handleSubmit }>
         <input
           type='text'
           value={ name }
-          onChange={(e)=> setName(e.target.value)}
+          // onChange={(e)=> setTodo({...todo, name: e.target.value})}
+          onChange={ ( e ) => setName( e.target.value ) }
         />
         <button type='submit'>{ todosId ? 'Edit' : 'Create' }</button>
       </FormContainer>
     </div>
-  )
+  );
 }
 
 export default TodosForm;
