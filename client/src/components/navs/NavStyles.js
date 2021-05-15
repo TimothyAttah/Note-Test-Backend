@@ -85,6 +85,43 @@ display: block;
 
 
 export const activeNav = {
-  borderBottom: '2px solid teal',
-  color: 'teal'
+  borderBottom: '2px solid #909090',
+  color: '#909090',
+  backgroundColor: '#3d3d3d'
 }
+
+
+export const SidebarContainer = styled.div`
+  width: 200px;
+  padding: 30px 20px 0px 20px;
+`;
+
+export const Sidebars = styled.ul`
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 200px;
+  li {
+      display: flex;
+    align-items: center;
+    
+  }
+  li a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #377cff;
+    border-radius: 6px;
+    span {
+      padding-left: 10px;
+    }
+    :hover {
+      background-color: #3d3d3d;
+      color: #909090;
+    }
+  }
+`;

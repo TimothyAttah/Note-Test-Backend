@@ -64,7 +64,6 @@ const TodosForm = () => {
       }
       dispatch( todosEdit( updatedTodo, todosId ) );
       clear()
-       setName( { name: ''} )
     } else {
       dispatch( todosCreate( newTodos ) );
     }
@@ -74,7 +73,6 @@ const TodosForm = () => {
 
   const clear = () => {
     setName( '' );
-    setName(todos.name = '')
     todosId = null
   }
   return (

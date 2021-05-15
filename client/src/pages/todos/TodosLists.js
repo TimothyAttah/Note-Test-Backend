@@ -13,6 +13,9 @@ const TodosContainer = styled.div`
   margin-top: 50px;
   margin-bottom: 20px;
   text-transform: capitalize;
+  @media (max-width: 411px){
+    font-size: 20px;
+  }
    }
 `
 

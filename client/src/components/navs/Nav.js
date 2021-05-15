@@ -5,7 +5,9 @@ import {  AddCircle, AddOutlined, Menu } from '@material-ui/icons';
 import { navMenu } from '../helper/Helper';
 import { NavLink } from 'react-router-dom';
 import Buttons from '../buttons/Button';
-import { Navs, NavsCenter, NavsLeft, NavsRight, activeNav} from './NavStyles';
+import {
+  Navs, NavsCenter, NavsLeft, NavsRight, activeNav, SidebarContainer, Sidebars
+} from './NavStyles';
 
 const Nav = () => {
   const [ isOpen, setIsOpen ] = useState( false );
@@ -51,9 +53,24 @@ const Nav = () => {
         open={ isOpen }
         onClose={ () => setIsOpen( false ) }
       >
-        <div>
-          <h3>Drawer is open</h3>
-        </div>
+        <SidebarContainer>
+          <Sidebars>
+            { navMenu.map( (item, index) => {
+              return (
+                 <li key={ index }>
+              <NavLink
+                to={ item.url }
+                exact
+                activeStyle={ activeNav }
+              >
+                { item.name }
+                <span>{ item.icon }</span>
+              </NavLink>
+            </li>
+              )
+            })}
+          </Sidebars>
+        </SidebarContainer>
       </Drawer>
     </Navs>
   );
