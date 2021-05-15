@@ -12,7 +12,7 @@ const Todos = styled.ul`
   margin: 0;
   padding: 0;
   .status {
-    background-color: #377cff;
+    background-color: #3d3d3d;
     color: #fff;
     text-decoration: line-through;
     .MuiCheckbox-root{
@@ -37,7 +37,7 @@ const Todos = styled.ul`
      }
     }
   p {
-    color: #3d3d3d;
+    color: #909090;
     font-weight: 500;
     font-size: 15px;
     display: flex;
@@ -97,7 +97,7 @@ const TodoItem = ( { todo } ) => {
               <div>
               <Checkbox
               color={todo.isComplete ? 'default' : 'primary'}
-              checked={ todo.isComplete }
+              checked={ isComplete }
               onChange={ () => setIsComplete(dispatch(checkTodos(todo, todo._id))) }
               inputProps={{'aria-label': 'secondary checkbox'}}
             />
