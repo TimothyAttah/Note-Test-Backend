@@ -88,3 +88,9 @@ export const activeNav = {
   borderBottom: '2px solid teal',
   color: 'teal'
 }
+
+
+export const SidebarContainer = styled.div`
+  border: 2px solid red;
+  width: 250px;
+`;
