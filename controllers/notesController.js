@@ -22,7 +22,7 @@ module.exports.notesCreate = async ( req, res ) => {
 
 module.exports.allNotes = async ( req, res ) => {
   try {
-    const notes = await Notes.find()
+    const notes = await Notes.find().sort({createdAt: -1})
       .populate( 'postedBy', '-password' )
     .populate('comments.postedBy', '_id firstName lastName')
     res.status(200).json(notes)
