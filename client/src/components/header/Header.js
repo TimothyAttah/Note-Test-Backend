@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MenuBook } from '@material-ui/icons';
-import nameToInitials, { user, fullName } from '../NameInitials';
+import NamesInitials, {user, fullName} from '../NamesInitials'
 
 import Buttons from '../buttons/Button';
 import { Headers, HeadersRight } from './HeaderStyles';
@@ -18,7 +18,7 @@ const Header = () => {
         <HeadersRight>
           <Link to='/api/users/profile'>
             <h4>{ fullName }</h4>
-            <Avatar>{ nameToInitials( fullName ) }</Avatar>
+            <Avatar><NamesInitials fullName={fullName} /></Avatar>
           </Link>
           <HeaderNavs />
         </HeadersRight>

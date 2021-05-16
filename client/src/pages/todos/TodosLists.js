@@ -25,8 +25,7 @@ const TodosLists = () => {
     dispatch( todosLists() );
   }, [ dispatch ] );
   const { todos } = useSelector( state => state.todosReducer )
-  console.log(todos);
-  
+
   return (
     <TodosContainer>
       {todos.length ? (

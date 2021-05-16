@@ -36,8 +36,8 @@ h4 > a {
 }
 
 .MuiAvatar-root{
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
 };
 .MuiSvgIcon-root {
   height: 50px;
@@ -61,8 +61,8 @@ ${props => props.primary && css`
 @media (max-width: 730px){
   display: block;
   .MuiAvatar-root{
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   margin: 10px auto;
 };
 .MuiSvgIcon-root {

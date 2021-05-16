@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
-import nameToInitials, { user } from '../../components/NameInitials';
 import ReadMore from '../../components/ReadMore'
+import NamesInitials, {user} from '../../components/NamesInitials'
 
 
 import PopupNav from '../../components/navs/PopupNav';
@@ -15,8 +15,7 @@ import { listNotes, likeNotes, unlikeNotes } from '../../redux/actions/notesActi
 import {
   NoteComments, NoteCommentsLeft, Notes, NoteLeft, NoteCenter
 } from './NoteListsStyles';
-
-console.log(user);
+import moment from 'moment';
 
 const NoteLists = () => {
   const dispatch = useDispatch()
@@ -48,17 +47,21 @@ const NoteLists = () => {
                 <NoteLeft>
                   <Link to={  note && note.postedBy._id !== user.results._id ? `/api/auth/users/${note.postedBy._id}/user/profile` : `/api/users/profile`}>
                   <Avatar>
-                    { nameToInitials( fullName ) }
+                    <NamesInitials fullName={fullName} />
                     </Avatar>
                     </Link>
                   <NoteLeft primary>
-                    <h4> <Link to={  note && note.postedBy._id !== user.results._id ? `/api/auth/users/${note.postedBy._id}/user/profile` : `/api/users/profile`}>{ fullName }</Link></h4>
-                    <h5>24 followers</h5>
+                      <h4>
+                        <Link to={ note && note.postedBy._id !== user.results._id ? `/api/auth/users/${ note.postedBy._id }/user/profile` : `/api/users/profile` }>
+                          { fullName }
+                        </Link>
+                      </h4>
+                    <h5>{note.postedBy.followers.length} Followers</h5>
                   </NoteLeft>
                 </NoteLeft>
                 <NoteCenter>
                   <h2>{ note.title }</h2>
-                  <small>24th feb 2021</small>
+                  <small>{moment(note.createdAt).fromNow()}</small>
                     <ReadMore>
                        { note.content }
                  </ReadMore>

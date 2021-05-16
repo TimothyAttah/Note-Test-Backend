@@ -3,7 +3,7 @@ import { Drawer, IconButton } from '@material-ui/core';
 import {  AddCircle, AddOutlined, Menu } from '@material-ui/icons';
 
 import { navMenu } from '../helper/Helper';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Buttons from '../buttons/Button';
 import {
   Navs, NavsCenter, NavsLeft, NavsRight, activeNav, SidebarContainer, Sidebars
@@ -44,9 +44,11 @@ const Nav = () => {
         />
       </NavsLeft>
       <NavsRight >
+        <Link to='/api/users/notes/create/note'>
         <IconButton>
           <AddCircle />
-        </IconButton>
+          </IconButton>
+          </Link>
       </NavsRight>
       <Drawer
         anchor='left'
