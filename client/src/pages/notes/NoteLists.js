@@ -61,7 +61,7 @@ const NoteLists = () => {
                 </NoteLeft>
                 <NoteCenter>
                   <h2>{ note.title }</h2>
-                  <small>{moment(note.createdAt).fromNow()}</small>
+                  <small>{moment(note.createdAt).format('llll')}</small>
                     <ReadMore>
                        { note.content }
                  </ReadMore>

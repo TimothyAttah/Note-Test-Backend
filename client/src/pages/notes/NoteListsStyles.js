@@ -80,6 +80,9 @@ ${props => props.primary && css`
 
 export const NoteCenter = styled.div`
   width: 400px;
+  small {
+    color: #909090;
+  }
   p {
     padding-top: 20px;
   }
@@ -94,6 +97,9 @@ export const NoteCenter = styled.div`
     padding-left: 10px;
      h2 {
       font-size: 12px;
+    }
+    small {
+      font-size: 9px;
     }
      p {
       width: 120px;
