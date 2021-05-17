@@ -51,8 +51,9 @@ export const NavsCenter = styled.ul`
       padding-left: 3px;
     }
     :hover {
-      border-bottom: 2px solid teal;
-      color: teal;
+      border-bottom: 2px solid #909090;
+      color: #909090;
+      background-color: #3d3d3d;
     }
   }
   @media (max-width: 900px){
