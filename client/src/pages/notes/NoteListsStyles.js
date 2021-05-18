@@ -118,8 +118,11 @@ export const NoteComments = styled.div`
  .MuiButton-root {
    font-size: 10px;
    text-transform: capitalize;
-   background-color: crimson;
-
+   background-color: #377cff;
+  :hover {
+    background-color: #377cff;
+    opacity: 0.8;
+  }
  }
  .MuiSvgIcon-root{
    font-size: 15px;

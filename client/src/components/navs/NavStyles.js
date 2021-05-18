@@ -28,7 +28,7 @@ export const NavsCenter = styled.ul`
   li {
    display: flex;
     align-items: center;
-    background-color: #e5e5e5;
+    background-color: crimson;
      box-shadow:  -2px -2px 2px #fff7,
                2px 2px 2px #0002;
     cursor: pointer;
@@ -46,14 +46,14 @@ export const NavsCenter = styled.ul`
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    color: black;
+    color: #fff;
     span {
       padding-left: 3px;
     }
     :hover {
       border-bottom: 2px solid #909090;
-      color: #909090;
-      background-color: #3d3d3d;
+      color: #377cff;
+      background-color: #e5e5e5;
     }
   }
   @media (max-width: 900px){
@@ -64,9 +64,13 @@ export const NavsCenter = styled.ul`
 export const NavsLeft = styled.div`
 .MuiButton-root {
   padding: 5px 12px;
-   background-color: #e5e5e5;
+   background-color: crimson;
+   color: #fff;
+    :hover {
+       background-color: #e5e5e5;
+     }
     a {
-     color: black;
+     color: #fff;
      display: flex;
      justify-content: center;
      align-items: center;
@@ -87,8 +91,8 @@ display: block;
 
 export const activeNav = {
   borderBottom: '2px solid #909090',
-  color: '#909090',
-  backgroundColor: '#3d3d3d'
+  color: '#377cff',
+  backgroundColor: '#e5e5e5'
 }
 
 
