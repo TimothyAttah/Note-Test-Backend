@@ -35,6 +35,10 @@ const FormContainer = styled.form`
   cursor: pointer;
   box-shadow:  -5px -5px 5px #fff7,
                5px 5px 5px #0002;
+  background-color: #377cff;
+  color: #e5e5e5;
+   text-shadow:  -3px -3px 3px #fff7,
+               3px 3px 3px #0003;
   }
 `
 

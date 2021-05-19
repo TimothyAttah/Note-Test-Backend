@@ -9,7 +9,7 @@ const TodosContainer = styled.div`
    h2 {
   font-size: 2em;
   text-align: center;
-  color: #3d3d3d;
+  color: #377cff;
   margin-top: 50px;
   margin-bottom: 20px;
   text-transform: capitalize;
