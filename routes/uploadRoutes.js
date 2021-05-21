@@ -6,6 +6,6 @@ const cloudinary = require( '../utils/cloudinary' );
 const upload = require( '../utils/multer' );
 
 
-router.post('/upload_avatar', upload.single('image'), uploadController.uploadAvatar)
+router.post('/upload_avatar', upload.single('file'), uploadController.uploadAvatar)
 
 module.exports = router;

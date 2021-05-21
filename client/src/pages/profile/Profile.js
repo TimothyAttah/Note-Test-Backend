@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { myNotes } from '../../redux/actions/notesActions';
 import ReadMore from '../../components/ReadMore';
 import { Link } from 'react-router-dom';
+// import axios from 'axios';
 
 
 
@@ -155,7 +156,7 @@ right: 10px;
 const Profile = () => {
   const dispatch = useDispatch();
   const [ image, setImage ] = useState( '' )
-  const [url, setUrl] = useState('')
+  const [ avatar, setAvatar ] = useState( false );
   useEffect( () => {
     dispatch(myNotes())
   },[dispatch])
@@ -168,21 +169,46 @@ const Profile = () => {
     data.append( 'file', image )
     data.append( 'upload_preset', 'note3sixty_v1' )
     data.append( 'cloud_name', 'timothycloud' )
-    fetch( 'https://api.cloudinary.com/v1_1/timothycloud/image/upload', {
+    fetch( '/upload/upload_avatar', {
       method: 'POST',
       body: data
     } )
       .then( res => res.json() )
       .then( data => {
-        console.log(data);
-        setUrl(data.secure_url);
+        console.log('Avatar data' + data);
+        setAvatar(data.secure_url);
       } )
       .catch( err => {
       console.log(err);
     })
   }
+  
+console.log(avatar);
 
-  console.log(url);
+
+
+  // const handleAvatar = async ( e ) => {
+  //   try {
+  //   const file = e.target.files[ 0 ]
+    
+  //   if ( !file ) return setImage( { error: 'No file selected' } )
+  //   let formData = new FormData()
+  //   formData.append( 'file', image )
+  //   const {data} = await axios.post( '/upload/upload_avatar', formData, {
+  //     headers: {
+  //       'Content-type': 'multipart/form-data',
+  //        "Authorization": "Bearer "+localStorage.getItem('jwt')
+  //     }
+  //   } )
+  //     console.log(data);
+  //     // setAvatar(res.data.url)
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+
+
   
   return (
     <>
@@ -193,9 +219,9 @@ const Profile = () => {
         <ProfileCardIcon primary>
           { images ? (
                   <div>
-                    <Avatar>{ images && <img src={ url } alt='' /> }</Avatar>
+                    <Avatar>{ <img src={image ? image : user.results.avatar} alt='' /> }</Avatar>
                     <div>
-                      <input type='file' onChange={ ( e ) => setImage( e.target.files[ 0 ] ) } />
+                      <input type='file' name='file' onChange={ ( e ) => setImage(e.target.files[0])} />
                       <button onClick={() => uploadImage()}>Change</button>
                     </div>
            </div>
