@@ -1,4 +1,4 @@
-exports.uploadController = {
+const uploadController = {
   uploadAvatar: async ( req, res ) => {
     try {
       
@@ -8,3 +8,4 @@ exports.uploadController = {
   }
 }
 
+module.exports = uploadController;

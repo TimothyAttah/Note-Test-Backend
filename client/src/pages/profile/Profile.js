@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Avatar, Button, Divider, Fab } from '@material-ui/core'
 import nameToInitials, {fullName, user} from '../../components/NameInitials'
 import styled, { css } from 'styled-components';
@@ -154,12 +154,35 @@ right: 10px;
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const [ image, setImage ] = useState( '' )
+  const [url, setUrl] = useState('')
   useEffect( () => {
     dispatch(myNotes())
   },[dispatch])
   const notes = useSelector( state => state.notesReducer.notes );
   console.log( notes );
   console.log( user );
+
+  const uploadImage = () => {
+    const data = new FormData();
+    data.append( 'file', image )
+    data.append( 'upload_preset', 'note3sixty_v1' )
+    data.append( 'cloud_name', 'timothycloud' )
+    fetch( 'https://api.cloudinary.com/v1_1/timothycloud/image/upload', {
+      method: 'POST',
+      body: data
+    } )
+      .then( res => res.json() )
+      .then( data => {
+        console.log(data);
+        setUrl(data.secure_url);
+      } )
+      .catch( err => {
+      console.log(err);
+    })
+  }
+
+  console.log(url);
   
   return (
     <>
@@ -169,7 +192,13 @@ const Profile = () => {
       <ProfileCardIcon>
         <ProfileCardIcon primary>
           { images ? (
-            <Avatar>{ images && <img src={images.Benita} alt='' />}</Avatar>
+                  <div>
+                    <Avatar>{ images && <img src={ url } alt='' /> }</Avatar>
+                    <div>
+                      <input type='file' onChange={ ( e ) => setImage( e.target.files[ 0 ] ) } />
+                      <button onClick={() => uploadImage()}>Change</button>
+                    </div>
+           </div>
           ) : (
               <Avatar>{ nameToInitials( fullName ) }</Avatar>
           )}
