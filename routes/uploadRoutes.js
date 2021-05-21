@@ -2,7 +2,10 @@ const router = require( 'express' ).Router();
 const auth = require( '../middlewares/auth' );
 const uploadImage = require( '../middlewares/uploadImage' );
 const uploadController = require( '../controllers/uploadController' );
+const cloudinary = require( '../utils/cloudinary' );
+const upload = require( '../utils/multer' );
 
-router.post('/upload_avatar', uploadImage, uploadController.uploadAvatar)
+
+router.post('/upload_avatar', upload.single('image'), uploadController.uploadAvatar)
 
 module.exports = router;
