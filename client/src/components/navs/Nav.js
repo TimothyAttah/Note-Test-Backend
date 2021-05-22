@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import { Drawer, IconButton } from '@material-ui/core';
+import { Button, Drawer, IconButton } from '@material-ui/core';
 import {  AddCircle, AddOutlined, Menu } from '@material-ui/icons';
 
 import { navMenu } from '../helper/Helper';
 import { Link, NavLink } from 'react-router-dom';
-import Buttons from '../buttons/Button';
 import {
   Navs, NavsCenter, NavsLeft, NavsRight, activeNav, SidebarContainer, Sidebars
 } from './NavStyles';
@@ -36,19 +35,19 @@ const Nav = () => {
         } ) }
       </NavsCenter>
       <NavsLeft>
-        <Buttons
-          first={ <AddOutlined /> }
-          second='Create Note'
-          firstLink='/api/users/notes/create/note'
-          secondLink='/api/users/notes/create/note'
-        />
+        <Link to='/api/users/notes/create/note'>
+          <Button>
+            <AddOutlined />
+          Create Note
+        </Button>
+        </Link>
       </NavsLeft>
       <NavsRight >
         <Link to='/api/users/notes/create/note'>
-        <IconButton>
-          <AddCircle />
+          <IconButton>
+            <AddCircle />
           </IconButton>
-          </Link>
+        </Link>
       </NavsRight>
       <Drawer
         anchor='left'
@@ -57,20 +56,20 @@ const Nav = () => {
       >
         <SidebarContainer>
           <Sidebars>
-            { navMenu.map( (item, index) => {
+            { navMenu.map( ( item, index ) => {
               return (
-                 <li key={ index }>
-              <NavLink
-                to={ item.url }
-                exact
-                activeStyle={ activeNav }
-              >
-                { item.name }
-                <span>{ item.icon }</span>
-              </NavLink>
-            </li>
+                <li key={ index }>
+                  <NavLink
+                    to={ item.url }
+                    exact
+                    activeStyle={ activeNav }
+                  >
+                    { item.name }
+                    <span>{ item.icon }</span>
+                  </NavLink>
+                </li>
               )
-            })}
+            } ) }
           </Sidebars>
         </SidebarContainer>
       </Drawer>
