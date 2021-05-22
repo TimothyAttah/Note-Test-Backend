@@ -67,7 +67,8 @@ export const NavsLeft = styled.div`
    background-color: crimson;
    color: #fff;
     :hover {
-       background-color: #e5e5e5;
+       background-color: crimson;
+       opacity: 0.9;
      }
     a {
      color: #fff;
