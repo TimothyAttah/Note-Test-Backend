@@ -61,6 +61,9 @@ a {
     padding-right: 10px;
     color: #000;
   }
+.MuiAvatar-root {
+  background-color: #377cff;
+}
   @media (max-width: 414px){
     h4 {
       display: none;
