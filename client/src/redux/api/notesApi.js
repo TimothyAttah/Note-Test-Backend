@@ -58,3 +58,6 @@ export const editTodos = ( todosData, todosId ) => API.put( `/todos/${ todosId }
 
 export const checkTodos = ( todosData, todosId ) => API.patch( `/todos/${ todosId }/edit`, todosData );
 
+export const uploadAvatar = ( avatar ) => API.post( '/upload/upload_avatar', avatar );
+
+export const getMyUploadsAvatars = ( id ) => API.get( `/upload/${ id }/my_avatars` );
