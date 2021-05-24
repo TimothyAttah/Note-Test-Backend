@@ -18,10 +18,10 @@ const UserSchema = new mongoose.Schema( {
     type: String,
     required: true
   },
-  avatar: {
-    type: String,
-    default: 'https://res.cloudinary.com/timothycloud/image/upload/v1621547457/130-1300217_user-icon-member-icon-png-transparent-png_m7qu9s.png'
-  },
+  // avatar: {
+  //   type: String,
+  //   // default: 'https://res.cloudinary.com/timothycloud/image/upload/v1621547457/130-1300217_user-icon-member-icon-png-transparent-png_m7qu9s.png'
+  // },
   followers: [{type: ObjectId, ref: 'User'}],
   following: [{type: ObjectId, ref: 'User'}],
 }, { timestamps: true, } )
