@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { myNotes } from '../../redux/actions/notesActions';
 import ReadMore from '../../components/ReadMore';
 import { Link } from 'react-router-dom';
+import FileBase from 'react-file-base64';
 // import axios from 'axios';
 
 
@@ -164,26 +165,33 @@ const Profile = () => {
   console.log( notes );
   console.log( user );
 
-  const uploadImage = () => {
-    const data = new FormData();
-    data.append( 'file', image )
-    data.append( 'upload_preset', 'note3sixty_v1' )
-    data.append( 'cloud_name', 'timothycloud' )
-    fetch( '/upload/upload_avatar', {
-      method: 'POST',
-      body: data
-    } )
-      .then( res => res.json() )
-      .then( data => {
-        console.log('Avatar data' + data);
-        setAvatar(data.secure_url);
-      } )
-      .catch( err => {
-      console.log(err);
-    })
-  }
+  // const uploadImage = () => {
+  //   const data = new FormData();
+  //   data.append( 'file', image )
+  //   data.append( 'upload_preset', 'note3sixty_v1' )
+  //   data.append( 'cloud_name', 'timothycloud' )
+  //   fetch( '/upload/upload_avatar', {
+  //     method: 'POST',
+  //     body: data
+  //   } )
+  //     .then( res => res.json() )
+  //     .then( data => {
+  //       console.log('Avatar data' + data);
+  //       setAvatar(data.secure_url);
+  //     } )
+  //     .catch( err => {
+  //     console.log(err);
+  //   })
+  // }
   
-console.log(avatar);
+  // console.log( avatar );
+  
+
+  const handleAvatar = ( e ) => {
+    e.preventDefault();
+    setAvatar(avatar)
+    console.log(avatar);
+  }
 
 
 
@@ -219,10 +227,17 @@ console.log(avatar);
         <ProfileCardIcon primary>
           { images ? (
                   <div>
-                    <Avatar>{ <img src={image ? image : user.results.avatar} alt='' /> }</Avatar>
+                    <Avatar>{ <img src={avatar ? avatar : user.results.avatar} alt='' /> }</Avatar>
                     <div>
-                      <input type='file' name='file' onChange={ ( e ) => setImage(e.target.files[0])} />
-                      <button onClick={() => uploadImage()}>Change</button>
+                      <form onSubmit={handleAvatar}>
+                        {/* <input type='file' name='file' onChange={ ( e ) => setImage(e.target.files[0])} /> */ }
+                        <FileBase
+                          type='file'
+                          multiple={ false }
+                          onDone={({base64}) => setAvatar({avatar: base64})}
+                        />
+                      <button>Change</button>
+                     </form>
                     </div>
            </div>
           ) : (
