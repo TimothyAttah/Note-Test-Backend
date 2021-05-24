@@ -8,6 +8,7 @@ require( './models/NoteModel' );
 require( './models/IncomeModel' );
 require( './models/ExpensesModel' );
 require( './models/TodosModel' );
+require( './models/AvatarModel' );
 
 const app = express();
 
