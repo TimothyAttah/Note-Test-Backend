@@ -1,5 +1,6 @@
 const express = require( 'express' );
 const cors = require( 'cors' );
+const fileUpload = require('express-fileupload')
 const dotenv = require( 'dotenv' )
 dotenv.config({path: './config/key'})
 
@@ -16,8 +17,11 @@ const connectDB = require( './config/db' );
 connectDB();
 
 app.use( express.json() );
-app.use(express.urlencoded({limit: '50mb', extended: true}))
+// app.use(express.urlencoded({limit: '50mb', extended: true}))
 app.use( cors() );
+app.use( fileUpload( {
+  useTempFiles: true
+}))
 
 app.use( '/users', require( './routes/authRoutes' ) );
 app.use( '/notes', require( './routes/notesRoutes' ) );
