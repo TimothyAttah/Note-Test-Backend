@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Avatar, Button, Divider, Fab } from '@material-ui/core'
-import nameToInitials, {fullName, user} from '../../components/NameInitials'
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,9 @@ import { myNotes } from '../../redux/actions/notesActions';
 import ReadMore from '../../components/ReadMore';
 import { Link } from 'react-router-dom';
 import FileBase from 'react-file-base64';
-// import axios from 'axios';
+import NamesInitials, { fullName, user } from '../../components/NamesInitials';
+import {uploadAvatar, allUploadAvatars} from '../../redux/actions/avatarActions'
+
 
 
 
@@ -37,12 +38,14 @@ const ProfileCardIcon = styled.div`
     justify-content: center;
     align-items: center;
     .MuiAvatar-colorDefault{
-      background-color: #fff;
+      /* background-color: #fff; */
+      color: #377cff;
     }
     .MuiAvatar-root {
       width: 150px;
       height: 150px;
       border: 2px solid #bdbdbd;
+      font-size: 40px;
      img {
        object-fit: contain;
        max-width: 100%;
@@ -156,14 +159,18 @@ right: 10px;
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const [ image, setImage ] = useState( '' )
-  const [ avatar, setAvatar ] = useState( false );
+  const [ selectedFile, setSelectedFile ] = useState( '' )
+  const [ avatar, setAvatar ] = useState( '' );
+  const [ previewSource, setPreviewSource ] = useState( '' );
   useEffect( () => {
-    dispatch(myNotes())
+    dispatch( myNotes() )
+    dispatch(allUploadAvatars())
   },[dispatch])
   const notes = useSelector( state => state.notesReducer.notes );
-  console.log( notes );
-  console.log( user );
+  const allAvatars = useSelector( state => state.avatarReducer );
+
+  console.log(allAvatars);
+  
 
   // const uploadImage = () => {
   //   const data = new FormData();
@@ -185,35 +192,45 @@ const Profile = () => {
   // }
   
   // console.log( avatar );
+
+  const handleInputAvatar = ( e ) => {
+    const file = e.target.files[ 0 ]
+    previewFile(file)
+  }
+
+  const previewFile = ( file ) => {
+    const reader = new FileReader();
+    reader.readAsDataURL( file )
+    reader.onloadend = () => {
+      setPreviewSource(reader.result)
+    }
+  }
   
 
   const handleAvatar = ( e ) => {
     e.preventDefault();
-    setAvatar(avatar)
-    console.log(avatar);
+    if ( !previewSource ) return;
+    uploadImage(previewSource)
   }
 
+  const uploadImage = async (base64EncodedImage) => {
+   try {
+     await fetch( '/upload', {
+       method: 'POST',
+       body: JSON.stringify( { data: base64EncodedImage } ),
+       headers: {'Content-type': 'application/json'}
+     })
+   } catch (error) {
+     console.log(error);
+   }
+  }
 
-
-  // const handleAvatar = async ( e ) => {
-  //   try {
-  //   const file = e.target.files[ 0 ]
-    
-  //   if ( !file ) return setImage( { error: 'No file selected' } )
-  //   let formData = new FormData()
-  //   formData.append( 'file', image )
-  //   const {data} = await axios.post( '/upload/upload_avatar', formData, {
-  //     headers: {
-  //       'Content-type': 'multipart/form-data',
-  //        "Authorization": "Bearer "+localStorage.getItem('jwt')
-  //     }
-  //   } )
-  //     console.log(data);
-  //     // setAvatar(res.data.url)
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
+  // const handleSubmit = ( e ) => {
+  //   e.preventDefault();
+  //   dispatch( uploadAvatar( avatar ) )
+  //   console.log(avatar);
   // }
+
 
 
 
@@ -222,77 +239,103 @@ const Profile = () => {
     <>
       {user || notes ? (
         <>
-           <Profiles>
-      <ProfileCardIcon>
-        <ProfileCardIcon primary>
-          { images ? (
-                  <div>
-                    <Avatar>{ <img src={avatar ? avatar : user.results.avatar} alt='' /> }</Avatar>
-                    <div>
-                      <form onSubmit={handleAvatar}>
-                        {/* <input type='file' name='file' onChange={ ( e ) => setImage(e.target.files[0])} /> */ }
-                        <FileBase
-                          type='file'
-                          multiple={ false }
-                          onDone={({base64}) => setAvatar({avatar: base64})}
-                        />
-                      <button>Change</button>
-                     </form>
-                    </div>
-           </div>
-          ) : (
-              <Avatar>{ nameToInitials( fullName ) }</Avatar>
-          )}
-          </ProfileCardIcon>
-        
-      </ProfileCardIcon>
+          <Profiles>
+            <ProfileCardIcon>
+              <ProfileCardIcon primary>
+                <Avatar >
+                  {previewSource ? <img src={ previewSource } alt=''/> : (<NamesInitials fullName={ fullName } />)}
+                </Avatar>
+              </ProfileCardIcon>
+              <form onSubmit={handleAvatar}>
+                <input
+                  type='file'
+                  name='image'
+                  onChange={ handleInputAvatar }
+                  value={avatar}
+                />
+                <button type='submit'>Change</button>
+              </form>
+              { previewSource && (
+                <img src={ previewSource } alt='' style={ { height: '200px' } }/>
+              )}
 
-      <ProfileRight>
-        <h1>{ fullName }</h1>
-        <h4>{ user.results.email }</h4>
-        <Divider/>
-        <ProfileRight primary>
-            <h4><span><Fab color='secondary'>{ notes.length }</Fab></span>Posts</h4>
-          <h4><span><Fab color='secondary'>{user.results.followers.length}</Fab></span>Followers</h4>
-          <h4><span><Fab color='secondary'>{user.results.following.length}</Fab></span>Following</h4>
-        </ProfileRight>
-      </ProfileRight>
-      </Profiles>
-      <Divider />
-      <ProfilePostContainer>
-        { notes ? (
-          notes.map( note => {
-            return (
-              <div key={note._id} style={{paddingBottom: '30px'}}>
-                <ProfilePost >
-                  <h2>{ note.title }</h2>
-                  <Divider />
-                  <ProfilePostContent>
-                     <ReadMore>
-                  { note.content }
-                    </ReadMore>
-                </ProfilePostContent>
-                  <ProfilePostButton>
-                     <Button variant='contained' size='small' color='primary'>
-                      <Link to={ `/api/users/notes/${ note._id }/note/read` }>Read More</Link>
-                    </Button>
-                 </ProfilePostButton>
-                   
-                  
-              </ProfilePost>
-              </div>
-            )
-          })
-        ): (
-          <h2>Loading...</h2>
-       )}
-      </ProfilePostContainer>
+             
+              {/* <form onSubmit={handleSubmit}>
+                 <input
+                  type='file'
+                 
+                  name='name'
+                  onChange={(e) => setAvatar(e.target.files[0])}
+                />
+                <button type='submit'>Change</button>
+              </form>
+              { avatar && (
+                <img src={ avatar } alt='' style={ { height: '200px' } }/>
+              )} */}
+            </ProfileCardIcon>
+            <ProfileRight>
+              <h1>{ fullName }</h1>
+              <h4>{ user.results.email }</h4>
+              <Divider />
+              <ProfileRight primary>
+                <h4><span><Fab color='secondary'>{ notes.length }</Fab></span>Posts</h4>
+                <h4><span><Fab color='secondary'>{ user.results.followers.length }</Fab></span>Followers</h4>
+                <h4><span><Fab color='secondary'>{ user.results.following.length }</Fab></span>Following</h4>
+              </ProfileRight>
+            </ProfileRight>
+          </Profiles>
+          <Divider />
+          <ProfilePostContainer>
+            { notes ? (
+              notes.map( note => {
+                return (
+                  <div key={ note._id } style={ { paddingBottom: '30px' } }>
+                    <ProfilePost >
+                      <h2>{ note.title }</h2>
+                      <Divider />
+                      <ProfilePostContent>
+                        <ReadMore>
+                          { note.content }
+                        </ReadMore>
+                      </ProfilePostContent>
+                      <ProfilePostButton>
+                        <Button variant='contained' size='small' color='primary'>
+                          <Link to={ `/api/users/notes/${ note._id }/note/read` }>Read More</Link>
+                        </Button>
+                      </ProfilePostButton>
+                    </ProfilePost>
+                  </div>
+                )
+              } )
+            ) : (
+              <h2>Loading...</h2>
+            ) }
+          </ProfilePostContainer>
         </>
-      ): (
+      ) : (
         <h2>Loading...</h2>
-      )}
+      ) }
     </>
   )
 }
 
 export default Profile;
+
+  // { images ? (
+  //                 <div> 
+  //                  <Avatar>{ <img src={avatar ? avatar : user.results.avatar} alt='' /> }</Avatar>
+  //                   <div>
+  //                     <form onSubmit={handleAvatar}>
+  //                        <input type='file' name='file' onChange={ ( e ) => setImage(e.target.files[0])} />
+  //                       <FileBase
+  //                         type='file'
+  //                         multiple={ false }
+  //                         onDone={({base64}) => setAvatar({avatar: base64})}
+  //                       />
+  //                     <button>Change</button>
+  //                    </form>
+  //                   </div>
+  //          </div>
+  //         ) : (
+  //             <Avatar>{ nameToInitials( fullName ) }</Avatar>
+  //         )}

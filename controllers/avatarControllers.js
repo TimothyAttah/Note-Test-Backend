@@ -5,7 +5,8 @@ const upload = require( '../utils/multer' );
 
 
 exports.uploadAvatar = async ( req, res ) => {
-  const {avatar} = req.body;
+  const avatarData = req.body;
+  const { avatar } = avatarData;
   try {
     // await upload.single('avatar')
     // const results = await cloudinary.uploader.upload( req.file.path )
@@ -36,6 +37,32 @@ module.exports.getMyUploadsAvatars = async ( req, res ) => {
     const myAvatars = await Avatar.find( { postedBy: req.user._id } )
       .populate( 'postedBy', '-password' )
     res.status( 200 ).json( { message: 'All User Avatars', myAvatars} );
+  } catch (error) {
+    return res.status(500).json({error: error})
+  }
+}
+
+exports.uploadImage = async ( req, res ) => {
+  try {
+    const fileStr = req.body.data
+    const uploadedResponse = await cloudinary.uploader.upload( fileStr, {
+      upload_preset: 'note3sixty_v1'
+    } )
+    console.log(uploadedResponse);
+     res.status(200).json({message: 'Image uploaded successfully.',  uploadedResponse})
+  } catch (error) {
+     return res.status(500).json({error: error})
+  }
+}
+
+exports.getImages = async ( req, res ) => {
+  try {
+    const { resources } = await cloudinary.search.expression( 'folder: note3sixty' )
+      .sort_by( 'public_id', 'desc' )
+      .max_results( 30 )
+      .execute();
+    const PublicIds = resources.map( file => file.public_id )
+      res.status( 200 ).json( { message: 'All User Avatars', PublicIds} );
   } catch (error) {
     return res.status(500).json({error: error})
   }
