@@ -107,3 +107,18 @@ module.exports.unfollowUsers = async ( req, res ) => {
 // } catch (error) {
 //    return res.status( 500 ).json( { error: error } );
 // }
+
+
+module.exports.updateAvatar = async ( req, res ) => {
+  try {
+    await User.findByIdAndUpdate( req.user._id, { $set: { avatar: req.body.avatar } }, { new: true },
+      async ( err, results ) => {
+        if ( err ) {
+          return res.status( 400 ).json( { error: 'Something went wrong' } );
+        }
+        res.status(200).json({message: 'Image updated successfully', results})
+      })
+  } catch (error) {
+     return res.status( 500 ).json( { error: error } );
+  }
+}
