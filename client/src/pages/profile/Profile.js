@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Avatar, Button, Divider, Fab } from '@material-ui/core'
+import { Camera } from '@material-ui/icons'
 import styled, { css } from 'styled-components';
 import { images } from '../../components/Images';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +9,7 @@ import ReadMore from '../../components/ReadMore';
 import { Link } from 'react-router-dom';
 import FileBase from 'react-file-base64';
 import NamesInitials, { fullName, user } from '../../components/NamesInitials';
-import {uploadAvatar, allUploadAvatars} from '../../redux/actions/avatarActions'
+import {uploadAvatar, allUploadAvatars, updateAvatar} from '../../redux/actions/avatarActions'
 
 
 
@@ -35,6 +36,7 @@ const ProfileCardIcon = styled.div`
   height: 300px;
   ${props => props.primary && css`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     .MuiAvatar-colorDefault{
@@ -140,6 +142,50 @@ const ProfilePost = styled.div`
   }
 `;
 
+const AvatarContainer = styled.div`
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  margin: 15px auto;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height:100%;
+    display: block;
+    object-fit: cover;
+  }
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #fff8;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: rgb(225, 140, 45);
+    transition: 0.3s ease-in-out;
+    :hover {
+      bottom: -15%;
+      display: block;
+      background: red;
+    }
+    #file_upload {
+      position: absolute;
+      top: 0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+`;
+
 
 
 const ProfilePostContent = styled.div`
@@ -159,7 +205,7 @@ right: 10px;
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const [ selectedFile, setSelectedFile ] = useState( '' )
+  const [ url, setUrl ] = useState( '' )
   const [ avatar, setAvatar ] = useState( '' );
   const [ previewSource, setPreviewSource ] = useState( '' );
   useEffect( () => {
@@ -169,7 +215,8 @@ const Profile = () => {
   const notes = useSelector( state => state.notesReducer.notes );
   const allAvatars = useSelector( state => state.avatarReducer );
 
-  console.log(allAvatars);
+  
+  console.log(user);
   
 
   // const uploadImage = () => {
@@ -231,10 +278,33 @@ const Profile = () => {
   //   console.log(avatar);
   // }
 
+  useEffect( () => {
+    if ( avatar ) {
+     const data = new FormData()
+  data.append( 'file', avatar )
+  data.append( 'upload_preset', 'note3sixty_v1' )
+  data.append( 'cloud_name', 'timothycloud' )
+  fetch( 'https://api.cloudinary.com/v1_1/timothycloud/image/upload', {
+    method: 'POST',
+    body: data
+  } )
+     .then( res => res.json() )
+    .then( data => {
+      setUrl( data.url )
+      console.log( data );
+      localStorage.setItem( 'user', JSON.stringify( { ...user, avatar: data.url } ) )
+      window.location.reload()
+    } )
+    .catch( error => {
+      console.log( error );
+    } )
+    }
+  },[ avatar])
 
-
-
-  
+ const updateImage = (file) => {
+    setAvatar(file)
+  }
+ console.log(user.avatar);
   return (
     <>
       {user || notes ? (
@@ -242,11 +312,27 @@ const Profile = () => {
           <Profiles>
             <ProfileCardIcon>
               <ProfileCardIcon primary>
-                <Avatar >
+                {/* <Avatar >
                   {previewSource ? <img src={ previewSource } alt=''/> : (<NamesInitials fullName={ fullName } />)}
-                </Avatar>
+                </Avatar> */}
+                <AvatarContainer>
+                   
+                  <img src={ user.avatar ? user.avatar : user.results.avatar} alt=''/>
+               
+                <span>
+                  <Camera />
+                  <p>Change</p>
+                  <input
+                    type='file'
+                      onChange={(e) => updateImage(e.target.files[0])}
+                    id='file_upload'
+                  />
+                </span>
+                </AvatarContainer>
               </ProfileCardIcon>
-              <form onSubmit={handleAvatar}>
+
+
+              {/* <form onSubmit={handleAvatar}>
                 <input
                   type='file'
                   name='image'
@@ -257,7 +343,7 @@ const Profile = () => {
               </form>
               { previewSource && (
                 <img src={ previewSource } alt='' style={ { height: '200px' } }/>
-              )}
+              )} */}
 
              
               {/* <form onSubmit={handleSubmit}>

@@ -1,6 +1,7 @@
 const cloudinary = require( 'cloudinary' );
- const key = require('../config/key')
-// const upload = require( '../utils/multer' );
+const key = require( '../config/key' )
+ const mongoose = require( 'mongoose' );
+const Avatar = mongoose.model( 'Avatar' );
 
 const fs = require( 'fs' )
 
@@ -13,18 +14,24 @@ cloudinary.config( {
 
 const uploadController = {
   uploadAvatar: async ( req, res ) => {
+    const avatarData = req.body;
+  const { avatar } = avatarData;
     try {
+    //    req.user.password = undefined
+    //    const newUploads = await new Avatar( {
+      //      avatar,
+      //   postedBy: req.user
+      // } ).populate( 'postedBy', '-password' )
       const file = req.files.file;
-      cloudinary.v2.uploader.upload( file.tempFilePath, {
+     await cloudinary.v2.uploader.upload( file.tempFilePath, {
         folder: 'note3sixty', width: 150, height: 150, crop: 'fill'
       }, async ( err, result ) => {
         if ( err ) throw err;
         removeTmp( file.tempFilePath )
-        console.log( { result } )
-        res.json({message: 'Image uploaded successfully', url: result.secure_url})
+       console.log( { result } )
+        // await newUploads.save();
+        res.json({message: 'Image uploaded successfully', url: result.secure_url,})
       })
-      // const results = await cloudinary.uploader.upload( req.file.path )
-      // res.status(200).json({message: 'Image upload successfully.', results})
     } catch (err) {
       return res.status(500).json({error: err.message})
     }
