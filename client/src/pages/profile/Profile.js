@@ -205,7 +205,6 @@ right: 10px;
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const [ url, setUrl ] = useState( '' )
   const [ avatar, setAvatar ] = useState( '' );
   const [ previewSource, setPreviewSource ] = useState( '' );
   useEffect( () => {
@@ -213,7 +212,6 @@ const Profile = () => {
     dispatch(allUploadAvatars())
   },[dispatch])
   const notes = useSelector( state => state.notesReducer.notes );
-  const allAvatars = useSelector( state => state.avatarReducer );
 
   
   console.log(user);
@@ -290,16 +288,14 @@ const Profile = () => {
   } )
      .then( res => res.json() )
     .then( data => {
-      setUrl( data.url )
-      console.log( data );
-      localStorage.setItem( 'user', JSON.stringify( { ...user, avatar: data.url } ) )
-      window.location.reload()
+       console.log( data );
+      dispatch(updateAvatar(data.url))
     } )
     .catch( error => {
       console.log( error );
     } )
     }
-  },[ avatar])
+  },[ avatar, dispatch])
 
  const updateImage = (file) => {
     setAvatar(file)

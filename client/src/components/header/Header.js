@@ -18,7 +18,8 @@ const Header = () => {
         <HeadersRight>
           <Link to='/api/users/profile'>
             <h4>{ fullName }</h4>
-            <Avatar><NamesInitials fullName={fullName} /></Avatar>
+            {/* <Avatar>{ user.avatar ?  <img src={ user.avatar ? user.avatar : user.results.avatar} alt=''/>: ( <NamesInitials fullName={ fullName } /> ) }</Avatar> */ }
+            <Avatar> <img src={ user.avatar ? user.avatar : user.results.avatar} alt=''/></Avatar>
           </Link>
           <HeaderNavs />
         </HeadersRight>

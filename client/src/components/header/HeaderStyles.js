@@ -63,6 +63,12 @@ a {
   }
 .MuiAvatar-root {
   background-color: #377cff;
+  img {
+    width: 100%;
+    height:100%;
+    display: block;
+    object-fit: cover;
+  }
 }
   @media (max-width: 414px){
     h4 {

@@ -8,7 +8,7 @@ const avatarReducer = ( avatar = [], action ) => {
     case GET_ALL_AVATARS:
       return avatar
     case UPDATE_AVATAR:
-      return action.payload
+      return action.payload.avatar
     default:
       return avatar;
   }
