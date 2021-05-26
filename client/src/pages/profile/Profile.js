@@ -31,7 +31,7 @@ const Profiles = styled.div`
 `;
 
 const ProfileCardIcon = styled.div`
-  border: 2px solid green;
+ border: 1px solid #eee;
   width: 250px;
   height: 300px;
   ${props => props.primary && css`
@@ -151,15 +151,18 @@ const AvatarContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 50%;
   cursor: pointer;
+  border: 2px solid red;
   img {
     width: 100%;
     height:100%;
     display: block;
     object-fit: cover;
+     position: relative;
   }
-  span {
+  .change_avatar {
     position: absolute;
     bottom: 0;
+    /* bottom: -100%; */
     left: 0;
     width: 100%;
     height: 50%;
@@ -169,9 +172,9 @@ const AvatarContainer = styled.div`
     font-weight: 400;
     color: rgb(225, 140, 45);
     transition: 0.3s ease-in-out;
+     border: 2px solid red;
     :hover {
       bottom: -15%;
-      display: block;
       background: red;
     }
     #file_upload {
@@ -315,7 +318,7 @@ const Profile = () => {
                    
                   <img src={ user.avatar ? user.avatar : user.results.avatar} alt=''/>
                
-                <span>
+                <div className='change_avatar'>
                   <Camera />
                   <p>Change</p>
                   <input
@@ -323,7 +326,7 @@ const Profile = () => {
                       onChange={(e) => updateImage(e.target.files[0])}
                     id='file_upload'
                   />
-                </span>
+                </div>
                 </AvatarContainer>
               </ProfileCardIcon>
 
