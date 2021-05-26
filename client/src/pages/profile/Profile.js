@@ -143,26 +143,31 @@ const ProfilePost = styled.div`
 `;
 
 const AvatarContainer = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
   position: relative;
   margin: 15px auto;
   border: 1px solid #ddd;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid red;
+ 
+   :hover {
+       span{
+           bottom: -15%;
+        }
+     }
   img {
     width: 100%;
     height:100%;
     display: block;
     object-fit: cover;
      position: relative;
+    
   }
-  .change_avatar {
+  span {
     position: absolute;
-    bottom: 0;
-    /* bottom: -100%; */
+    bottom: -100%;
     left: 0;
     width: 100%;
     height: 50%;
@@ -172,11 +177,6 @@ const AvatarContainer = styled.div`
     font-weight: 400;
     color: rgb(225, 140, 45);
     transition: 0.3s ease-in-out;
-     border: 2px solid red;
-    :hover {
-      bottom: -15%;
-      background: red;
-    }
     #file_upload {
       position: absolute;
       top: 0;
@@ -315,10 +315,8 @@ const Profile = () => {
                   {previewSource ? <img src={ previewSource } alt=''/> : (<NamesInitials fullName={ fullName } />)}
                 </Avatar> */}
                 <AvatarContainer>
-                   
                   <img src={ user.avatar ? user.avatar : user.results.avatar} alt=''/>
-               
-                <div className='change_avatar'>
+                <span>
                   <Camera />
                   <p>Change</p>
                   <input
@@ -326,7 +324,7 @@ const Profile = () => {
                       onChange={(e) => updateImage(e.target.files[0])}
                     id='file_upload'
                   />
-                </div>
+                </span>
                 </AvatarContainer>
               </ProfileCardIcon>
 

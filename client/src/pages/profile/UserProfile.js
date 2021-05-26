@@ -132,8 +132,8 @@ const ProfilePost = styled.div`
 `;
 
 const AvatarContainer = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
   position: relative;
   margin: 15px auto;
