@@ -171,12 +171,13 @@ const AvatarContainer = styled.div`
     left: 0;
     width: 100%;
     height: 50%;
-    background: #fff8;
+    background-color: #377cff;
+    opacity: 0.7;
     text-align: center;
     text-transform: uppercase;
     font-weight: 400;
-    color: rgb(225, 140, 45);
-    transition: 0.3s ease-in-out;
+    color: #ddd;
+    transition: 0.5s ease-in-out;
     #file_upload {
       position: absolute;
       top: 0;
