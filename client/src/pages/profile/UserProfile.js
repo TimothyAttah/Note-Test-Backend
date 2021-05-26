@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { Avatar, Button, Divider, Fab } from '@material-ui/core';
-import nameToInitials, { user } from '../../components/NameInitials';
+import {  Button, Divider, Fab } from '@material-ui/core';
+import { user } from '../../components/NamesInitials';
 import styled, { css } from 'styled-components';
-import { images } from '../../components/Images';
 import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import ReadMore from '../../components/ReadMore';
@@ -132,6 +131,50 @@ const ProfilePost = styled.div`
   }
 `;
 
+const AvatarContainer = styled.div`
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+  margin: 15px auto;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height:100%;
+    display: block;
+    object-fit: cover;
+  }
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #fff8;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: rgb(225, 140, 45);
+    transition: 0.3s ease-in-out;
+    :hover {
+      bottom: -15%;
+      display: block;
+      background: red;
+    }
+    #file_upload {
+      position: absolute;
+      top: 0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+`;
+
 
 
 const ProfilePostContent = styled.div`
@@ -245,11 +288,10 @@ const UserProfile = () => {
           <Profiles>
             <ProfileCardIcon>
               <ProfileCardIcon primary>
-                { images ? (
-                  <Avatar>{ images && <img src={ images.Benita } alt='' /> }</Avatar>
-                ) : (
-                  <Avatar>{ nameToInitials( fullName ) }</Avatar>
-                ) }
+                
+                 <AvatarContainer>
+                  <img src={ userProfile.user.avatar} alt=''/>
+                </AvatarContainer>
               </ProfileCardIcon>
         
             </ProfileCardIcon>

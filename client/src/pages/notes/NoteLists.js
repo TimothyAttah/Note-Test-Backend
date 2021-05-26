@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Comment from '../../components/comments/Comment';
 import OpenComment from '../../components/comments/OpenComment';
 import ReadMore from '../../components/ReadMore'
-import NamesInitials, {user} from '../../components/NamesInitials'
+import {user} from '../../components/NamesInitials'
 
 
 import PopupNav from '../../components/navs/PopupNav';
@@ -29,8 +29,6 @@ const NoteLists = () => {
     dispatch( likeNotes( id ) );
   }
 
-  // const hasUserLiked = (note) => note && note.likes.includes( user._id )
-
   const handleUnlikeNotes = (id) => {
     dispatch( unlikeNotes( id ) );
   }
@@ -45,10 +43,10 @@ const NoteLists = () => {
               <Notes >
               <Notes primary>
                 <NoteLeft>
-                  <Link to={  note && note.postedBy._id !== user.results._id ? `/api/auth/users/${note.postedBy._id}/user/profile` : `/api/users/profile`}>
-                  <Avatar>
-                    <NamesInitials fullName={fullName} />
-                    </Avatar>
+                    <Link to={ note && note.postedBy._id !== user.results._id ? `/api/auth/users/${ note.postedBy._id }/user/profile` : `/api/users/profile` }>
+                     
+                      <Avatar> <img src={note && note.postedBy._id === user.results._id ? user.avatar : note.postedBy.avatar} alt=''/></Avatar>
+                
                     </Link>
                   <NoteLeft primary>
                       <h4>

@@ -30,6 +30,15 @@ export const HeaderDropDown = styled.div`
         padding-right: 7px;
       }
     }
+    .MuiAvatar-root {
+  background-color: #377cff;
+  img {
+    width: 100%;
+    height:100%;
+    display: block;
+    object-fit: cover;
+  }
+}
       @media (max-width: 445px){
       width: 80px;
       padding: 2px;

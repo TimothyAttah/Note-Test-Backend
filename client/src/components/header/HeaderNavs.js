@@ -7,7 +7,8 @@ import { ArrowDropDown } from '@material-ui/icons';
 import history from '../../history';
 import { logout } from '../../redux/actions/authActions';
 import { HeaderDropDown } from './HeaderNavsStyles'
-import nameToInitials, {fullName} from '../NameInitials'
+// import nameToInitials, {fullName} from '../NameInitials'
+import { user, fullName } from '../NamesInitials';
 
 
 const HeaderNavs = ({note}) => {
@@ -46,7 +47,7 @@ const HeaderNavs = ({note}) => {
           <HeaderDropDown primary onClick={()=> window.location.reload(false)}>
             <Link to='/api/users/profile'>
               <h4>{ fullName }</h4>
-              <Avatar>{ nameToInitials( fullName ) }</Avatar>
+              <Avatar> <img src={ user.avatar ? user.avatar : user.results.avatar} alt=''/></Avatar>
             </Link>
              <p>See your profile</p>
           </HeaderDropDown>

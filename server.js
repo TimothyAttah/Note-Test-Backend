@@ -1,5 +1,6 @@
 const express = require( 'express' );
 const cors = require( 'cors' );
+const fileUpload = require('express-fileupload')
 const dotenv = require( 'dotenv' )
 dotenv.config({path: './config/key'})
 
@@ -8,6 +9,7 @@ require( './models/NoteModel' );
 require( './models/IncomeModel' );
 require( './models/ExpensesModel' );
 require( './models/TodosModel' );
+require( './models/AvatarModel' );
 
 const app = express();
 
@@ -15,7 +17,11 @@ const connectDB = require( './config/db' );
 connectDB();
 
 app.use( express.json() );
+// app.use(express.urlencoded({limit: '50mb', extended: true}))
 app.use( cors() );
+app.use( fileUpload( {
+  useTempFiles: true
+}))
 
 app.use( '/users', require( './routes/authRoutes' ) );
 app.use( '/notes', require( './routes/notesRoutes' ) );
@@ -23,6 +29,8 @@ app.use( '/auth/users', require( './routes/userRoutes' ) );
 app.use( '/incomes', require( './routes/incomeRoutes' ) );
 app.use( '/expenses', require( './routes/expensesRoutes' ) );
 app.use( '/todos', require( './routes/todosRoutes' ) );
+// app.use( '/upload', require( './routes/avatarRoutes' ) );
+app.use( '/upload', require( './routes/uploadRoutes' ) );
 
 
 const PORT = process.env.PORT || 8080;

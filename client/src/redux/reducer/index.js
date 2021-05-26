@@ -5,6 +5,7 @@ import todosReducer from './todosReducer';
 import usersReducer from './usersReducer';
 import incomesReducer from './incomeReducer';
 import expensesReducer from './expensesReducer';
+import avatarReducer from './avatarReducer';
 
 export default combineReducers( {
   auth,
@@ -13,4 +14,5 @@ export default combineReducers( {
   usersReducer,
   incomesReducer,
   expensesReducer,
+  avatarReducer,
 } );

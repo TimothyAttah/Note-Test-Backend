@@ -4,6 +4,7 @@ const Notes = mongoose.model( 'Notes' );
 const Incomes = mongoose.model( 'Incomes' );
 const Expenses = mongoose.model( 'Expenses' );
 const Todos = mongoose.model( 'Todos' );
+const Avatar = mongoose.model('Avatar')
 
 module.exports.getUser = async ( req, res ) => {
   try {
@@ -33,14 +34,21 @@ module.exports.getUser = async ( req, res ) => {
                     .exec( async ( err, todos ) => {
                       if ( err ) {
                         return res.status( 404 ).json( { error: err.message } );
-                    }
-                    res.status( 200 ).json( { message: 'Single user profile', user, posts, incomes, expenses, todos} )
-                  })
+                      }
+                      await Avatar.find( { postedBy: req.params.id } )
+                        .populate( 'postedBy', '-password' )
+                        .exec( async ( err, avatar ) => {
+                          if ( err ) {
+                            return res.status( 404 ).json( { error: err.message } );
+                          }
+                          res.status( 200 ).json( { message: 'Single user profile', user, posts, incomes, expenses, todos, avatar } )
+                        } );
+                    } );
                 } );
             } );
         } );
     }
-  } catch (error) {
+  } catch ( error ) {
     return res.status( 500 ).json( { error: error } );
   }
 }
@@ -99,3 +107,18 @@ module.exports.unfollowUsers = async ( req, res ) => {
 // } catch (error) {
 //    return res.status( 500 ).json( { error: error } );
 // }
+
+
+module.exports.updateAvatar = async ( req, res ) => {
+  try {
+    await User.findByIdAndUpdate( req.user._id, { $set: { avatar: req.body.avatar } }, { new: true },
+      async ( err, results ) => {
+        if ( err ) {
+          return res.status( 400 ).json( { error: 'Something went wrong' } );
+        }
+        res.status(200).json({message: 'Image updated successfully', results})
+      })
+  } catch (error) {
+     return res.status( 500 ).json( { error: error } );
+  }
+}
