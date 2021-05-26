@@ -44,9 +44,7 @@ const NoteLists = () => {
               <Notes primary>
                 <NoteLeft>
                     <Link to={ note && note.postedBy._id !== user.results._id ? `/api/auth/users/${ note.postedBy._id }/user/profile` : `/api/users/profile` }>
-                     
-                      <Avatar> <img src={note && note.postedBy._id === user.results._id ? user.avatar : note.postedBy.avatar} alt=''/></Avatar>
-                
+                   <Avatar> <img src={note.postedBy.avatar} alt=''/></Avatar>
                     </Link>
                   <NoteLeft primary>
                       <h4>

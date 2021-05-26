@@ -20,7 +20,6 @@ export const uploadAvatar = ( avatarData ) => async dispatch => {
 export const allUploadAvatars = (  ) => async dispatch => {
   try {
     const { data } = await api.getAllUploadsAvatars( );
-    console.log( data );
     dispatch( {
       type: GET_ALL_AVATARS,
       payload: data
