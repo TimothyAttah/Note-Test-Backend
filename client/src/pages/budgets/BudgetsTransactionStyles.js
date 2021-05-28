@@ -18,12 +18,15 @@ export const TotalBalance = styled.div`
   flex-wrap: wrap;
  width: 100%;
   color: #fff;
-  font-size: 30px;
+ 
   position: relative;
   padding-top: 30px;
   padding-bottom: 50px;
   opacity: 0.9;
   overflow: hidden;
+  h1, h2 {
+     font-size: 50px;
+  }
   h2 {
    padding-right: 10px;
   }
