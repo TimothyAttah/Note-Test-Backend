@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Navs = styled.nav`
-  background-color: #377cff;
+  background-color: #3ec6ff;
+  /* background-color: #377cff; */
   display: flex;
   justify-content: space-between;
   align-items: center;
