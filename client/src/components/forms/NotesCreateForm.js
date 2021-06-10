@@ -12,6 +12,7 @@ const FormContainer = styled.form`
 	label {
 		font-weight: bold;
 	}
+
 	input,
 	textarea {
 		width: 95%;
@@ -26,6 +27,7 @@ const FormContainer = styled.form`
 	input {
 		margin-bottom: 30px;
 	}
+
 	button {
 		margin-top: 20px;
 	}
